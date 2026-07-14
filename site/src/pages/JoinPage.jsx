@@ -1,5 +1,6 @@
 import React from 'react';
 import SiteFooter from '../components/SiteFooter';
+import PageHero from '../components/PageHero';
 
 const encode = (data) =>
   Object.keys(data)
@@ -63,21 +64,13 @@ export default function JoinPage({ go }) {
 
   return (
     <div>
-      {/* Hero */}
-      <div style={{ background: 'var(--navy)', padding: '56px 0' }}>
-        <div className="container">
-          <span className="eyebrow" style={{ color: 'var(--gold)', marginBottom: 12 }}>Join Pack 351</span>
-          <h1 style={{
-            fontFamily: 'Barlow Condensed', fontWeight: 800,
-            fontSize: 'clamp(36px,5vw,64px)', color: '#fff', lineHeight: 1, marginBottom: 16,
-          }}>
-            Let's get your scout started.
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,.75)', fontSize: 17, maxWidth: 500, lineHeight: 1.65 }}>
-            Takes under 2 minutes. No payment yet — a leader will reach out within 48 hours to walk you through next steps.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        eyebrow="Join Pack 351"
+        title="Let's get your scout started."
+        sub="Takes under 2 minutes. No payment yet — a leader will reach out within 48 hours to walk you through next steps."
+        image="/photos/photo-camping.jpg"
+        imageAlt="Cub Scouts around a campfire"
+      />
 
       {/* Form + sidebar */}
       <div className="section">

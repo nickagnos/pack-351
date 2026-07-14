@@ -3,6 +3,7 @@ import SiteFooter from '../components/SiteFooter';
 import PhotoSlot from '../components/PhotoSlot';
 import SectionHeader from '../components/SectionHeader';
 import EventRow from '../components/EventRow';
+import PageHero from '../components/PageHero';
 
 const EVENTS = [
   { month: 'Jun', day: '2',  title: 'Pack Meeting',          time: '6:30–7:30 PM', loc: 'Central Baptist Church', tag: 'Weekly',    tagBg: 'var(--navy)' },
@@ -50,19 +51,13 @@ const FEATURED = [
 export default function EventsPage({ go }) {
   return (
     <div>
-      {/* Hero */}
-      <div style={{ background: 'var(--gold-light)', borderBottom: '1px solid var(--border)', padding: '52px 0' }}>
-        <div className="container">
-          <span className="eyebrow" style={{ marginBottom: 12 }}>Events & Calendar</span>
-          <h1 style={{ fontFamily: 'Barlow Condensed', fontWeight: 800, fontSize: 'clamp(36px,5vw,64px)', color: 'var(--navy)', lineHeight: 1, marginBottom: 16 }}>
-            What's coming up
-          </h1>
-          <p style={{ color: 'var(--muted)', fontSize: 17, maxWidth: 540, lineHeight: 1.65 }}>
-            We meet most Monday nights. Big events happen year-round —
-            campouts, the Pinewood Derby, the Raingutter Regatta, and our famous Hideaway candy cane fundraiser.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        eyebrow="Events & Calendar"
+        title="What's coming up"
+        sub="We meet most Monday nights. Big events happen year-round — campouts, the Pinewood Derby, the Raingutter Regatta, and our famous Hideaway candy cane fundraiser."
+        image="/photos/photo-pinewood-derby.jpg"
+        imageAlt="Pinewood Derby race day"
+      />
 
       {/* Signature events */}
       <div className="section">

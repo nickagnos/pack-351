@@ -2,6 +2,8 @@ import React from 'react';
 import SiteFooter from '../components/SiteFooter';
 import PhotoSlot from '../components/PhotoSlot';
 import SectionHeader from '../components/SectionHeader';
+import PageHero from '../components/PageHero';
+import QuickFacts from '../components/QuickFacts';
 
 const dens = [
   { name: 'Lion',           grade: 'Kindergarten', color: '#fde68a' },
@@ -22,33 +24,15 @@ const leaders = [
 export default function AboutPage({ go }) {
   return (
     <div>
-      {/* Hero */}
-      <div style={{ background: 'var(--navy)', padding: '64px 0' }}>
-        <div className="container">
-          <span className="eyebrow" style={{ color: 'var(--gold)', marginBottom: 12 }}>About Us</span>
-          <h1 style={{
-            fontFamily: 'Barlow Condensed', fontWeight: 800, color: '#fff',
-            fontSize: 'clamp(40px,5vw,72px)', lineHeight: 1, marginBottom: 20,
-          }}>
-            A Pack built by<br />families, for families.
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,.75)', fontSize: 17, maxWidth: 560, lineHeight: 1.7 }}>
-            Pack 351 is chartered by Central Baptist Church in Lindale, TX. We're parents, kids,
-            and leaders who believe the best childhood memories are made outside — with a little mud on your boots.
-          </p>
-        </div>
-      </div>
-
-      {/* Group photo */}
-      <div className="container" style={{ paddingTop: 40 }}>
-        <PhotoSlot
-          src="/photos/photo-group.jpg"
-          alt="Full Pack 351 group shot — all scouts and leaders"
-          label="photo: full pack group shot — all scouts & leaders"
-          bg="#b0c4d8"
-          style={{ height: 380, borderRadius: 10 }}
-        />
-      </div>
+      <PageHero
+        eyebrow="About Us"
+        title={<>A Pack built by<br />families, for families.</>}
+        sub="Pack 351 is chartered by Central Baptist Church in Lindale, TX. We're parents, kids, and leaders who believe the best childhood memories are made outside — with a little mud on your boots."
+        image="/photos/photo-group.jpg"
+        imageAlt="The whole Pack 351 — scouts and leaders together"
+        actions={<button className="btn btn-primary" onClick={() => go('join')}>Join Pack 351 →</button>}
+      />
+      <QuickFacts />
 
       {/* Pack story */}
       <div className="section">

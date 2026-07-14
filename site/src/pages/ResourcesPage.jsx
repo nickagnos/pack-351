@@ -1,6 +1,7 @@
 import React from 'react';
 import SiteFooter from '../components/SiteFooter';
 import SectionHeader from '../components/SectionHeader';
+import PageHero from '../components/PageHero';
 
 const FORMS = [
   {
@@ -85,18 +86,13 @@ export default function ResourcesPage({ go }) {
 
   return (
     <div>
-      {/* Hero */}
-      <div style={{ background: 'var(--navy)', padding: '52px 0' }}>
-        <div className="container">
-          <span className="eyebrow" style={{ color: 'var(--gold)', marginBottom: 12 }}>Resources</span>
-          <h1 style={{ fontFamily: 'Barlow Condensed', fontWeight: 800, fontSize: 'clamp(36px,5vw,64px)', color: '#fff', lineHeight: 1, marginBottom: 16 }}>
-            Everything in one place.
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,.72)', maxWidth: 520, lineHeight: 1.65 }}>
-            Forms, FAQs, the uniform guide — bookmark this page. It answers 95% of new family questions and saves a lot of "quick question" emails.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        eyebrow="Resources"
+        title="Everything in one place."
+        sub={'Forms, FAQs, the uniform guide — bookmark this page. It answers 95% of new family questions and saves a lot of "quick question" emails.'}
+        image="/photos/photo-blue-gold.jpg"
+        imageAlt="Blue & Gold awards ceremony"
+      />
 
       {/* Tab bar */}
       <div style={{ background: '#fff', borderBottom: '1px solid var(--border)', position: 'sticky', top: 68, zIndex: 50 }}>

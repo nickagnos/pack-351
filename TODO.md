@@ -1,5 +1,26 @@
 # Pack 351 Website — To-Do
 
+## 🎬 NEXT: Scroll-world landing page — LOCAL (Draw Things) ✅ chosen
+
+Full spec: `~/.claude/plans/i-want-to-use-wiggly-iverson.md`. Using `~/Repos/scroll-world-drawthings` (skill) + `~/Repos/drawthings-mcp` (MCP server, registered ✓). Architecture A (continuous forward take, no connectors). Draw Things is single-GPU → strictly sequential.
+
+**PIVOT (2026-07-13):** Wan 2.2 video was tested across 7 legs and **always bobs in place** (no committed forward camera) — a model-level limit. So: **no AI video.** New approach = **code-driven scroll camera on the FLUX stills** (deterministic push-in + parallax + cross-fade through the shared cream background). Stills are excellent; motion is authored in CSS/JS. Reliable, free, full control.
+
+- [x] Draw Things API live; FLUX.1 schnell stills excellent; Wan video rejected (bobs)
+- [x] Camera-motion approach decided: code-driven, not AI video
+- [x] Generated + refined all 7 stills (no platforms, girls throughout, WoHaLi flag via PIL text composite, awards-ceremony blue&gold, ranks-in-order finale, 4-lane-ish derby, straight regatta gutters)
+- [x] Built scroll-cinematic engine → **ported to React** (`site/src/components/ScrollWorld.jsx`)
+- [x] **Integrated**: HomePage = the cinematic; SiteNav overlays on Home only; stills → `site/public/scroll-world/*.webp`; CTA → `#/join`
+- [x] Verified end-to-end on Vite dev server (7 scenes, nav overlay both ways, CTA nav); `npm run build` passes
+- [x] **Restyled About / Events / Join / Resources** — shared warm cream `PageHero` (image-forward) replaces the flat navy heroes; clay images on each; whole site now matches the landing
+- [x] **Moved old Home content** — quick-facts strip (`QuickFacts.jsx`) rehomed on About; events already live on Events; CTAs on About/Join
+- [ ] **Tweak some images** (user flagged — e.g. group-shot re-roll on cream, derby crispness) — next
+- [ ] **Optional derby re-roll** if the 4-lane look isn't crisp enough
+- [ ] **Favicon** + redeploy `dist/` to Netlify
+
+### Backup — Higgsfield cloud (only if we later want the true AI fly-through)
+- [ ] Buy credits + install `higgsfield` CLI + `higgsfield auth login` → original skill, architecture B (dive + connector), `seedance_2_0`
+
 ## Before showing to anyone
 
 - [ ] **Deploy to Netlify** — drag `site/dist/` to netlify.com, or connect the GitHub repo
@@ -8,8 +29,8 @@
 ## Content to fill in
 
 - [ ] **Leader names** — replace the four `[Name]` placeholders on the About page (`src/pages/AboutPage.jsx:126`)
-- [ ] **Leader headshots** — add `leader-cubmaster.jpg`, `leader-assistant.jpg`, `leader-treasurer.jpg`, `leader-outdoor.jpg` to `site/public/photos/`
-- [ ] **Activity photos** — 7 photos needed (see `site/public/photos/PHOTOS-NEEDED.md` for exact filenames and sizes)
+- [x] **Leader headshots** — generated as clay-style busts (`leader-*.jpg` in `site/public/photos/`); swap for real photos anytime
+- [x] **Activity photos** — all 11 generated in the clay style (5 reused from the landing, 6 new incl. candy-cane, group shot, 4 leaders); swap for real photos anytime
 - [ ] **Charter year** — "Pack 351 has been part of the Lindale community for years" → replace with the actual charter year (`src/pages/AboutPage.jsx:63`)
 - [ ] **Copyright year** — footer shows © 2026; update if needed (`src/components/SiteFooter.jsx:66`)
 

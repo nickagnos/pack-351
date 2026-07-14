@@ -5,12 +5,17 @@ export default function SiteNav({ current, go }) {
   const [open, setOpen] = React.useState(false);
   const links = [['about', 'About'], ['events', 'Events'], ['resources', 'Resources']];
   const nav = (p) => { go(p); setOpen(false); };
+  // On the home cinematic the nav floats over the scene (transparent overlay); everywhere
+  // else it's the solid sticky bar.
+  const isHome = current === 'home' && !open;
 
   return (
     <nav style={{
-      position: 'sticky', top: 0, zIndex: 100,
-      background: '#fff', borderBottom: '1px solid var(--border)',
-      boxShadow: '0 1px 6px rgba(0,0,0,.07)',
+      position: isHome ? 'fixed' : 'sticky', top: 0, left: 0, right: 0, zIndex: 100,
+      background: isHome ? 'transparent' : '#fff',
+      borderBottom: isHome ? 'none' : '1px solid var(--border)',
+      boxShadow: isHome ? 'none' : '0 1px 6px rgba(0,0,0,.07)',
+      transition: 'background .2s',
     }}>
       <div className="container" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 68,

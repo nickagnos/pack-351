@@ -14,11 +14,15 @@ Full spec: `~/.claude/plans/i-want-to-use-wiggly-iverson.md`. Using `~/Repos/scr
 - [x] Verified end-to-end on Vite dev server (7 scenes, nav overlay both ways, CTA nav); `npm run build` passes
 - [x] **Restyled About / Events / Join / Resources** — shared warm cream `PageHero` (image-forward) replaces the flat navy heroes; clay images on each; whole site now matches the landing
 - [x] **Moved old Home content** — quick-facts strip (`QuickFacts.jsx`) rehomed on About; events already live on Events; CTAs on About/Join
-- [ ] **Tweak some images** (user flagged — e.g. group-shot re-roll on cream, derby crispness) — next
-- [ ] **Optional derby re-roll** if the 4-lane look isn't crisp enough
-- [ ] **Favicon** + redeploy `dist/` to Netlify
+- [x] **Tweaked all 8 images** (2026-07-15) — Cub Scout accuracy pass: navy WoHaLi flag w/ real logo, straight 4-lane derby, straw regatta, blue&gold banner+awards, warm camping, corrected uniforms (blue+tan mix, leaders in tan, co-ed/diverse), clean group photo, fleur-de-lis + rank-badge finale. Committed `b5679ec`, pushed to `origin/main`.
+- [ ] **Favicon** + redeploy `dist/` to Netlify (only remaining launch item here)
 
-### Backup — Higgsfield cloud (only if we later want the true AI fly-through)
+### Local AI video — CLOSED (2026-07-15)
+
+Tested LTX-2 / LTX-2.3 as a Wan replacement. Verdict: **Draw Things' HTTP API can't do first-last-frame conditioning** (end frame ignored) and **LTX shows the same near-static camera as Wan**. Local AI video for the camera is dropped for good — the shipped code-driven scroll camera stays. See memory `drawthings-flf-api-limit`. (Also fixed the `drawthings-mcp` image-model bug: it now guards against rendering stills on a video checkpoint.)
+
+### Backup — Higgsfield cloud (only if we ever want a true AI fly-through)
+
 - [ ] Buy credits + install `higgsfield` CLI + `higgsfield auth login` → original skill, architecture B (dive + connector), `seedance_2_0`
 
 ## Before showing to anyone

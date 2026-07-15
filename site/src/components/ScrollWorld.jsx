@@ -1,4 +1,5 @@
 import React from 'react';
+import { asset } from '../asset';
 
 // Scroll-scrubbed clay-diorama cinematic. Scroll drives a deterministic "camera":
 // each scene pushes in (Ken Burns) + drifts (parallax) and cross-fades to the next
@@ -80,7 +81,7 @@ export default function ScrollWorld({ go }) {
       <div className="sw-stage" ref={stageRef}>
         {SCENES.map((s, i) => (
           <div className="sw-scene" style={{ zIndex: i + 1 }} key={i}>
-            <div className="sw-img" style={{ backgroundImage: `url('${s.img}')` }} />
+            <div className="sw-img" style={{ backgroundImage: `url('${asset(s.img)}')` }} />
             <div className="sw-copy">
               <div className="sw-eyebrow">{s.eyebrow}</div>
               <h1 className="sw-title">{s.title}</h1>

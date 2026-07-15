@@ -1,145 +1,67 @@
 import React from 'react';
 import SiteFooter from '../components/SiteFooter';
 import PageHero from '../components/PageHero';
+import { asset } from '../asset';
 
-const encode = (data) =>
-  Object.keys(data)
-    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
-    .join('&');
+const CONTACT_EMAIL = 'nickagnos@gmail.com';
+const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Joining Pack 351')}` +
+  `&body=${encodeURIComponent(
+    "Hi! We'd like to learn about joining Pack 351.\n\n" +
+    "Scout's name:\nScout's grade:\nParent name:\nBest phone (optional):\n"
+  )}`;
 
 export default function JoinPage({ go }) {
-  const [form, setForm] = React.useState({ name: '', email: '', phone: '', grade: '', hear: '' });
-  const [done, setDone] = React.useState(false);
-  const [error, setError] = React.useState(false);
-  const set = (k) => (e) => setForm(f => ({ ...f, [k]: e.target.value }));
-
-  const inputStyle = {
-    width: '100%', padding: '12px 14px', borderRadius: 7,
-    border: '1.5px solid var(--border)', fontFamily: 'Nunito',
-    fontSize: 16, color: 'var(--text)', background: '#fff',
-    outline: 'none', transition: 'border-color .12s',
-  };
-  const labelStyle = {
-    display: 'block', fontFamily: 'Barlow Condensed', fontWeight: 700,
-    fontSize: 18, color: 'var(--text)', marginBottom: 6,
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(false);
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({ 'form-name': 'join-pack-351', ...form }),
-      });
-      if (res.ok) {
-        setDone(true);
-      } else {
-        setError(true);
-      }
-    } catch {
-      setError(true);
-    }
-  };
-
-  if (done) return (
-    <div style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 40 }}>
-      <div style={{ textAlign: 'center', maxWidth: 480 }}>
-        <div style={{ fontSize: 64, marginBottom: 20 }}>🏕️</div>
-        <span className="eyebrow" style={{ marginBottom: 12 }}>You're in!</span>
-        <h1 style={{ fontFamily: 'Barlow Condensed', fontWeight: 800, fontSize: 52, color: 'var(--navy)', margin: '12px 0 16px' }}>
-          Welcome to Pack 351!
-        </h1>
-        <p style={{ color: 'var(--muted)', marginBottom: 28, lineHeight: 1.7 }}>
-          Our Cubmaster will reach out within 48 hours with next steps. In the meantime, explore what's coming up.
-        </p>
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button className="btn btn-navy" onClick={() => go('events')}>See upcoming events</button>
-          <button className="btn btn-ghost" onClick={() => go('resources')}>Explore resources</button>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <div>
       <PageHero
         eyebrow="Join Pack 351"
         title="Let's get your scout started."
-        sub="Takes under 2 minutes. No payment yet — a leader will reach out within 48 hours to walk you through next steps."
-        image="/photos/photo-camping.jpg"
+        sub="No application, no payment up front. Drop in to any Monday meeting, or send us a quick email and a leader will walk your family through the next steps."
+        image={asset('/photos/photo-camping.jpg')}
         imageAlt="Cub Scouts around a campfire"
       />
 
-      {/* Form + sidebar */}
+      {/* Get started + sidebar */}
       <div className="section">
         <div className="container">
           <div className="join-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: 60, alignItems: 'start' }}>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit}>
-              <h2 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 32, color: 'var(--navy)', marginBottom: 32 }}>
-                Tell us about your family
+            {/* Two ways to join */}
+            <div>
+              <h2 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 32, color: 'var(--navy)', marginBottom: 16 }}>
+                Two easy ways to join
               </h2>
-              {/* Honeypot field — hidden from humans, traps bots */}
-              <input type="text" name="bot-field" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <div>
-                  <label style={labelStyle}>Your name</label>
-                  <input type="text" name="name" placeholder="First and last name" value={form.name} onChange={set('name')} style={inputStyle} required />
-                </div>
-                <div>
-                  <label style={labelStyle}>Email address</label>
-                  <input type="email" name="email" placeholder="We'll reply here" value={form.email} onChange={set('email')} style={inputStyle} required />
-                </div>
-                <div>
-                  <label style={labelStyle}>
-                    Phone <span style={{ fontFamily: 'Nunito', fontWeight: 400, fontSize: 14, color: 'var(--muted)' }}>(optional)</span>
-                  </label>
-                  <input type="tel" name="phone" placeholder="(555) 000-0000" value={form.phone} onChange={set('phone')} style={inputStyle} />
-                </div>
-                <div>
-                  <label style={labelStyle}>Your scout's current grade</label>
-                  <select name="grade" value={form.grade} onChange={set('grade')} style={{ ...inputStyle, color: form.grade ? 'var(--text)' : 'var(--muted)' }} required>
-                    <option value="">Select grade →</option>
-                    {[
-                      'Kindergarten (Lion den)',
-                      '1st grade (Tiger den)',
-                      '2nd grade (Wolf den)',
-                      '3rd grade (Bear den)',
-                      '4th grade (Webelos den)',
-                      '5th grade (Arrow of Light den)',
-                    ].map(g => <option key={g} value={g}>{g}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label style={labelStyle}>
-                    How did you hear about us? <span style={{ fontFamily: 'Nunito', fontWeight: 400, fontSize: 14, color: 'var(--muted)' }}>(optional)</span>
-                  </label>
-                  <select name="hear" value={form.hear} onChange={set('hear')} style={{ ...inputStyle, color: form.hear ? 'var(--text)' : 'var(--muted)' }}>
-                    <option value="">Choose one</option>
-                    {['A friend or neighbor', 'Facebook / social media', 'School flyer or teacher', 'Central Baptist Church', 'BeAScout.org', 'Just drove by!', 'Other'].map(h => (
-                      <option key={h} value={h}>{h}</option>
-                    ))}
-                  </select>
-                </div>
+              <p style={{ color: 'var(--muted)', lineHeight: 1.75, marginBottom: 28 }}>
+                There's no form to fill out. Come see us in person, or reach out and we'll help you
+                with everything — your scout's den, gear, cost, and when to show up.
+              </p>
 
-                {error && (
-                  <p style={{ color: '#b91c1c', fontSize: 14, textAlign: 'center' }}>
-                    Something went wrong. Please try again or email us at{' '}
-                    <a href="mailto:nickagnos@gmail.com" style={{ color: '#b91c1c' }}>nickagnos@gmail.com</a>.
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div className="card" style={{ padding: 22 }}>
+                  <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22, color: 'var(--navy)', marginBottom: 6 }}>
+                    1 · Drop in to a meeting
+                  </div>
+                  <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 14 }}>
+                    Most Monday nights, 6:30–7:30 PM at Central Baptist Church in Lindale. No sign-up
+                    needed — just show up and see if it's a fit.
                   </p>
-                )}
+                  <button className="btn btn-ghost" onClick={() => go('events')}>See upcoming events →</button>
+                </div>
 
-                <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: 8 }}>
-                  Join Pack 351 →
-                </button>
-                <p style={{ fontSize: 13, color: 'var(--muted)', textAlign: 'center' }}>
-                  No payment now. Our Cubmaster will email you within 48 hours.
-                </p>
+                <div className="card" style={{ padding: 22 }}>
+                  <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22, color: 'var(--navy)', marginBottom: 6 }}>
+                    2 · Email us
+                  </div>
+                  <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 14 }}>
+                    Tell us your scout's grade and we'll reply with everything you need to get started.
+                    No payment now — we'll cover dues and gear when you're ready.
+                  </p>
+                  <a className="btn btn-primary btn-lg" href={MAILTO}>
+                    Email us to get started →
+                  </a>
+                </div>
               </div>
-            </form>
+            </div>
 
             {/* Sidebar */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>

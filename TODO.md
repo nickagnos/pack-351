@@ -27,8 +27,12 @@ Tested LTX-2 / LTX-2.3 as a Wan replacement. Verdict: **Draw Things' HTTP API ca
 
 ## Before showing to anyone
 
-- [ ] **Deploy to Netlify** — drag `site/dist/` to netlify.com, or connect the GitHub repo
-- [ ] **Confirm notification email** — in Netlify dashboard → Forms → set where Join submissions are emailed
+- [x] **Migrated to GitHub Pages** (2026-07-15) — removed Netlify (`netlify.toml`, hidden form), added `.github/workflows/deploy.yml`, set Vite `base: '/pack-351/'`, routed asset URLs through `src/asset.js`. Verified the built site at the `/pack-351/` base. Deploy auto-runs on push to `main`.
+- [x] **Join form removed** — replaced with a no-backend contact CTA (drop-in + `mailto:` email) since Pages has no form backend.
+- [ ] **Two GitHub settings to actually go live** (see `CLAUDE.md` → "Hosting & deployment"):
+  - [ ] Make the repo **public** (or a plan that allows Pages on private repos) — it's currently private.
+  - [ ] **Settings → Pages → Source = "GitHub Actions".**
+- [ ] **(Optional) custom domain** for a clean root URL — add a `CNAME` + DNS and set the build `base` back to `'/'`.
 
 ## Content to fill in
 

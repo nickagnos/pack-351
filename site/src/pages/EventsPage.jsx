@@ -4,6 +4,7 @@ import PhotoSlot from '../components/PhotoSlot';
 import SectionHeader from '../components/SectionHeader';
 import EventRow from '../components/EventRow';
 import PageHero from '../components/PageHero';
+import { asset } from '../asset';
 
 const EVENTS = [
   { month: 'Jun', day: '2',  title: 'Pack Meeting',          time: '6:30–7:30 PM', loc: 'Central Baptist Church', tag: 'Weekly',    tagBg: 'var(--navy)' },
@@ -55,7 +56,7 @@ export default function EventsPage({ go }) {
         eyebrow="Events & Calendar"
         title="What's coming up"
         sub="We meet most Monday nights. Big events happen year-round — campouts, the Pinewood Derby, the Raingutter Regatta, and our famous Hideaway candy cane fundraiser."
-        image="/photos/photo-pinewood-derby.jpg"
+        image={asset("/photos/photo-pinewood-derby.jpg")}
         imageAlt="Pinewood Derby race day"
       />
 
@@ -66,7 +67,7 @@ export default function EventsPage({ go }) {
           <div className="events-featured-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16, marginBottom: 64 }}>
             {FEATURED.map(e => (
               <div key={e.title} className="card" style={{ overflow: 'hidden' }}>
-                <PhotoSlot src={e.src} alt={e.alt} label={e.label} bg={e.bg} style={{ height: 200 }} />
+                <PhotoSlot src={asset(e.src)} alt={e.alt} label={e.label} bg={e.bg} style={{ height: 200 }} />
                 <div style={{ padding: 20 }}>
                   <span className="eyebrow" style={{ marginBottom: 8 }}>{e.when}</span>
                   <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 26, color: 'var(--navy)', marginBottom: 10 }}>{e.title}</h3>

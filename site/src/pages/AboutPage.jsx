@@ -4,6 +4,7 @@ import PhotoSlot from '../components/PhotoSlot';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import QuickFacts from '../components/QuickFacts';
+import { asset } from '../asset';
 
 const dens = [
   { name: 'Lion',           grade: 'Kindergarten', color: '#fde68a' },
@@ -28,7 +29,7 @@ export default function AboutPage({ go }) {
         eyebrow="About Us"
         title={<>A Pack built by<br />families, for families.</>}
         sub="Pack 351 is chartered by Central Baptist Church in Lindale, TX. We're parents, kids, and leaders who believe the best childhood memories are made outside — with a little mud on your boots."
-        image="/photos/photo-group.jpg"
+        image={asset("/photos/photo-group.jpg")}
         imageAlt="The whole Pack 351 — scouts and leaders together"
         actions={<button className="btn btn-primary" onClick={() => go('join')}>Join Pack 351 →</button>}
       />
@@ -56,14 +57,14 @@ export default function AboutPage({ go }) {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <PhotoSlot
-                src="/photos/photo-hiking.jpg"
+                src={asset("/photos/photo-hiking.jpg")}
                 alt="Scouts hiking a trail"
                 label="photo: scouts hiking a trail"
                 bg="#8ab58a"
                 style={{ height: 210, borderRadius: 8 }}
               />
               <PhotoSlot
-                src="/photos/photo-candy-cane.jpg"
+                src={asset("/photos/photo-candy-cane.jpg")}
                 alt="Candy cane fundraiser in the Hideaway neighborhood"
                 label="photo: candy cane fundraiser — Hideaway neighborhood"
                 bg="#c09090"
@@ -101,7 +102,7 @@ export default function AboutPage({ go }) {
             {leaders.map(({ role, photo }) => (
               <div key={role} className="card" style={{ padding: '24px 16px', textAlign: 'center' }}>
                 <PhotoSlot
-                  src={photo}
+                  src={asset(photo)}
                   alt={`Pack 351 ${role}`}
                   label="portrait"
                   bg="#c8d0e0"

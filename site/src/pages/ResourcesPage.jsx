@@ -2,6 +2,7 @@ import React from 'react';
 import SiteFooter from '../components/SiteFooter';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
+import { asset } from '../asset';
 
 const FORMS = [
   {
@@ -90,7 +91,7 @@ export default function ResourcesPage({ go }) {
         eyebrow="Resources"
         title="Everything in one place."
         sub={'Forms, FAQs, the uniform guide — bookmark this page. It answers 95% of new family questions and saves a lot of "quick question" emails.'}
-        image="/photos/photo-blue-gold.jpg"
+        image={asset("/photos/photo-blue-gold.jpg")}
         imageAlt="Blue & Gold awards ceremony"
       />
 

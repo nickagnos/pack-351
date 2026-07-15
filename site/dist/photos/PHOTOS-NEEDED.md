@@ -35,5 +35,6 @@ The site automatically shows the photo once the file exists — no code changes 
 - **BSA Brand Center**: For stock/filler photos while you gather real ones, visit https://www.scouting.org/programs/cub-scouts/ or search for Cub Scout imagery in the BSA Media Resources.
 
 ## After adding photos
-Run `npm run build` from the `site/` folder to rebuild, then redeploy to Netlify
-(or just drag-and-drop the new `dist/` folder to Netlify — it re-reads public/ automatically).
+Commit the new photo and push to `main` — the site is on GitHub Pages and the
+deploy workflow rebuilds and republishes automatically. (To preview locally first:
+`npm run build` then `npm run preview` from the `site/` folder.)

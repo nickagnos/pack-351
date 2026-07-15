@@ -54,7 +54,7 @@ The old join form posted to Netlify's form handler, which does not work on GitHu
 
 Set up for GitHub Pages (migrated off Netlify 2026-07-15) — code is ready but the site is NOT live yet. Target is a project page at `https://nickagnos.github.io/pack-351/`, so vite.config.js sets base '/pack-351/' for the build; runtime asset URLs go through src/asset.js (import.meta.env.BASE_URL) so they resolve under the subpath. Local npm run dev stays at /.
 
-To go live (all still to do): (1) commit the deploy workflow — it's prepared at .github/workflows/deploy.yml but not committed yet, because pushing a workflow file needs a token with the `workflow` scope (`gh auth refresh -h github.com -u nickagnos -s workflow`) or the GitHub web UI; (2) make the repo public — currently private, and free Pages needs a public repo (or a paid plan); (3) Settings → Pages → Source = "GitHub Actions". Optional: a custom domain (CNAME + DNS) with the build base changed back to '/' gives a clean root URL.
+To go live (2 steps left; the deploy workflow at .github/workflows/deploy.yml is now committed): (1) make the repo public — currently private, and free Pages needs a public repo (or a paid plan); (2) Settings → Pages → Source = "GitHub Actions". Optional: a custom domain (CNAME + DNS) with the build base changed back to '/' gives a clean root URL.
 
 ## Tech stack
 - React 18, Vite 6

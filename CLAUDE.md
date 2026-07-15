@@ -57,7 +57,7 @@ If a real form is ever wanted again, add a third-party handler (Formspree, Getfo
 
 **To go live (all still to do):**
 
-- [ ] **Commit the deploy workflow.** It's prepared at `.github/workflows/deploy.yml` (builds `site/`, publishes `site/dist/` to Pages on push to `main`) but is **not committed yet** — pushing a workflow file needs a token with the `workflow` scope (`gh auth refresh -h github.com -u nickagnos -s workflow`, then push), or add the file via GitHub's web UI.
+- [x] **Deploy workflow committed** — `.github/workflows/deploy.yml` builds `site/` and publishes `site/dist/` to Pages on push to `main` (fires once Pages is enabled below). (Pushing it required adding the `workflow` scope to the token.)
 - [ ] **Make the repo public** — currently **private**; free Pages needs a public repo (or a paid plan).
 - [ ] **Settings → Pages → Source = "GitHub Actions".**
 

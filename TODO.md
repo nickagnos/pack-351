@@ -27,10 +27,11 @@ Tested LTX-2 / LTX-2.3 as a Wan replacement. Verdict: **Draw Things' HTTP API ca
 
 ## Before showing to anyone
 
-- [x] **Migrated to GitHub Pages** (2026-07-15) — removed Netlify (`netlify.toml`, hidden form), added `.github/workflows/deploy.yml`, set Vite `base: '/pack-351/'`, routed asset URLs through `src/asset.js`. Verified the built site at the `/pack-351/` base. Deploy auto-runs on push to `main`.
+- [x] **GitHub Pages migration — code done** (2026-07-15) — removed Netlify (`netlify.toml`, hidden form), set Vite `base: '/pack-351/'`, routed all asset URLs through `src/asset.js`, verified the built site loads at the `/pack-351/` base.
 - [x] **Join form removed** — replaced with a no-backend contact CTA (drop-in + `mailto:` email) since Pages has no form backend.
-- [ ] **Two GitHub settings to actually go live** (see `CLAUDE.md` → "Hosting & deployment"):
-  - [ ] Make the repo **public** (or a plan that allows Pages on private repos) — it's currently private.
+- [ ] **Go live on GitHub Pages — NOT live yet.** Three steps (details in `CLAUDE.md` → "Hosting & deployment"):
+  - [ ] **Commit the deploy workflow** — it's prepared at `.github/workflows/deploy.yml` but not committed (pushing a workflow file needs a token with the `workflow` scope: `gh auth refresh -h github.com -u nickagnos -s workflow`, then push — or add it via GitHub's web UI).
+  - [ ] **Make the repo public** — currently private; free Pages needs a public repo (or a paid plan).
   - [ ] **Settings → Pages → Source = "GitHub Actions".**
 - [ ] **(Optional) custom domain** for a clean root URL — add a `CNAME` + DNS and set the build `base` back to `'/'`.
 

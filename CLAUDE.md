@@ -1,7 +1,7 @@
 # Pack 351 Website — CLAUDE.md
 
 ## What this project is
-A static marketing website for **Cub Scout Pack 351** in Lindale, TX. Five pages: Home, About, Events, Join, Resources. Built with Vite + React, **hosted on GitHub Pages** (migrated off Netlify 2026-07-15) — see [Hosting & deployment](#hosting--deployment).
+A static marketing website for **Cub Scout Pack 351** in Lindale, TX. Five pages: Home, About, Events, Join, Resources. Built with Vite + React, **set up for GitHub Pages** (migrated off Netlify 2026-07-15; not live yet) — see [Hosting & deployment](#hosting--deployment).
 
 ## Project layout
 ```
@@ -53,14 +53,15 @@ If a real form is ever wanted again, add a third-party handler (Formspree, Getfo
 
 ## Hosting & deployment
 
-**Hosted on GitHub Pages** (migrated off Netlify 2026-07-15). Deploy is automatic: pushing to `main` runs `.github/workflows/deploy.yml`, which builds `site/` and publishes `site/dist/` to Pages. Served as a **project page** at `https://nickagnos.github.io/pack-351/`, so `vite.config.js` sets `base: '/pack-351/'` for the build; every runtime asset URL goes through `src/asset.js` (`import.meta.env.BASE_URL`) so it resolves under that subpath. Local `npm run dev` stays at `/`.
+**Set up for GitHub Pages** (migrated off Netlify 2026-07-15) — the code is ready but the site is **not live yet** (see the go-live steps below). Target is a **project page** at `https://nickagnos.github.io/pack-351/`, so `vite.config.js` sets `base: '/pack-351/'` for the build and every runtime asset URL goes through `src/asset.js` (`import.meta.env.BASE_URL`) to resolve under that subpath. Local `npm run dev` stays at `/`.
 
-**Two one-time GitHub settings are still required for the site to go live:**
+**To go live (all still to do):**
 
-- [ ] **Repo must be public** (or on a plan that allows Pages on private repos) — this repo is currently private.
-- [ ] **Settings → Pages → Source = "GitHub Actions"** — lets the workflow deploy.
+- [ ] **Commit the deploy workflow.** It's prepared at `.github/workflows/deploy.yml` (builds `site/`, publishes `site/dist/` to Pages on push to `main`) but is **not committed yet** — pushing a workflow file needs a token with the `workflow` scope (`gh auth refresh -h github.com -u nickagnos -s workflow`, then push), or add the file via GitHub's web UI.
+- [ ] **Make the repo public** — currently **private**; free Pages needs a public repo (or a paid plan).
+- [ ] **Settings → Pages → Source = "GitHub Actions".**
 
-Optional: for a clean root URL, add a **custom domain** (`CNAME` file + DNS) and change the build `base` back to `'/'` — the `asset()` helper adapts automatically.
+Optional: for a clean root URL, add a **custom domain** (`CNAME` + DNS) and change the build `base` back to `'/'` — the `asset()` helper adapts automatically.
 
 ## Tech stack
 - React 18, Vite 6

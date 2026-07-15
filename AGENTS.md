@@ -1,7 +1,7 @@
 # Pack 351 Website — AGENTS.md
 
 ## What this project is
-A static marketing website for Cub Scout Pack 351 in Lindale, TX. Five pages: Home, About, Events, Join, and Resources. Built with Vite + React, hosted on GitHub Pages (migrated off Netlify 2026-07-15 — see "Hosting & deployment" below).
+A static marketing website for Cub Scout Pack 351 in Lindale, TX. Five pages: Home, About, Events, Join, and Resources. Built with Vite + React, set up for GitHub Pages (migrated off Netlify 2026-07-15; not live yet — see "Hosting & deployment" below).
 
 ## Project layout
 ```
@@ -52,9 +52,9 @@ The old join form posted to Netlify's form handler, which does not work on GitHu
 
 ## Hosting & deployment
 
-Hosted on GitHub Pages (migrated off Netlify 2026-07-15). Deploy is automatic: pushing to main runs .github/workflows/deploy.yml, which builds site/ and publishes site/dist/ to Pages. Served as a project page at `https://nickagnos.github.io/pack-351/`, so vite.config.js sets base '/pack-351/' for the build; runtime asset URLs go through src/asset.js (import.meta.env.BASE_URL) so they resolve under the subpath. Local npm run dev stays at /.
+Set up for GitHub Pages (migrated off Netlify 2026-07-15) — code is ready but the site is NOT live yet. Target is a project page at `https://nickagnos.github.io/pack-351/`, so vite.config.js sets base '/pack-351/' for the build; runtime asset URLs go through src/asset.js (import.meta.env.BASE_URL) so they resolve under the subpath. Local npm run dev stays at /.
 
-Two one-time GitHub settings are still required for the site to go live: (1) the repo must be public (or on a plan that allows Pages on private repos) — it is currently private; (2) Settings → Pages → Source must be set to "GitHub Actions". Optional: a custom domain (CNAME + DNS) with the build base changed back to '/' gives a clean root URL.
+To go live (all still to do): (1) commit the deploy workflow — it's prepared at .github/workflows/deploy.yml but not committed yet, because pushing a workflow file needs a token with the `workflow` scope (`gh auth refresh -h github.com -u nickagnos -s workflow`) or the GitHub web UI; (2) make the repo public — currently private, and free Pages needs a public repo (or a paid plan); (3) Settings → Pages → Source = "GitHub Actions". Optional: a custom domain (CNAME + DNS) with the build base changed back to '/' gives a clean root URL.
 
 ## Tech stack
 - React 18, Vite 6

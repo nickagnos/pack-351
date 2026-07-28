@@ -5,19 +5,15 @@ import { asset } from '../asset';
 // each scene pushes in (Ken Burns) + drifts (parallax) and cross-fades to the next
 // through the shared cream field. Stills are generated locally (see PHOTOS/scroll-world).
 const SCENES = [
-  { img: '/scroll-world/welcome.webp', eyebrow: 'Pack 351 · Lindale, TX', title: 'We build memories outside.',
+  { img: '/scroll-world/den.webp', eyebrow: 'Pack 351 · Lindale, TX', title: 'It starts at the den.',
     body: 'Cub Scouts for kids Kindergarten through 5th grade — right here in Lindale. Here’s a year with Pack 351.' },
-  { img: '/scroll-world/camping.webp', eyebrow: 'Sleep under the stars', title: 'First campout, first s’more.',
-    body: 'Family campouts where the whole family comes along.' },
   { img: '/scroll-world/derby.webp', eyebrow: 'Start your engines', title: 'Race day.',
-    body: 'Carve it, paint it, race it down the ramp — the Pinewood Derby.' },
+    body: 'Carve it, paint it, race it down the track — the Pinewood Derby.' },
   { img: '/scroll-world/regatta.webp', eyebrow: 'Set sail', title: 'A regatta in a rain gutter.',
     body: 'Build a boat, blow it across the water, first to the finish wins.' },
-  { img: '/scroll-world/trails.webp', eyebrow: 'Boots on', title: 'Miles of Piney Woods.',
-    body: 'Hikes and trails all over East Texas.' },
-  { img: '/scroll-world/bluegold.webp', eyebrow: 'The whole pack, together', title: 'Blue & Gold Banquet.',
-    body: 'Awards, patches, and the whole pack together — the year’s big celebration.' },
-  { img: '/scroll-world/join.webp', eyebrow: 'Ready to get started?', title: 'Your kid’s next adventure.',
+  { img: '/scroll-world/camping.webp', eyebrow: 'Into the woods', title: 'First campout, first s’more.',
+    body: 'Campouts, hikes, and the outdoors — where the whole family comes along.' },
+  { img: '/scroll-world/finale.webp', eyebrow: 'Ready to get started?', title: 'Your kid’s next adventure.',
     body: 'Open to all K–5th graders. Drop in to any Monday meeting first — no pressure.', cta: true },
 ];
 const VH_PER_SCENE = 118; // scroll distance (in vh) per scene

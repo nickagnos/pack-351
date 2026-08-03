@@ -19,7 +19,6 @@ pack-351/
     index.html                 ← app entry HTML
     package.json
     vite.config.js             ← sets base '/pack-351/' for the production build
-  project/                     ← original Claude Design prototype (reference only)
   .github/workflows/deploy.yml ← builds site/ + publishes to GitHub Pages on push to main
   CLAUDE.md                    ← this file
 ```
@@ -40,8 +39,8 @@ Hash-based (`#/home`, `#/about`, `#/events`, `#/join`, `#/resources`). No server
 3. No code changes needed — `PhotoSlot` automatically shows the image when `src` resolves (asset paths go through `src/asset.js` so they work under the `/pack-351/` base)
 
 ## Updating content
-- **Contact email**: search `txcspack351@gmail.com` — appears in 4 files (see CONTACT-INFO.md)
-- **Leader names**: search `[Name]` in `src/pages/AboutPage.jsx`
+- **Contact email**: search `txcspack351@gmail.com` — appears in 4 files (`SiteFooter.jsx`,
+  `JoinPage.jsx`, `ResourcesPage.jsx` ×2, `EventsPage.jsx`)
 - **Events**: `src/pages/EventsPage.jsx` — the `EVENTS` array (the year list) and `FEATURED`
   (the three signature-event cards). The page deliberately carries **no fixed dates**: each
   row has a season or frequency (`when: 'Most Mondays'`, `'Spring'`), and a note under the

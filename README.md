@@ -1,22 +1,55 @@
-# CODING AGENTS: READ THIS FIRST
+# Pack 351 — Cub Scouts, Lindale TX
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+The website for **Cub Scout Pack 351** in Lindale, Texas. Five pages — Home, About, Events,
+Join and Resources — built as a static site with Vite and React.
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+**Live at:** https://nickagnos.github.io/pack-351/
 
-## What you should do — IMPORTANT
+## Running it locally
 
-**Read `pack-351/project/Pack 351 Website.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+Everything happens in `site/`:
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+```bash
+cd site
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build → site/dist/
+npm run preview  # serve the production build at the real /pack-351/ base
+```
 
-## About the design files
+Use `npm run preview` rather than `npm run dev` when you want to check something that
+depends on the deployed URL structure — the dev server runs at `/`, the real site runs
+under `/pack-351/`.
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
+## How it's laid out
 
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
+```
+site/
+  src/
+    pages/       one file per page
+    components/  shared UI — nav, footer, page hero, photo slot
+    App.jsx      hash router (#/home, #/about, …)
+    styles.css   all the CSS
+  public/
+    photos/      site photography (see PHOTOS-NEEDED.md)
+    ranks/       official Cub Scout rank emblems
+    scroll-world/  the four home-page cinematic stills
+```
 
-## Bundle contents
+Routing is hash-based, so there's no server config or SPA fallback to worry about — the
+host only ever serves one `index.html`.
 
-- `pack-351/README.md` — this file
-- `pack-351/project/` — the `Pack 351` project files (HTML prototypes, assets, components)
+**Every image on the site is AI-generated placeholder art**, waiting on real photos of the
+Pack. `site/public/photos/PHOTOS-NEEDED.md` lists what's needed and the exact filename each
+one should use; drop a file in with the right name and it appears, no code changes.
+
+## Deploying
+
+Push to `main`. That's it — `.github/workflows/deploy.yml` builds `site/` and publishes it
+to GitHub Pages automatically.
+
+## More detail
+
+`CLAUDE.md` has the maintenance notes: where the contact email and meeting times live, how
+the Events page is meant to work, what the Join page does instead of a form, and the
+hosting setup. Start there before changing content.

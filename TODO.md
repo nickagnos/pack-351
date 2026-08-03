@@ -1,77 +1,85 @@
 # Pack 351 Website — To-Do
 
-## 🎬 NEXT: Scroll-world landing page — LOCAL (Draw Things) ✅ chosen
+## Go live (the only blocking work)
 
-Full spec: `~/.claude/plans/i-want-to-use-wiggly-iverson.md`. Using `~/Repos/scroll-world-drawthings` (skill) + `~/Repos/drawthings-mcp` (MCP server, registered ✓). Architecture A (continuous forward take, no connectors). Draw Things is single-GPU → strictly sequential.
+The site is built, audited and ready; it is **not live yet**. Three steps, in order —
+the push is what actually triggers the first deploy. Details in `CLAUDE.md` →
+"Hosting & deployment".
 
-**PIVOT (2026-07-13):** Wan 2.2 video was tested across 7 legs and **always bobs in place** (no committed forward camera) — a model-level limit. So: **no AI video.** New approach = **code-driven scroll camera on the FLUX stills** (deterministic push-in + parallax + cross-fade through the shared cream background). Stills are excellent; motion is authored in CSS/JS. Reliable, free, full control.
+- [x] **Deploy workflow committed** — `.github/workflows/deploy.yml`, runs on push to `main`.
+- [ ] **Make the repo public** — currently private; free Pages needs a public repo.
+- [ ] **Settings → Pages → Source = "GitHub Actions".**
+- [ ] **`git push origin main`** — fires the workflow. Watch it under the Actions tab.
+- [ ] **Check the Facebook link preview** at https://developers.facebook.com/tools/debug/ —
+      it caches hard, so prime it before sharing the link in the Pack's group.
 
-- [x] Draw Things API live; FLUX.1 schnell stills excellent; Wan video rejected (bobs)
-- [x] Camera-motion approach decided: code-driven, not AI video
-- [x] Generated + refined all 7 stills (no platforms, girls throughout, WoHaLi flag via PIL text composite, awards-ceremony blue&gold, ranks-in-order finale, 4-lane-ish derby, straight regatta gutters)
-- [x] Built scroll-cinematic engine → **ported to React** (`site/src/components/ScrollWorld.jsx`)
-- [x] **Integrated**: HomePage = the cinematic; SiteNav overlays on Home only; stills → `site/public/scroll-world/*.webp`; CTA → `#/join`
-- [x] Verified end-to-end on Vite dev server (7 scenes, nav overlay both ways, CTA nav); `npm run build` passes
-- [x] **Restyled About / Events / Join / Resources** — shared warm cream `PageHero` (image-forward) replaces the flat navy heroes; clay images on each; whole site now matches the landing
-- [x] **Moved old Home content** — quick-facts strip (`QuickFacts.jsx`) rehomed on About; events already live on Events; CTAs on About/Join
-- [x] **Tweaked all 8 images** (2026-07-15) — Cub Scout accuracy pass: navy WoHaLi flag w/ real logo, straight 4-lane derby, straw regatta, blue&gold banner+awards, warm camping, corrected uniforms (blue+tan mix, leaders in tan, co-ed/diverse), clean group photo, fleur-de-lis + rank-badge finale. Committed `b5679ec`, pushed to `origin/main`.
-- [x] **Rebuilt the home scenes** (2026-08-01) — the 5 old stills were wide establishing shots packed with 15–25 tiny figures, which is what diffusion renders worst (bald gray heads, melted faces, garbled logo text on the finale). Replaced with **4 simple outdoor scenes** — trail, campfire, creek, overlook — each 2–4 scouts, large in frame, seen from behind, with nature carrying the frame and no text/logos/engineered props. Scene 4 doubles as the finale and carries the Join CTA. Derby + regatta still have their own images on the Events page. Stills are now `.jpg` (no `cwebp`/`ffmpeg` on this machine, and `sips` can't write webp).
-- [ ] **Favicon** + redeploy `dist/` to Netlify (only remaining launch item here)
+## Real content to replace
 
-### Local AI video — CLOSED (2026-07-15)
+The site is complete but several details are stand-ins. None block launch.
 
-Tested LTX-2 / LTX-2.3 as a Wan replacement. Verdict: **Draw Things' HTTP API can't do first-last-frame conditioning** (end frame ignored) and **LTX shows the same near-static camera as Wan**. Local AI video for the camera is dropped for good — the shipped code-driven scroll camera stays. See memory `drawthings-flf-api-limit`. (Also fixed the `drawthings-mcp` image-model bug: it now guards against rendering stills on a video checkpoint.)
+- [ ] **Real photos.** Every image is AI-generated placeholder art. `site/public/photos/PHOTOS-NEEDED.md`
+      lists each filename and what it should show; drop a real photo in with the matching
+      name and it appears, no code changes. Same for the four home-page cinematic stills in
+      `site/public/scroll-world/`.
+- [ ] **Charter year** — "Pack 351 has been part of the Lindale community for years" wants
+      the real founding year (`src/pages/AboutPage.jsx`, "Our story").
+- [ ] **Annual cost** — shows $175/year in three places; confirm against the council rate
+      (`components/QuickFacts.jsx`, `pages/JoinPage.jsx`, `pages/ResourcesPage.jsx`).
+- [ ] **Facebook group URL** — `https://www.facebook.com/groups/351cubscouts` in
+      `src/components/SiteFooter.jsx`; confirm it's right.
+- [ ] **Popcorn Sale** — the Events row and the storefront hero image were added together.
+      Confirm the Pack actually runs one, or remove both.
+- [ ] **Copyright year** — footer shows © 2026.
 
-### Backup — Higgsfield cloud (only if we ever want a true AI fly-through)
+## Copy polish
 
-- [ ] Buy credits + install `higgsfield` CLI + `higgsfield auth login` → original skill, architecture B (dive + connector), `seedance_2_0`
+- [ ] **Last 3 em dashes.** Down from 35. Rewrite the sentence rather than swapping
+      punctuation. Remaining: `pages/ResourcesPage.jsx` (2, in the Band section) and the
+      screen-reader `<h1>` in `components/ScrollWorld.jsx`. Find them with
+      `grep -rn '—' site/src/`. **Leave en dashes (`–`) alone** — those are ranges like
+      `K–5th graders` and are correct.
+- [ ] **"Our story"** — personalize with real Pack history and anecdotes (`pages/AboutPage.jsx`).
 
-## Before showing to anyone
+## If the leaders section comes back
 
-- [x] **GitHub Pages migration — code done** (2026-07-15) — removed Netlify (`netlify.toml`, hidden form), set Vite `base: '/pack-351/'`, routed all asset URLs through `src/asset.js`, verified the built site loads at the `/pack-351/` base.
-- [x] **Join form removed** — replaced with a no-backend contact CTA (drop-in + `mailto:` email) since Pages has no form backend.
-- [ ] **Go live on GitHub Pages — NOT live yet.** Three steps (details in `CLAUDE.md` → "Hosting & deployment"):
-  - [x] **Deploy workflow committed** (`.github/workflows/deploy.yml`) — runs on push to `main` once Pages is enabled.
-  - [ ] **Make the repo public** — currently private; free Pages needs a public repo (or a paid plan).
-  - [ ] **Settings → Pages → Source = "GitHub Actions".**
-- [ ] **(Optional) custom domain** for a clean root URL — add a `CNAME` + DNS and set the build `base` back to `'/'`.
+Removed 2026-08-02 because the names were placeholders and the portraits were generated
+stand-ins; the four `leader-*.jpg` files were deleted 2026-08-03. Rebuilding it means real
+names and real headshots — the section isn't worth restoring without both.
 
-## Content to fill in
+## Nice to have
 
-- [ ] **Remove the em dashes.** The site copy leans on `—` heavily and it reads as AI-written. **35 left** across `site/src/`, of which **31 are user-visible** (the other 4 are in code comments and can stay). Rewrite each sentence rather than substituting punctuation: usually a period or a comma works, and some clauses just want dropping. Don't swap `—` for ` - `.
-  - `pages/ResourcesPage.jsx` (15, by far the worst)
-  - `pages/JoinPage.jsx` (5), `pages/EventsPage.jsx` (5), `pages/AboutPage.jsx` (5)
-  - `pages/HomePage.jsx`, `components/QuickFacts.jsx`, `components/PageHero.jsx`, `styles.css` (1 each)
-  - Find them with: `grep -rn '—' site/src/`
-  - **Leave the 15 en dashes (`–`) alone.** Those are ranges like `K–5th graders` and are correct.
-  - Already done: the 4 home-page scene strings in `components/ScrollWorld.jsx` (2026-08-01).
-- [ ] **Leader names** — replace the four `[Name]` placeholders on the About page (`src/pages/AboutPage.jsx:126`)
-- [x] **Leader headshots** — generated as clay-style busts (`leader-*.jpg` in `site/public/photos/`); swap for real photos anytime
-- [x] **Activity photos** — all 11 generated in the clay style (5 reused from the landing, 6 new incl. candy-cane, group shot, 4 leaders); swap for real photos anytime
-- [ ] **Charter year** — "Pack 351 has been part of the Lindale community for years" → replace with the actual charter year (`src/pages/AboutPage.jsx:63`)
-- [ ] **Copyright year** — footer shows © 2026; update if needed (`src/components/SiteFooter.jsx:66`)
+- [ ] **Custom domain** — buy `pack351.com` or similar, add a `CNAME` + DNS, and set the
+      Vite build `base` back to `'/'`. **Also update `og:url` and `og:image` in
+      `site/index.html`** — those are absolute by spec and won't follow the base change.
 
-## Events
+---
 
-- [ ] **Verify event dates** — the dates in EventsPage and HomePage are approximate; update when you have the real schedule
-  - EventsPage full list: `src/pages/EventsPage.jsx` lines 4–17
-  - HomePage preview (4 events): `src/pages/HomePage.jsx` lines 124–127
-- [ ] **Pack meeting dates** — currently shows every Monday in June as placeholders; replace with actual scheduled dates
+## Done
 
-## Forms / Documents (Resources page)
-
-- [ ] **Activity Permission Slip** — upload to `site/public/` and link in `src/pages/ResourcesPage.jsx:21`
-- [ ] **Talent Release (photo permission)** — same, link at line 26
-- [ ] **Scholarship Request form** — same, link at line 31
-- [ ] **Pinewood Derby Car Rules** — same, link at line 36
-- [ ] **Raingutter Regatta Boat Rules** — same, link at line 41
-- [ ] **Campout Packing Checklist** — same, link at line 46
-*(The two BSA health forms already link directly to scouting.org — no action needed)*
-
-## Nice to have (not blocking)
-
-- [ ] **Custom domain** — buy `pack351.com` (or similar) and add in Netlify settings
-- [ ] **Pack description** — personalize the "Our story" section with real history and anecdotes (`src/pages/AboutPage.jsx` lines 63–70)
-- [ ] **Adjust annual cost** — currently shows $175/year; confirm this is accurate for your council (`src/pages/HomePage.jsx:103`, `src/pages/JoinPage.jsx:152`, `src/pages/ResourcesPage.jsx:55`)
-- [ ] **Facebook group URL** — currently `https://www.facebook.com/groups/351cubscouts`; confirm this is correct (`src/components/SiteFooter.jsx:49`)
-- [ ] **Favicon** — add a `site/public/favicon.ico` or `favicon.svg`
+- [x] **Pre-launch audit** (2026-08-03) — all asset paths and external links verified, alt
+      text complete, no mobile overflow, no console errors, no secrets in history. Fixed:
+      Open Graph/Twitter cards, favicon, per-page `<title>`, home-page heading structure
+      (four competing `<h1>`s → one), and internal `.md` notes no longer ship to the live site.
+- [x] **Repo cleanup** (2026-08-03) — untracked `node_modules/` and `dist/`; deleted the
+      Claude Design handoff bundle (`project/`, `example-pics/`), the stale `CONTACT-INFO.md`,
+      and the orphaned leader portraits.
+- [x] **Contact email** → `txcspack351@gmail.com` (was a personal address).
+- [x] **Resources page** — "Forms & Docs" became a Links section pointing at eight verified
+      Cub Scouting resources, replacing six PDFs that were never going to be uploaded. Tabs
+      flattened into stacked sections. Added a Band app section.
+- [x] **Events page** — all fixed dates removed; it describes a typical Pack year by season,
+      and points to email and Facebook for real dates.
+- [x] **About page** — den-meeting hero, official rank emblems on the den cards, leaders
+      section removed.
+- [x] **Home page** (2026-08-01) — the five crowded stills became four simple outdoor scenes
+      (trail, campground, creek, overlook), each with 2–4 scouts large in frame and seen from
+      behind. The old ones were wide shots packed with 15–25 tiny figures, which is what
+      diffusion renders worst.
+- [x] **GitHub Pages migration** (2026-07-15) — Netlify removed, Vite `base` set to
+      `/pack-351/`, all asset URLs routed through `src/asset.js`.
+- [x] **Join form removed** — replaced with a no-backend contact CTA (drop in to a meeting,
+      or a prefilled `mailto:`), since Pages has no form backend.
+- [x] **Local AI video — closed** (2026-07-15). Wan 2.2 and LTX both bob in place rather than
+      committing to forward camera motion, and Draw Things' HTTP API can't do first-last-frame
+      conditioning. The shipped scroll camera is code-driven CSS/JS over FLUX stills, which is
+      deterministic and free. Don't reopen this without new models.

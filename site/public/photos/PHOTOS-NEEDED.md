@@ -21,22 +21,14 @@ The site automatically shows the photo once the file exists — no code changes 
 > **Note:** the Home page uses none of these. It's the full-screen scrolling cinematic,
 > whose four stills live in `site/public/scroll-world/` — see that folder's README.
 
-## Leader headshots — not currently used
-
-The About page's "Our leaders" section was removed on 2026-08-02, so
-`leader-cubmaster.jpg`, `leader-assistant.jpg`, `leader-treasurer.jpg` and
-`leader-outdoor.jpg` are still in this folder but nothing references them. They're kept in
-case the section comes back; delete them if it isn't coming back.
-
 ---
 
 ## About the current placeholders
 
 Everything here is AI-generated stand-in art, meant to be replaced by real photos. The
-About-page images (`photo-group`, `photo-hiking`, `photo-candy-cane` and the four
-`leader-*` portraits) were regenerated 2026-08-02 in Draw Things / FLUX.1 schnell, in the
-same isometric-clay-miniature style the rest of the set uses. Two things worth knowing if
-you ever regenerate them:
+About-page images (`photo-hiking`, `photo-candy-cane`, `photo-den-meeting`) were regenerated
+2026-08-02 in Draw Things / FLUX.1 schnell, in the same isometric-clay-miniature style the
+rest of the set uses. Two things worth knowing if you ever regenerate them:
 
 - **Keep the backdrop plain cream.** These sit directly on the page's `--cream` (#faf7f0),
   so a miniature floating on a cream field blends in; a full-frame environment doesn't.
@@ -82,7 +74,7 @@ geometry and size, why "diverse" has to be spelled out per child, why every scou
 ## Photo tips
 - **Format**: JPG or PNG works. JPG is preferred for photos.
 - **Size**: Aim for 1200px on the longest side. Larger is fine; smaller may look blurry.
-- **Cropping**: Activity photos display as rectangles (roughly 16:9 or wider). Leader headshots display as circles (square crop works best).
+- **Cropping**: these all display as rectangles, roughly 16:9 or wider.
 - **BSA Brand Center**: For stock/filler photos while you gather real ones, visit https://www.scouting.org/programs/cub-scouts/ or search for Cub Scout imagery in the BSA Media Resources.
 
 ## After adding photos

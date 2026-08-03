@@ -1,7 +1,7 @@
 # Pack 351 Website — CLAUDE.md
 
 ## What this project is
-A static marketing website for **Cub Scout Pack 351** in Lindale, TX. Five pages: Home, About, Events, Join, Resources. Built with Vite + React, **set up for GitHub Pages** (migrated off Netlify 2026-07-15; not live yet) — see [Hosting & deployment](#hosting--deployment).
+A static marketing website for **Cub Scout Pack 351** in Lindale, TX. Five pages: Home, About, Events, Join, Resources. Built with Vite + React, **live on GitHub Pages** at <https://nickagnos.github.io/pack-351/> (migrated off Netlify 2026-07-15, went live 2026-08-03) — see [Hosting & deployment](#hosting--deployment).
 
 ## Project layout
 ```
@@ -57,14 +57,16 @@ If a real form is ever wanted again, add a third-party handler (Formspree, Getfo
 
 ## Hosting & deployment
 
-**Set up for GitHub Pages** (migrated off Netlify 2026-07-15) — the code is ready but the site is **not live yet** (see the go-live steps below). Target is a **project page** at `https://nickagnos.github.io/pack-351/`, so `vite.config.js` sets `base: '/pack-351/'` for the build and every runtime asset URL goes through `src/asset.js` (`import.meta.env.BASE_URL`) to resolve under that subpath. Local `npm run dev` stays at `/`.
+**Live on GitHub Pages** at <https://nickagnos.github.io/pack-351/> since 2026-08-03 (migrated off Netlify 2026-07-15). It's a **project page**, not a user page, so `vite.config.js` sets `base: '/pack-351/'` for the build and every runtime asset URL goes through `src/asset.js` (`import.meta.env.BASE_URL`) to resolve under that subpath. Local `npm run dev` stays at `/`.
 
-**To go live (all still to do):**
+**Publishing a change:** commit to `main` and push. `.github/workflows/deploy.yml` builds `site/` and publishes `site/dist/` to Pages — a run takes ~40 seconds. Check it with `gh run list` and confirm the live bundle with:
 
-- [x] **Deploy workflow committed** — `.github/workflows/deploy.yml` builds `site/` and publishes `site/dist/` to Pages on push to `main` (fires once Pages is enabled below). (Pushing it required adding the `workflow` scope to the token.)
-- [ ] **Make the repo public** — currently **private**; free Pages needs a public repo (or a paid plan).
-- [ ] **Settings → Pages → Source = "GitHub Actions".**
-- [ ] **Push `main`** — this is what actually fires the first deploy.
+```bash
+ASSET=$(curl -s https://nickagnos.github.io/pack-351/ | grep -o '/pack-351/assets/index-[^"]*\.js' | head -1)
+curl -s "https://nickagnos.github.io$ASSET" | grep -o 'some text you changed'
+```
+
+Go-live is **done** — all four steps (workflow committed, repo made public, Pages source set to "GitHub Actions", `main` pushed) are complete. Note the repo is now **public**; treat anything committed here as published. Pushing workflow changes needs the `workflow` scope on the token.
 
 Optional: for a clean root URL, add a **custom domain** (`CNAME` + DNS) and change the build
 `base` back to `'/'`. The `asset()` helper adapts automatically, but **two things won't**:

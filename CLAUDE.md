@@ -65,8 +65,13 @@ If a real form is ever wanted again, add a third-party handler (Formspree, Getfo
 - [x] **Deploy workflow committed** — `.github/workflows/deploy.yml` builds `site/` and publishes `site/dist/` to Pages on push to `main` (fires once Pages is enabled below). (Pushing it required adding the `workflow` scope to the token.)
 - [ ] **Make the repo public** — currently **private**; free Pages needs a public repo (or a paid plan).
 - [ ] **Settings → Pages → Source = "GitHub Actions".**
+- [ ] **Push `main`** — this is what actually fires the first deploy.
 
-Optional: for a clean root URL, add a **custom domain** (`CNAME` + DNS) and change the build `base` back to `'/'` — the `asset()` helper adapts automatically.
+Optional: for a clean root URL, add a **custom domain** (`CNAME` + DNS) and change the build
+`base` back to `'/'`. The `asset()` helper adapts automatically, but **two things won't**:
+`og:url` and `og:image` in `site/index.html` are absolute URLs (the Open Graph spec requires it)
+and hardcode `https://nickagnos.github.io/pack-351/`. Update both by hand, or Facebook link
+previews will keep pointing at the old origin.
 
 ## Tech stack
 - React 18, Vite 6

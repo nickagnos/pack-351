@@ -76,13 +76,18 @@ export default function ScrollWorld({ go }) {
   return (
     <div className="sw-root">
       <style>{SW_CSS}</style>
+      {/* The four scene titles are mood lines, not page headings - as <h1>s they gave the
+          home page four competing top-level headings, none of which named the Pack. The
+          real heading lives here, off-screen but read by screen readers and search
+          engines; the scene titles below are <h2>s. */}
+      <h1 className="sw-sr-only">Cub Scout Pack 351 — Lindale, Texas</h1>
       <div className="sw-stage" ref={stageRef}>
         {SCENES.map((s, i) => (
           <div className="sw-scene" style={{ zIndex: i + 1 }} key={i}>
             <div className="sw-img" style={{ backgroundImage: `url('${asset(s.img)}')` }} />
             <div className="sw-copy">
               <div className="sw-eyebrow">{s.eyebrow}</div>
-              <h1 className="sw-title">{s.title}</h1>
+              <h2 className="sw-title">{s.title}</h2>
               <p className="sw-body">{s.body}</p>
               {s.cta && (
                 <div className="sw-cta">
@@ -123,6 +128,10 @@ const SW_CSS = `
 .sw-eyebrow { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2.5px;
   text-transform: uppercase; color: var(--gold-text); margin-bottom: 14px;
   text-shadow: 0 0 10px var(--sw-bg), 0 0 22px var(--sw-bg); }
+/* Off-screen but still in the accessibility tree - not display:none, which would hide it
+   from screen readers too. */
+.sw-sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 .sw-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; line-height: .98; color: var(--navy);
   font-size: clamp(44px,6.4vw,92px); letter-spacing: -.5px; margin-bottom: 16px; text-shadow: 0 2px 30px var(--sw-bg); }
 .sw-body { font-size: clamp(16px,1.5vw,20px); line-height: 1.6; color: var(--muted); max-width: 460px; }

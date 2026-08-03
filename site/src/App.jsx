@@ -8,8 +8,22 @@ import ResourcesPage from './pages/ResourcesPage';
 
 const getPage = () => window.location.hash.replace('#/', '') || 'home';
 
+// Hash routing never reloads the document, so the <title> in index.html would otherwise
+// stick on every page — leaving all five identical in tabs, history and bookmarks.
+const TITLES = {
+  home:      'Pack 351 · Cub Scouts · Lindale, TX',
+  about:     'About · Pack 351 · Cub Scouts · Lindale, TX',
+  events:    'Events · Pack 351 · Cub Scouts · Lindale, TX',
+  join:      'Join · Pack 351 · Cub Scouts · Lindale, TX',
+  resources: 'Resources · Pack 351 · Cub Scouts · Lindale, TX',
+};
+
 export default function App() {
   const [page, setPage] = React.useState(getPage);
+
+  React.useEffect(() => {
+    document.title = TITLES[page] || TITLES.home;
+  }, [page]);
 
   const go = React.useCallback((p) => {
     setPage(p);

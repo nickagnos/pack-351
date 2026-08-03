@@ -1,1 +1,12 @@
+# Dependencies — restored by `npm ci` in the deploy workflow
+node_modules/
+
+# Build output — GitHub Actions builds this from source on every push to main.
+# Committing it only guarantees a stale copy in the repo.
+site/dist/
+
+# macOS
+.DS_Store
+
+# Local scratch
 scroll-world-tweaks-wip/

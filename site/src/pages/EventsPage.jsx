@@ -12,7 +12,7 @@ import { asset } from '../asset';
 // listing the same meeting three times was only ever a side effect of having dates.
 const EVENTS = [
   { when: 'Most Mondays', title: 'Pack Meeting',          time: '6:30–7:30 PM', loc: 'Central Baptist Church', tag: 'Weekly',     tagBg: 'var(--navy)' },
-  { when: 'Summer',       title: 'Summer Campout',        time: 'Fri–Sun',      loc: 'Camp Pirtle, Lindale',   tag: 'Overnight',  tagBg: '#166534' },
+  { when: 'Summer',       title: 'Summer Campout',        time: 'Fri–Sun',      loc: 'Camp Pirtle, Gary TX',  tag: 'Overnight',  tagBg: '#166534' },
   { when: 'Early fall',   title: 'Fall Kickoff Meeting',  time: 'Evening',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: 'var(--navy)' },
   // Added alongside the popcorn hero image - the page shouldn't show a popcorn sale and
   // then never mention one. Remove this row if the Pack doesn't run a popcorn fundraiser.

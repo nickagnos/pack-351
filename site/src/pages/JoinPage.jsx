@@ -3,7 +3,7 @@ import SiteFooter from '../components/SiteFooter';
 import PageHero from '../components/PageHero';
 import { asset } from '../asset';
 
-const CONTACT_EMAIL = 'nickagnos@gmail.com';
+const CONTACT_EMAIL = 'txcspack351@gmail.com';
 const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Joining Pack 351')}` +
   `&body=${encodeURIComponent(
     "Hi! We'd like to learn about joining Pack 351.\n\n" +
@@ -33,7 +33,7 @@ export default function JoinPage({ go }) {
               </h2>
               <p style={{ color: 'var(--muted)', lineHeight: 1.75, marginBottom: 28 }}>
                 There's no form to fill out. Come see us in person, or reach out and we'll help you
-                with everything — your scout's den, gear, cost, and when to show up.
+                with everything: your scout's den, gear, cost, and when to show up.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -43,9 +43,9 @@ export default function JoinPage({ go }) {
                   </div>
                   <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 14 }}>
                     Most Monday nights, 6:30–7:30 PM at Central Baptist Church in Lindale. No sign-up
-                    needed — just show up and see if it's a fit.
+                    needed. Just show up and see if it's a fit.
                   </p>
-                  <button className="btn btn-ghost" onClick={() => go('events')}>See upcoming events →</button>
+                  <button className="btn btn-ghost" onClick={() => go('events')}>See what we do →</button>
                 </div>
 
                 <div className="card" style={{ padding: 22 }}>
@@ -54,7 +54,7 @@ export default function JoinPage({ go }) {
                   </div>
                   <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 14 }}>
                     Tell us your scout's grade and we'll reply with everything you need to get started.
-                    No payment now — we'll cover dues and gear when you're ready.
+                    No payment now. We'll cover dues and gear when you're ready.
                   </p>
                   <a className="btn btn-primary btn-lg" href={MAILTO}>
                     Email us to get started →
@@ -66,9 +66,9 @@ export default function JoinPage({ go }) {
             {/* Sidebar */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
-                { icon: '💸', title: "What does it cost?", body: "$175/year covers dues, activity fees, and your scout's Handbook. Uniform is extra but we'll guide you. Scholarships are available — no scout is ever turned away for finances." },
+                { icon: '💸', title: "What does it cost?", body: "$175/year covers dues, activity fees, and your scout's Handbook. Uniform is extra but we'll guide you. Scholarships are available, and no scout is ever turned away for finances." },
                 { icon: '📅', title: "When do we meet?", body: 'Most Monday nights, 6:30–7:30 PM at Central Baptist Church in Lindale.' },
-                { icon: '👀', title: "Can we visit before joining?", body: "Absolutely. Drop in to any Monday meeting. No sign-up needed — just show up and see if it's a fit." },
+                { icon: '👀', title: "Can we visit before joining?", body: "Absolutely. Drop in to any Monday meeting. No sign-up needed. Just show up and see if it's a fit." },
                 { icon: '👕', title: "Do we need a uniform right away?", body: "Nope. Wear whatever for the first meeting. We'll walk you through exactly what to get, and often have gently used gear available." },
               ].map(({ icon, title, body }) => (
                 <div key={title} className="card" style={{ padding: 18 }}>

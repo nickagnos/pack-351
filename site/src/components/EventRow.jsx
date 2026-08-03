@@ -1,16 +1,22 @@
 import React from 'react';
 
-export default function EventRow({ month, day, title, time, location, tag, tagBg }) {
+// A single row in the Pack-year list. The left badge used to be a calendar tile (month +
+// day number). The Pack doesn't publish firm dates ahead of time, so it now carries a
+// timing label instead - "Most Mondays", "Spring", "December" - and the box is sized for
+// a word rather than a two-digit number.
+export default function EventRow({ when, title, time, location, tag, tagBg }) {
   return (
     <div className="card" style={{ padding: '16px 20px', display: 'flex', gap: 18, alignItems: 'center' }}>
       <div style={{
-        minWidth: 52, textAlign: 'center',
+        width: 104, textAlign: 'center',
         background: 'var(--navy-light)', borderRadius: 7,
-        padding: '6px 0', border: '1.5px solid var(--navy)',
+        padding: '10px 6px', border: '1.5px solid var(--navy)',
         flexShrink: 0,
       }}>
-        <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 12, color: 'var(--navy)', textTransform: 'uppercase', letterSpacing: 1 }}>{month}</div>
-        <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 800, fontSize: 28, color: 'var(--navy)', lineHeight: 1.1 }}>{day}</div>
+        <div style={{
+          fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 17, color: 'var(--navy)',
+          textTransform: 'uppercase', letterSpacing: .6, lineHeight: 1.15,
+        }}>{when}</div>
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>

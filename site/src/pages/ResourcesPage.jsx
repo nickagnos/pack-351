@@ -4,61 +4,78 @@ import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import { asset } from '../asset';
 
-const FORMS = [
+// Every link here was checked on 2026-08-02, and each PDF was opened to confirm it is the
+// document it claims to be (the old Part C link had been 404ing for who knows how long).
+// `kind` drives the badge and icon: 'pdf' downloads a file, 'web' opens a site.
+//
+// Deliberately NOT linked: BSA's "Publicity Waiver and Release"
+// (filestore.scouting.org/filestore/marketing/pdf/talent.pdf). It's a real national form,
+// but it grants BSA a perpetual exclusive commercial licence over a child's likeness - not
+// permission for the Pack to post photos here. Anyone adding a photo-release link later
+// should write a Pack form instead. AHMR Part A already covers council and BSA use.
+const LINKS = [
   {
-    name: 'Annual Health & Medical Record (A & B)',
-    note: 'Required for all scouts — complete annually',
-    href: 'https://filestore.scouting.org/filestore/HealthSafety/pdf/680-001_AB.pdf',
+    name: 'Annual Health & Medical Record',
+    note: 'Parts A & B for every Scout, yearly. Part C needs a doctor and is only for resident camp',
+    kind: 'pdf',
+    href: 'https://filestore.scouting.org/filestore/HealthSafety/pdf/680-001_ABC.pdf',
   },
   {
-    name: 'Annual Health & Medical Record (C)',
-    note: 'Required for overnight events',
-    href: 'https://filestore.scouting.org/filestore/HealthSafety/pdf/680-001_C.pdf',
-  },
-  {
-    name: 'Activity Permission Slip',
-    note: 'Required per event — ask your den leader for the current form',
-    href: null,
-  },
-  {
-    name: 'Talent Release (Photo permission)',
-    note: 'Optional — allows Pack to use photos',
-    href: null,
-  },
-  {
-    name: 'Scholarship Request',
-    note: 'Confidential — no scout turned away',
-    href: null,
-  },
-  {
-    name: 'Pinewood Derby Car Rules',
-    note: 'Read before you start building!',
-    href: null,
-  },
-  {
-    name: 'Raingutter Regatta Boat Rules',
-    note: 'Official construction guidelines',
-    href: null,
+    name: 'Activity Consent Form (permission slip)',
+    note: 'A parent signs one per trip or outing. English & Spanish',
+    kind: 'pdf',
+    href: 'https://filestore.scouting.org/filestore/pdf/680-673.pdf',
   },
   {
     name: 'Campout Packing Checklist',
-    note: 'Printable checklist for families',
-    href: null,
+    note: 'Scouting America’s pack-overnighter gear list. Print it and tick things off',
+    kind: 'pdf',
+    href: 'https://filestore.scouting.org/filestore/pdf/34-49.pdf',
+  },
+  {
+    name: 'my.Scouting account',
+    note: 'Register your Scout, pay dues, and take Youth Protection Training',
+    kind: 'web',
+    href: 'https://my.scouting.org/',
+  },
+  {
+    name: 'Scoutbook',
+    note: 'Track your Scout’s adventures and rank progress online',
+    kind: 'web',
+    href: 'https://scoutbook.scouting.org/',
+  },
+  {
+    name: 'Scout Shop',
+    note: 'The blue shirt, patches, and Pinewood Derby kits. Official store',
+    kind: 'web',
+    href: 'https://www.scoutshop.org/',
+  },
+  {
+    name: 'Cub Scout Adventures',
+    note: 'What your Scout actually works on, rank by rank, Lion through Arrow of Light',
+    kind: 'web',
+    href: 'https://www.scouting.org/programs/cub-scouts/adventures/',
+  },
+  {
+    name: 'East Texas Area Council',
+    note: 'Our council in Tyler. Summer camps, district events, and financial assistance',
+    kind: 'web',
+    href: 'https://etacbsa.org/',
   },
 ];
 
 const FAQS = [
   { q: "What does my scout actually do at a pack meeting?",
-    a: "Every meeting has an opening ceremony, den time (scouts work on rank adventures with their leader), and a closing. Most meetings include a hands-on activity or game. It's structured but fun — about 45–60 minutes." },
-  { q: "How much does it cost — and what if we can't afford it?",
-    a: "$175/year covers BSA national dues, council fees, and your scout's Handbook. Uniform and special events are extra. If cost is a barrier, just ask — we have scholarships and no one is ever turned away for finances." },
+    a: "Every meeting has an opening ceremony, den time (scouts work on rank adventures with their leader), and a closing. Most meetings include a hands-on activity or game. It's structured but fun, about 45–60 minutes." },
+  { q: "How much does it cost, and what if we can't afford it?",
+    a: "$175/year covers BSA national dues, council fees, and your scout's Handbook. Uniform and special events are extra. If cost is a barrier, just ask. We have scholarships and no one is ever turned away for finances." },
   { q: "Do we have to camp? Do parents have to come?",
-    a: "Camping is encouraged but never required. Parents are always welcome — we actually need adult volunteers for overnights. Many parents say it's their favorite part of Scouting." },
-  { q: "What about the uniform — what do we actually need?",
-    a: "The blue Cub Scout shirt with your rank badge is the main piece. Pants, belt, and neckerchief are optional for most meetings. Don't buy anything before your first meeting — we'll walk you through it and often have used gear to share." },
+    a: "Camping is encouraged but never required. Parents are always welcome, and we actually need adult volunteers for overnights. Many parents say it's their favorite part of Scouting." },
+  { q: "What do we actually need for the uniform?",
+    a: "The blue Cub Scout shirt with your rank badge is the main piece. Pants, belt, and neckerchief are optional for most meetings. Don't buy anything before your first meeting. We'll walk you through it and often have used gear to share." },
   { q: "Can both boys and girls join?",
     a: "Yes! Cub Scouts has welcomed all genders since 2018. All kids in Kindergarten through 5th grade are welcome in Pack 351." },
-  { q: "My kid has an allergy or accommodation — is that okay?",
+  { q: "My kid has an allergy or accommodation. Is that okay?",
     a: "Absolutely. Let us know during sign-up and we'll make sure your den leader is informed. All scouts are welcome." },
   { q: "How is Pack 351 organized? Who's in charge?",
     a: "The Cubmaster leads pack-wide meetings. Den leaders run each den. A Pack Committee (parent volunteers) handles finances, events, and logistics. It's truly a community effort." },
@@ -67,101 +84,78 @@ const FAQS = [
 ];
 
 const NEW_STEPS = [
-  { n: '1', title: 'Come to your first meeting', body: "Show up any Monday at 6:30 PM at Central Baptist Church. No paperwork, no uniform — just you and your scout. We'll take it from there." },
+  { n: '1', title: 'Come to your first meeting', body: "Show up any Monday at 6:30 PM at Central Baptist Church. No paperwork, no uniform. Just you and your scout. We'll take it from there." },
   { n: '2', title: 'Register online',            body: "After your visit, register through BeAScout.org or our Join page. You'll pay annual dues ($175) through the BSA portal." },
-  { n: '3', title: "Get your scout's shirt",    body: "Order a blue Cub Scout shirt from ScoutShop.org — that's all you need to start. We'll help you with patches at your next meeting." },
+  { n: '3', title: "Get your scout's shirt",    body: "Order a blue Cub Scout shirt from ScoutShop.org. That's all you need to start. We'll help you with patches at your next meeting." },
   { n: '4', title: 'Download the Scouting app', body: 'The free Scouting America app has your scout\'s handbook, advancement tracker, and event notifications. Available on iOS and Android.' },
-  { n: '5', title: 'Complete the medical form', body: "Download and fill out Parts A & B of the Annual Health & Medical Record. Your den leader needs this on file. Download it from the Forms tab." },
+  { n: '5', title: 'Complete the medical form', body: "Download and fill out Parts A & B of the Annual Health & Medical Record. Your den leader needs this on file. Grab it from the links at the top of this page." },
 ];
 
 export default function ResourcesPage({ go }) {
-  const [tab, setTab] = React.useState('forms');
   const [openFaq, setOpenFaq] = React.useState(null);
-
-  const tabs = [
-    { id: 'forms',        label: 'Forms & Docs' },
-    { id: 'uniform',      label: 'Uniform Guide' },
-    { id: 'new-families', label: 'New Families' },
-    { id: 'faq',          label: 'FAQ' },
-  ];
 
   return (
     <div>
       <PageHero
         eyebrow="Resources"
         title="Everything in one place."
-        sub={'Forms, FAQs, the uniform guide — bookmark this page. It answers 95% of new family questions and saves a lot of "quick question" emails.'}
-        image={asset("/photos/photo-blue-gold.jpg")}
-        imageAlt="Blue & Gold awards ceremony"
+        sub={'Links, forms, FAQs, the uniform guide. Bookmark this page. It answers 95% of new family questions and saves a lot of "quick question" emails.'}
+        image={asset("/photos/photo-handbook.jpg")}
+        imageAlt="A Cub Scout and a parent going through the handbook and forms at the kitchen table"
       />
 
-      {/* Tab bar */}
-      <div style={{ background: '#fff', borderBottom: '1px solid var(--border)', position: 'sticky', top: 68, zIndex: 50 }}>
-        <div className="container" style={{ display: 'flex', overflowX: 'auto' }}>
-          {tabs.map(t => (
-            <button key={t.id} onClick={() => setTab(t.id)} style={{
-              fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 18,
-              padding: '16px 22px', border: 'none', background: 'none', cursor: 'pointer',
-              color: tab === t.id ? 'var(--navy)' : 'var(--muted)',
-              borderBottom: tab === t.id ? '3px solid var(--gold)' : '3px solid transparent',
-              transition: 'all .12s', whiteSpace: 'nowrap',
-            }}>{t.label}</button>
-          ))}
-        </div>
-      </div>
+      {/* Everything below used to sit behind a four-tab switcher. It's now stacked, with
+          alternating cream/white backgrounds doing the work the tab bar used to do:
+          telling you where one topic ends and the next begins. */}
 
-      {/* Tab content */}
+      {/* LINKS */}
       <div className="section">
         <div className="container">
-
-          {/* FORMS */}
-          {tab === 'forms' && (
-            <div>
-              <SectionHeader eyebrow="Download & print" title="Forms & documents" />
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 10 }}>
-                {FORMS.map(f => (
+              <SectionHeader
+                eyebrow="The useful stuff"
+                title="Links & forms"
+                sub="Everything a Pack 351 family needs, straight from Scouting America. Nothing here is hosted by us, so you always get the current version."
+              />
+              <div className="links-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 10 }}>
+                {LINKS.map(f => (
                   <div key={f.name} className="card" style={{ padding: '16px 18px', display: 'flex', gap: 14, alignItems: 'center' }}>
+                    {/* Badge says what's on the other end so the arrow isn't a surprise:
+                        PDF downloads a file, WEB opens a site in a new tab. */}
                     <div style={{
                       width: 44, height: 52, background: 'var(--navy)', borderRadius: 6,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       flexShrink: 0, color: 'var(--gold)', fontFamily: 'Barlow Condensed',
                       fontWeight: 800, fontSize: 14,
-                    }}>PDF</div>
+                    }}>{f.kind === 'web' ? 'WEB' : 'PDF'}</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 17, color: 'var(--text)', marginBottom: 3 }}>{f.name}</div>
                       <div style={{ fontSize: 12, color: 'var(--muted)' }}>{f.note}</div>
                     </div>
-                    {f.href ? (
-                      <a
-                        href={f.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-ghost btn-sm"
-                        style={{ flexShrink: 0 }}
-                      >↓</a>
-                    ) : (
-                      <span
-                        className="btn btn-ghost btn-sm"
-                        style={{ flexShrink: 0, opacity: 0.4, cursor: 'default', pointerEvents: 'none' }}
-                        title="Coming soon"
-                      >↓</span>
-                    )}
+                    <a
+                      href={f.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-ghost btn-sm"
+                      style={{ flexShrink: 0 }}
+                      aria-label={f.kind === 'web' ? `Open ${f.name} in a new tab` : `Download ${f.name} (PDF)`}
+                    >{f.kind === 'web' ? '↗' : '↓'}</a>
                   </div>
                 ))}
               </div>
               <p style={{ marginTop: 16, fontSize: 13, color: 'var(--muted)' }}>
-                Pack-specific forms (permission slip, derby rules, etc.) will be posted here. Email{' '}
-                <a href="mailto:nickagnos@gmail.com" style={{ color: 'var(--navy)' }}>nickagnos@gmail.com</a>{' '}
-                if you need one now.
+                Looking for our Pinewood Derby or Regatta rules, or help with fees? Those are handled
+                inside the Pack, so just email{' '}
+                <a href="mailto:txcspack351@gmail.com" style={{ color: 'var(--navy)' }}>txcspack351@gmail.com</a>{' '}
+                and we'll sort you out. No Scout is ever turned away over money.
               </p>
-            </div>
-          )}
+        </div>
+      </div>
 
-          {/* UNIFORM */}
-          {tab === 'uniform' && (
-            <div>
+      {/* UNIFORM */}
+      <div className="section" style={{ background: '#fff', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+        <div className="container">
               <SectionHeader eyebrow="What to wear" title="The Cub Scout uniform" sub="Here's what's actually needed, what's optional, and a few money-saving tips." />
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+              <div className="uniform-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
                 <div>
                   <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 24, color: 'var(--navy)', marginBottom: 14 }}>Required</h3>
                   {['Blue Cub Scout shirt (with rank badge)', 'Pack 351 numeral patch', 'BSA patch (left shoulder)', 'Council shoulder patch'].map(item => (
@@ -195,13 +189,13 @@ export default function ResourcesPage({ go }) {
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+        </div>
+      </div>
 
-          {/* NEW FAMILIES */}
-          {tab === 'new-families' && (
-            <div>
-              <SectionHeader eyebrow="You're new here — welcome" title="Your first 30 days" sub="Five steps to get your scout settled in. Takes about a week." />
+      {/* NEW FAMILIES */}
+      <div className="section">
+        <div className="container">
+              <SectionHeader eyebrow="You're new here, welcome" title="Your first 30 days" sub="Five steps to get your scout settled in. Takes about a week." />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 {NEW_STEPS.map(s => (
                   <div key={s.n} style={{ display: 'flex', gap: 20 }}>
@@ -219,12 +213,12 @@ export default function ResourcesPage({ go }) {
                   </div>
                 ))}
               </div>
-            </div>
-          )}
+        </div>
+      </div>
 
-          {/* FAQ */}
-          {tab === 'faq' && (
-            <div>
+      {/* FAQ */}
+      <div className="section" style={{ background: '#fff', borderTop: '1px solid var(--border)' }}>
+        <div className="container">
               <SectionHeader eyebrow="Common questions" title="Frequently asked" sub="If your question isn't here, just email our Cubmaster." />
               <div style={{ maxWidth: 800, display: 'flex', flexDirection: 'column' }}>
                 {FAQS.map((f, i) => (
@@ -259,13 +253,76 @@ export default function ResourcesPage({ go }) {
                   <div style={{ fontSize: 14, color: 'var(--muted)', marginTop: 4 }}>Our Cubmaster usually replies within a day.</div>
                 </div>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                  <a href="mailto:nickagnos@gmail.com" className="btn btn-ghost btn-sm">Email Cubmaster</a>
+                  <a href="mailto:txcspack351@gmail.com" className="btn btn-ghost btn-sm">Email Cubmaster</a>
                   <button className="btn btn-navy btn-sm" onClick={() => go('join')}>Join & we'll reach out</button>
                 </div>
               </div>
-            </div>
-          )}
+        </div>
+      </div>
 
+      {/* Band closes the page: it's the one thing every family has to do, so it gets the
+          last word and the only full-colour block. */}
+      {/* Gold rule at the foot: this navy band sits directly on the navy-dark footer, and
+          without it the two blocks read as one undifferentiated slab of blue. */}
+      <div style={{
+        background: 'var(--navy)', padding: 'clamp(44px,6vw,68px) 0',
+        borderBottom: '3px solid var(--gold)',
+      }}>
+        <div className="container">
+          <div className="band-grid" style={{
+            display: 'grid', gridTemplateColumns: '1.15fr .85fr',
+            gap: 'clamp(28px,5vw,56px)', alignItems: 'center',
+          }}>
+            <div>
+              <span className="eyebrow" style={{ color: 'var(--gold)', marginBottom: 12 }}>
+                How we stay in touch
+              </span>
+              <h2 style={{
+                fontFamily: 'Barlow Condensed', fontWeight: 800,
+                fontSize: 'clamp(30px,3.4vw,46px)', color: '#fff', lineHeight: 1.05, marginBottom: 16,
+              }}>
+                The Pack runs on Band.
+              </h2>
+              <p style={{ color: 'rgba(255,255,255,.82)', lineHeight: 1.75, marginBottom: 14 }}>
+                Band is a free group app, and it's where Pack 351 actually lives day to day.
+                Meeting reminders, campout packing lists, last-minute weather calls, and all the
+                photos from the weekend go there first. If a plan changes, it changes on Band.
+              </p>
+              <p style={{ color: 'rgba(255,255,255,.82)', lineHeight: 1.75 }}>
+                Our group is private, so searching the app won't find us. Ask any leader for the
+                invite link at your first meeting and we'll get you added the same night.
+              </p>
+            </div>
+
+            <div className="card" style={{ padding: 26, background: '#fff' }}>
+              <div style={{
+                fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 21,
+                color: 'var(--navy)', marginBottom: 6,
+              }}>Get the app</div>
+              <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 18 }}>
+                Free on both stores. Search “BAND — App for all groups” by NAVER, or use these links.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <a
+                  href="https://apps.apple.com/us/app/band-app-for-all-groups/id542613198"
+                  target="_blank" rel="noopener noreferrer"
+                  className="btn btn-navy"
+                  style={{ width: '100%' }}
+                >Download for iPhone →</a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.nhn.android.band"
+                  target="_blank" rel="noopener noreferrer"
+                  className="btn btn-ghost"
+                  style={{ width: '100%' }}
+                >Download for Android →</a>
+              </div>
+              {/* Band is rated 13+, which surprises parents of K-5 kids. Say it up front. */}
+              <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 16, lineHeight: 1.6 }}>
+                Band is rated 13+, so accounts are for parents and leaders — not for your Scout.
+                One parent per family is plenty.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

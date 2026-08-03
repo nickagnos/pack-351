@@ -6,6 +6,10 @@
   --gold:       #d4950a;
   --gold-dark:  #a87308;
   --gold-light: #fef3c7;
+  /* Gold for small text on light backgrounds. --gold and --gold-dark are fine as fills
+     behind dark text, but as text on cream they land at 2.4:1 and 3.8:1 - both under the
+     4.5:1 WCAG AA minimum. This sits at ~5:1. */
+  --gold-text:  #8f6000;
   --cream:      #faf7f0;
   --text:       #1a1a2e;
   --muted:      #64748b;
@@ -41,7 +45,7 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
   font-size: 12px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   display: block;
 }
 
@@ -114,14 +118,17 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
   .home-grid { grid-template-columns: 1fr !important; }
   .home-grid .ps-span2c { grid-column: span 1 !important; }
   .den-grid { grid-template-columns: repeat(3, 1fr) !important; }
-  .leaders-grid { grid-template-columns: 1fr 1fr !important; }
   .events-featured-grid { grid-template-columns: 1fr !important; }
   .join-grid { grid-template-columns: 1fr !important; }
+  .uniform-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  /* Two columns leaves ~170px per card, which wraps the link names to one word per line
+     and pushes the right-hand card past the container edge. */
+  .links-grid { grid-template-columns: 1fr !important; }
   .footer-grid { grid-template-columns: 1fr !important; }
   .facts-grid { grid-template-columns: 1fr 1fr !important; }
 }
 
-/* Interior page hero — warm, image-forward, matches the cream clay landing */
+/* Interior page hero: warm, image-forward, matches the cream clay landing */
 .page-hero { background: var(--cream); padding: clamp(40px,6vw,74px) 0; border-bottom: 1px solid var(--border); }
 .page-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px,5vw,60px); align-items: center; }
 .page-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: var(--navy);
@@ -144,4 +151,6 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
 @media (max-width: 700px) {
   .page-hero-grid { grid-template-columns: 1fr !important; }
   .page-hero-img-wrap { aspect-ratio: 16 / 9; }
+  /* Band section: copy on top, download card below */
+  .band-grid { grid-template-columns: 1fr !important; }
 }

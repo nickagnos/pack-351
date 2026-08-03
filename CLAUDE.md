@@ -15,6 +15,7 @@ pack-351/
       styles.css               ← all CSS (global vars, utilities, responsive)
     public/
       photos/                  ← drop real photos here (see PHOTOS-NEEDED.md)
+      ranks/                   ← official Cub Scout rank emblems (see that folder's README)
     index.html                 ← app entry HTML
     package.json
     vite.config.js             ← sets base '/pack-351/' for the production build
@@ -39,9 +40,13 @@ Hash-based (`#/home`, `#/about`, `#/events`, `#/join`, `#/resources`). No server
 3. No code changes needed — `PhotoSlot` automatically shows the image when `src` resolves (asset paths go through `src/asset.js` so they work under the `/pack-351/` base)
 
 ## Updating content
-- **Contact email**: search `nickagnos@gmail.com` — appears in 3 files (see CONTACT-INFO.md)
+- **Contact email**: search `txcspack351@gmail.com` — appears in 4 files (see CONTACT-INFO.md)
 - **Leader names**: search `[Name]` in `src/pages/AboutPage.jsx`
-- **Events**: `src/pages/EventsPage.jsx` lines 4–17 (EVENTS array) and `src/pages/HomePage.jsx` lines 124–127
+- **Events**: `src/pages/EventsPage.jsx` — the `EVENTS` array (the year list) and `FEATURED`
+  (the three signature-event cards). The page deliberately carries **no fixed dates**: each
+  row has a season or frequency (`when: 'Most Mondays'`, `'Spring'`), and a note under the
+  list points people to email/Facebook for actual dates. Keep it that way when editing.
+  The Home page no longer lists events at all — it's the scrolling cinematic.
 - **Meeting time/location**: `src/components/SiteFooter.jsx` and the sidebar cards in `src/pages/JoinPage.jsx`
 - **Contact email for the Join page**: `CONTACT_EMAIL` in `src/pages/JoinPage.jsx`
 

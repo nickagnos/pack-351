@@ -40,7 +40,7 @@ Hash-based routing is used for the site pages: #/home, #/about, #/events, #/join
 3. No code changes are needed; PhotoSlot displays it automatically. Asset paths go through src/asset.js so they resolve under the /pack-351/ base.
 
 ## Updating content
-- Contact email: search nickagnos@gmail.com; it appears in multiple files and is documented in CONTACT-INFO.md.
+- Contact email: search txcspack351@gmail.com; it appears in multiple files and is documented in CONTACT-INFO.md.
 - Leader names: update the placeholders in src/pages/AboutPage.jsx.
 - Events: edit the EVENTS array in src/pages/EventsPage.jsx and the featured event summary in src/pages/HomePage.jsx.
 - Meeting time/location: update the shared footer in src/components/SiteFooter.jsx and the sidebar cards in src/pages/JoinPage.jsx.

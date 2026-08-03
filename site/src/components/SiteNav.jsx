@@ -12,7 +12,15 @@ export default function SiteNav({ current, go }) {
   return (
     <nav style={{
       position: isHome ? 'fixed' : 'sticky', top: 0, left: 0, right: 0, zIndex: 100,
-      background: isHome ? 'transparent' : '#fff',
+      // On Home the bar floats over the photo. Fully transparent left the links and the logo
+      // tagline unreadable against bright scenes, so it gets a soft cream fade - the same
+      // device the scenes use behind their copy, rather than a hard bar that would break
+      // the full-bleed look.
+      background: isHome
+        ? 'linear-gradient(to bottom, rgba(250,247,240,.95) 0%, rgba(250,247,240,.82) 45%, rgba(250,247,240,0) 100%)'
+        : '#fff',
+      backdropFilter: isHome ? 'blur(1.5px)' : 'none',
+      paddingBottom: isHome ? 18 : 0,
       borderBottom: isHome ? 'none' : '1px solid var(--border)',
       boxShadow: isHome ? 'none' : '0 1px 6px rgba(0,0,0,.07)',
       transition: 'background .2s',
@@ -26,7 +34,8 @@ export default function SiteNav({ current, go }) {
           {links.map(([id, label]) => (
             <button key={id} onClick={() => nav(id)} style={{
               fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 18,
-              color: current === id ? 'var(--navy)' : 'var(--muted)',
+              // --muted only clears 4.5:1 on a solid white bar; over the scenes it needs navy
+              color: (current === id || isHome) ? 'var(--navy)' : 'var(--muted)',
               background: 'none', border: 'none', cursor: 'pointer',
               padding: '8px 18px', borderRadius: 6,
               borderBottom: current === id ? '2px solid var(--gold)' : '2px solid transparent',

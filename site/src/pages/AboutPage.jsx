@@ -6,20 +6,17 @@ import PageHero from '../components/PageHero';
 import QuickFacts from '../components/QuickFacts';
 import { asset } from '../asset';
 
+// Official rank emblems from the Scouting America Brand Center (scouting.webdamdb.com).
+// They ship as JPEGs on a white field, which is why they sit on the white `.card` with no
+// treatment - the background disappears. Aspect ratios vary a lot (Arrow of Light is a wide
+// rectangle, Webelos a tall oval, the rest square), so they're laid out with object-fit.
 const dens = [
-  { name: 'Lion',           grade: 'Kindergarten', color: '#fde68a' },
-  { name: 'Tiger',          grade: '1st Grade',    color: '#fed7aa' },
-  { name: 'Wolf',           grade: '2nd Grade',    color: '#ddd6fe' },
-  { name: 'Bear',           grade: '3rd Grade',    color: '#bbf7d0' },
-  { name: 'Webelos',        grade: '4th Grade',    color: '#bae6fd' },
-  { name: 'Arrow of Light', grade: '5th Grade',    color: '#fca5a5' },
-];
-
-const leaders = [
-  { role: 'Cubmaster',       photo: '/photos/leader-cubmaster.jpg' },
-  { role: 'Asst. Cubmaster', photo: '/photos/leader-assistant.jpg' },
-  { role: 'Pack Treasurer',  photo: '/photos/leader-treasurer.jpg' },
-  { role: 'Outdoor Chair',   photo: '/photos/leader-outdoor.jpg' },
+  { name: 'Lion',           grade: 'Kindergarten', img: '/ranks/lion.jpg' },
+  { name: 'Tiger',          grade: '1st Grade',    img: '/ranks/tiger.jpg' },
+  { name: 'Wolf',           grade: '2nd Grade',    img: '/ranks/wolf.jpg' },
+  { name: 'Bear',           grade: '3rd Grade',    img: '/ranks/bear.jpg' },
+  { name: 'Webelos',        grade: '4th Grade',    img: '/ranks/webelos.jpg' },
+  { name: 'Arrow of Light', grade: '5th Grade',    img: '/ranks/arrow-of-light.jpg' },
 ];
 
 export default function AboutPage({ go }) {
@@ -28,9 +25,9 @@ export default function AboutPage({ go }) {
       <PageHero
         eyebrow="About Us"
         title={<>A Pack built by<br />families, for families.</>}
-        sub="Pack 351 is chartered by Central Baptist Church in Lindale, TX. We're parents, kids, and leaders who believe the best childhood memories are made outside — with a little mud on your boots."
-        image={asset("/photos/photo-group.jpg")}
-        imageAlt="The whole Pack 351 — scouts and leaders together"
+        sub="Pack 351 is chartered by Central Baptist Church in Lindale, TX. We're parents, kids, and leaders who believe the best childhood memories are made outside, with a little mud on your boots."
+        image={asset("/photos/photo-den-meeting.jpg")}
+        imageAlt="A Pack 351 den meeting: scouts around a table working on a project with their den leader"
         actions={<button className="btn btn-primary" onClick={() => go('join')}>Join Pack 351 →</button>}
       />
       <QuickFacts />
@@ -46,12 +43,12 @@ export default function AboutPage({ go }) {
               </h2>
               <p style={{ color: 'var(--muted)', lineHeight: 1.75, marginBottom: 16 }}>
                 Pack 351 has been part of the Lindale community for years, meeting at Central Baptist Church and
-                doing the things that make Scouting worth it — camping under East Texas stars, building and racing
+                doing the things that make Scouting worth it: camping under East Texas stars, building and racing
                 pinewood derby cars, sailing balsa boats down rain gutters, and leaving places better than we found them.
               </p>
               <p style={{ color: 'var(--muted)', lineHeight: 1.75 }}>
                 Every December you'll find our Scouts planting hundreds of three-foot candy canes in
-                yards across the Hideaway community. It's become one of our most beloved traditions —
+                yards across the Hideaway community. It's become one of our most beloved traditions,
                 and a great fundraiser for the Pack.
               </p>
             </div>
@@ -66,7 +63,7 @@ export default function AboutPage({ go }) {
               <PhotoSlot
                 src={asset("/photos/photo-candy-cane.jpg")}
                 alt="Candy cane fundraiser in the Hideaway neighborhood"
-                label="photo: candy cane fundraiser — Hideaway neighborhood"
+                label="photo: candy cane fundraiser, Hideaway neighborhood"
                 bg="#c09090"
                 style={{ height: 165, borderRadius: 8 }}
               />
@@ -76,43 +73,36 @@ export default function AboutPage({ go }) {
       </div>
 
       {/* Dens */}
-      <div className="section-sm" style={{ background: 'var(--cream)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+      {/* No borderBottom: the charter strip below now follows directly and brings its own
+          borderTop, so keeping both would draw a doubled 2px line. */}
+      <div className="section-sm" style={{ background: 'var(--cream)', borderTop: '1px solid var(--border)' }}>
         <div className="container">
           <SectionHeader eyebrow="How we're organized" title="Our dens" sub="Scouts are grouped by grade. Each den has 6–10 kids and its own dedicated leader." center />
           <div className="den-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6,1fr)', gap: 12 }}>
             {dens.map(d => (
               <div key={d.name} className="card" style={{ padding: '20px 12px', textAlign: 'center' }}>
-                <div style={{
-                  width: 46, height: 46, background: d.color, borderRadius: '50%',
-                  margin: '0 auto 12px', border: '2px solid rgba(0,0,0,.08)',
-                }} />
+                <img
+                  src={asset(d.img)}
+                  alt={`${d.name} rank emblem`}
+                  // Capped on BOTH axes. Height alone isn't enough: Arrow of Light is a 2.5:1
+                  // rectangle while the other five are square-ish, so a shared height renders
+                  // it two and a half times wider than its neighbours. The max-width reins it
+                  // in and lets the diamonds grow a little.
+                  style={{
+                    display: 'block', width: '100%', maxWidth: 104, height: 66,
+                    objectFit: 'contain', margin: '0 auto 12px',
+                  }}
+                />
                 <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 20, color: 'var(--navy)', marginBottom: 4 }}>{d.name}</div>
                 <div style={{ fontSize: 12, color: 'var(--muted)' }}>{d.grade}</div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Leaders */}
-      <div className="section">
-        <div className="container">
-          <SectionHeader eyebrow="Who runs the show" title="Our leaders" sub="All volunteers. All parents. All in." />
-          <div className="leaders-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 20 }}>
-            {leaders.map(({ role, photo }) => (
-              <div key={role} className="card" style={{ padding: '24px 16px', textAlign: 'center' }}>
-                <PhotoSlot
-                  src={asset(photo)}
-                  alt={`Pack 351 ${role}`}
-                  label="portrait"
-                  bg="#c8d0e0"
-                  style={{ width: 76, height: 76, borderRadius: '50%', margin: '0 auto 14px' }}
-                />
-                <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 20, marginBottom: 4 }}>[Name]</div>
-                <div style={{ fontSize: 13, color: 'var(--muted)' }}>{role}</div>
-              </div>
-            ))}
-          </div>
+          {/* The emblems are registered Scouting America marks, so they get an attribution
+              line. Kept small and muted - it's a legal courtesy, not page content. */}
+          <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', marginTop: 18 }}>
+            Rank emblems are trademarks of Scouting America, used by Pack 351 as a chartered unit.
+          </p>
         </div>
       </div>
 

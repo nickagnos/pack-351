@@ -3,18 +3,20 @@ import { asset } from '../asset';
 
 // Scroll-scrubbed clay-diorama cinematic. Scroll drives a deterministic "camera":
 // each scene pushes in (Ken Burns) + drifts (parallax) and cross-fades to the next
-// through the shared cream field. Stills are generated locally (see PHOTOS/scroll-world).
+// through the shared cream field. Stills live in site/public/scroll-world/.
+//
+// Scene compositions are deliberately simple: 2-4 scouts, large in frame, seen from
+// behind. Crowds of small figures render badly, and the copy below sits bottom-left,
+// so each still keeps its lower-left third open and light.
 const SCENES = [
-  { img: '/scroll-world/den.webp', eyebrow: 'Pack 351 · Lindale, TX', title: 'It starts at the den.',
-    body: 'Cub Scouts for kids Kindergarten through 5th grade — right here in Lindale. Here’s a year with Pack 351.' },
-  { img: '/scroll-world/derby.webp', eyebrow: 'Start your engines', title: 'Race day.',
-    body: 'Carve it, paint it, race it down the track — the Pinewood Derby.' },
-  { img: '/scroll-world/regatta.webp', eyebrow: 'Set sail', title: 'A regatta in a rain gutter.',
-    body: 'Build a boat, blow it across the water, first to the finish wins.' },
-  { img: '/scroll-world/camping.webp', eyebrow: 'Into the woods', title: 'First campout, first s’more.',
-    body: 'Campouts, hikes, and the outdoors — where the whole family comes along.' },
-  { img: '/scroll-world/finale.webp', eyebrow: 'Ready to get started?', title: 'Your kid’s next adventure.',
-    body: 'Open to all K–5th graders. Drop in to any Monday meeting first — no pressure.', cta: true },
+  { img: '/scroll-world/trail.jpg', eyebrow: 'Pack 351 · Lindale, TX', title: 'It starts outside.',
+    body: 'Cub Scouts for kids Kindergarten through 5th grade, right here in Lindale. Here’s a year with Pack 351.' },
+  { img: '/scroll-world/campground.jpg', eyebrow: 'Into the woods', title: 'First campout, first s’more.',
+    body: 'Campouts, hikes, and nights under the pines. The whole family comes along.' },
+  { img: '/scroll-world/creek.jpg', eyebrow: 'Down by the creek', title: 'Creek days.',
+    body: 'Exploring, fishing, and getting muddy. The best part of the year happens outside.' },
+  { img: '/scroll-world/overlook.jpg', eyebrow: 'Ready to get started?', title: 'Your kid’s next adventure.',
+    body: 'Open to all K–5th graders. Drop in to any Monday meeting first, no pressure.', cta: true },
 ];
 const VH_PER_SCENE = 118; // scroll distance (in vh) per scene
 
@@ -107,10 +109,20 @@ const SW_CSS = `
 .sw-scene { position: absolute; inset: 0; opacity: 0; will-change: opacity; }
 .sw-scene .sw-img { position: absolute; inset: 0; background: var(--sw-bg) center/cover no-repeat;
   transform-origin: 50% 52%; will-change: transform; backface-visibility: hidden; }
-.sw-copy { position: absolute; left: clamp(24px,6vw,110px); bottom: clamp(60px,14vh,150px);
+/* Cream scrim behind the copy. The navy text sits directly on the photo, and golden-hour
+   and firelight scenes never clear 3:1 on their own, so this floors the contrast regardless
+   of what image is dropped in. Sits above .sw-img, below .sw-copy; not scaled by Ken Burns. */
+.sw-scene::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(135% 118% at 0% 100%,
+    rgba(250,247,240,.95) 0%, rgba(250,247,240,.90) 30%,
+    rgba(250,247,240,.60) 52%, rgba(250,247,240,0) 78%); }
+.sw-copy { position: absolute; z-index: 2; left: clamp(24px,6vw,110px); bottom: clamp(60px,14vh,150px);
   max-width: min(560px,80vw); will-change: opacity, transform; }
+/* The eyebrow sits at the top of the copy block, highest up the image and least covered by
+   the scrim, so it gets the same cream halo the title uses. */
 .sw-eyebrow { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--gold-dark); margin-bottom: 14px; }
+  text-transform: uppercase; color: var(--gold-text); margin-bottom: 14px;
+  text-shadow: 0 0 10px var(--sw-bg), 0 0 22px var(--sw-bg); }
 .sw-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; line-height: .98; color: var(--navy);
   font-size: clamp(44px,6.4vw,92px); letter-spacing: -.5px; margin-bottom: 16px; text-shadow: 0 2px 30px var(--sw-bg); }
 .sw-body { font-size: clamp(16px,1.5vw,20px); line-height: 1.6; color: var(--muted); max-width: 460px; }
@@ -135,5 +147,12 @@ const SW_CSS = `
 .sw-hint .sw-arrow { display: block; text-align: center; font-size: 18px; margin-top: 4px; animation: sw-bob 1.6s ease-in-out infinite; }
 @keyframes sw-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 @media (max-width: 640px) { .sw-rail { display: none; } }
+/* Narrow viewports: the copy spans nearly the full width and sits higher in the frame,
+   so a corner-anchored radial doesn't reach it. Sweep straight up from the bottom instead. */
+@media (max-width: 700px) {
+  .sw-scene::after { background: linear-gradient(to top,
+    rgba(250,247,240,.96) 0%, rgba(250,247,240,.92) 34%,
+    rgba(250,247,240,.62) 54%, rgba(250,247,240,0) 76%); }
+}
 @media (prefers-reduced-motion: reduce) { .sw-scene .sw-img { transform: none !important; } .sw-hint .sw-arrow { animation: none; } }
 `;

@@ -15,6 +15,7 @@ Full spec: `~/.claude/plans/i-want-to-use-wiggly-iverson.md`. Using `~/Repos/scr
 - [x] **Restyled About / Events / Join / Resources** — shared warm cream `PageHero` (image-forward) replaces the flat navy heroes; clay images on each; whole site now matches the landing
 - [x] **Moved old Home content** — quick-facts strip (`QuickFacts.jsx`) rehomed on About; events already live on Events; CTAs on About/Join
 - [x] **Tweaked all 8 images** (2026-07-15) — Cub Scout accuracy pass: navy WoHaLi flag w/ real logo, straight 4-lane derby, straw regatta, blue&gold banner+awards, warm camping, corrected uniforms (blue+tan mix, leaders in tan, co-ed/diverse), clean group photo, fleur-de-lis + rank-badge finale. Committed `b5679ec`, pushed to `origin/main`.
+- [x] **Rebuilt the home scenes** (2026-08-01) — the 5 old stills were wide establishing shots packed with 15–25 tiny figures, which is what diffusion renders worst (bald gray heads, melted faces, garbled logo text on the finale). Replaced with **4 simple outdoor scenes** — trail, campfire, creek, overlook — each 2–4 scouts, large in frame, seen from behind, with nature carrying the frame and no text/logos/engineered props. Scene 4 doubles as the finale and carries the Join CTA. Derby + regatta still have their own images on the Events page. Stills are now `.jpg` (no `cwebp`/`ffmpeg` on this machine, and `sips` can't write webp).
 - [ ] **Favicon** + redeploy `dist/` to Netlify (only remaining launch item here)
 
 ### Local AI video — CLOSED (2026-07-15)
@@ -37,6 +38,13 @@ Tested LTX-2 / LTX-2.3 as a Wan replacement. Verdict: **Draw Things' HTTP API ca
 
 ## Content to fill in
 
+- [ ] **Remove the em dashes.** The site copy leans on `—` heavily and it reads as AI-written. **35 left** across `site/src/`, of which **31 are user-visible** (the other 4 are in code comments and can stay). Rewrite each sentence rather than substituting punctuation: usually a period or a comma works, and some clauses just want dropping. Don't swap `—` for ` - `.
+  - `pages/ResourcesPage.jsx` (15, by far the worst)
+  - `pages/JoinPage.jsx` (5), `pages/EventsPage.jsx` (5), `pages/AboutPage.jsx` (5)
+  - `pages/HomePage.jsx`, `components/QuickFacts.jsx`, `components/PageHero.jsx`, `styles.css` (1 each)
+  - Find them with: `grep -rn '—' site/src/`
+  - **Leave the 15 en dashes (`–`) alone.** Those are ranges like `K–5th graders` and are correct.
+  - Already done: the 4 home-page scene strings in `components/ScrollWorld.jsx` (2026-08-01).
 - [ ] **Leader names** — replace the four `[Name]` placeholders on the About page (`src/pages/AboutPage.jsx:126`)
 - [x] **Leader headshots** — generated as clay-style busts (`leader-*.jpg` in `site/public/photos/`); swap for real photos anytime
 - [x] **Activity photos** — all 11 generated in the clay style (5 reused from the landing, 6 new incl. candy-cane, group shot, 4 leaders); swap for real photos anytime

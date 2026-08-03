@@ -5,16 +5,19 @@ Use Cmd+click on the file paths in your IDE to jump straight to the line.
 
 ---
 
-## Email address (`nickagnos@gmail.com`)
+## Email address (`txcspack351@gmail.com`)
 
 | File | Line | Context |
 |---|---|---|
 | [site/src/components/SiteFooter.jsx](site/src/components/SiteFooter.jsx#L44) | 44–45 | Footer "Contact" column — displayed as a clickable email link |
-| [site/src/pages/ResourcesPage.jsx](site/src/pages/ResourcesPage.jsx#L157) | 157 | Forms tab — fallback note ("email us if you need a form now") |
-| [site/src/pages/ResourcesPage.jsx](site/src/pages/ResourcesPage.jsx#L265) | 265 | FAQ tab — "Email Cubmaster" button |
-| [site/src/pages/JoinPage.jsx](site/src/pages/JoinPage.jsx#L138) | 138 | Join form — error message fallback |
+| [site/src/pages/JoinPage.jsx](site/src/pages/JoinPage.jsx#L6) | 6 | `CONTACT_EMAIL` — feeds the prefilled `mailto:` link that replaced the old join form |
+| [site/src/pages/ResourcesPage.jsx](site/src/pages/ResourcesPage.jsx#L148) | 148 | Links section — "email us and we'll send it over" note |
+| [site/src/pages/ResourcesPage.jsx](site/src/pages/ResourcesPage.jsx#L256) | 256 | FAQ section — "Email Cubmaster" button |
+| [site/src/pages/EventsPage.jsx](site/src/pages/EventsPage.jsx#L97) | 97 | Note under the year list — "email us and we'll keep you in the loop" |
 
-**To change:** find-and-replace `nickagnos@gmail.com` across the whole `site/src/` folder.
+**To change:** find-and-replace the address across the whole `site/src/` folder.
+
+> Changed from `nickagnos@gmail.com` to the Pack address `txcspack351@gmail.com` on 2026-08-03.
 
 ---
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-// The at-a-glance pack facts — rehomed from the old Home page. Meeting time,
+// The at-a-glance pack facts, rehomed from the old Home page. Meeting time,
 // location, grade range, and cost.
 const FACTS = [
   { icon: '📅', head: 'Most Mondays', sub: '6:30 – 7:30 PM' },

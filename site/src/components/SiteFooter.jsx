@@ -41,8 +41,8 @@ export default function SiteFooter({ go }) {
           <div>
             <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 17, color: 'var(--gold)', marginBottom: 14 }}>Contact</div>
             <div style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', lineHeight: 2 }}>
-              <a href="mailto:nickagnos@gmail.com" style={{ color: 'rgba(255,255,255,.7)', textDecoration: 'none' }}>
-                nickagnos@gmail.com
+              <a href="mailto:txcspack351@gmail.com" style={{ color: 'rgba(255,255,255,.7)', textDecoration: 'none' }}>
+                txcspack351@gmail.com
               </a>
               <div>
                 <a

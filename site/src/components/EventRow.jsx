@@ -2,7 +2,7 @@ import React from 'react';
 
 // A single row in the Pack-year list. The left badge used to be a calendar tile (month +
 // day number). The Pack doesn't publish firm dates ahead of time, so it now carries a
-// timing label instead - "Most Mondays", "Spring", "December" - and the box is sized for
+// timing label instead - "Most Tuesdays", "Spring", "December" - and the box is sized for
 // a word rather than a two-digit number.
 export default function EventRow({ when, title, time, location, tag, tagBg }) {
   return (

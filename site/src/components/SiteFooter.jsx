@@ -31,8 +31,8 @@ export default function SiteFooter({ go }) {
           <div>
             <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 17, color: 'var(--gold)', marginBottom: 14 }}>Meetings</div>
             <div style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', lineHeight: 1.9 }}>
-              <div>Most Monday nights</div>
-              <div style={{ fontWeight: 600 }}>6:30 – 7:30 PM</div>
+              <div>Most Tuesday nights</div>
+              <div style={{ fontWeight: 600 }}>6:00 – 7:00 PM</div>
               <div style={{ marginTop: 6 }}>Central Baptist Church</div>
               <div>Lindale, TX</div>
             </div>

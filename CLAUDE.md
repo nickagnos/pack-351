@@ -43,15 +43,24 @@ Hash-based (`#/home`, `#/about`, `#/events`, `#/join`, `#/resources`). No server
   `JoinPage.jsx`, `ResourcesPage.jsx` ×2, `EventsPage.jsx`)
 - **Events**: `src/pages/EventsPage.jsx` — the `EVENTS` array (the year list) and `FEATURED`
   (the three signature-event cards). The page deliberately carries **no fixed dates**: each
-  row has a season or frequency (`when: 'Most Mondays'`, `'Spring'`), and a note under the
+  row has a season or frequency (`when: 'Most Tuesdays'`, `'Spring'`), and a note under the
   list points people to email/Facebook for actual dates. Keep it that way when editing.
   The Home page no longer lists events at all — it's the scrolling cinematic.
-- **Meeting time/location**: `src/components/SiteFooter.jsx` and the sidebar cards in `src/pages/JoinPage.jsx`
+- **Meeting day/time/location**: hardcoded as prose in **7 files** — there's no shared constant,
+  so change all of them or the site contradicts itself. As of 2026-08-04 it's *most Tuesdays,
+  6:00 – 7:00 PM* at Central Baptist Church:
+  `components/QuickFacts.jsx` (the `FACTS` array), `components/SiteFooter.jsx` (the Meetings
+  column), `components/ScrollWorld.jsx` (last scene's `body`), `pages/JoinPage.jsx` (×4: hero
+  `sub`, the "Drop in to a meeting" card, and two sidebar cards), `pages/EventsPage.jsx` (×2:
+  the first `EVENTS` row and the hero `sub`), `pages/ResourcesPage.jsx` (the "Come to your
+  first meeting" step), and `site/index.html` (the `og:description` meta tag — easy to miss,
+  it's the Facebook/iMessage link-preview text). Verify with
+  `grep -rniE 'monday|tuesday|6:00|7:00' site/src site/index.html`.
 - **Contact email for the Join page**: `CONTACT_EMAIL` in `src/pages/JoinPage.jsx`
 
 ## The join form → now a contact CTA (Netlify Forms removed)
 
-The old join form POSTed to Netlify's form handler, which doesn't work on GitHub Pages (static hosting, no form backend), so it was **removed** (2026-07-15). The Join page now offers two no-backend paths: **drop in to a Monday meeting**, or **email us** via a prefilled `mailto:` link (`CONTACT_EMAIL` in `src/pages/JoinPage.jsx`). The hidden Netlify `<form>` + `data-netlify` markup are gone from `index.html`.
+The old join form POSTed to Netlify's form handler, which doesn't work on GitHub Pages (static hosting, no form backend), so it was **removed** (2026-07-15). The Join page now offers two no-backend paths: **drop in to a Tuesday meeting**, or **email us** via a prefilled `mailto:` link (`CONTACT_EMAIL` in `src/pages/JoinPage.jsx`). The hidden Netlify `<form>` + `data-netlify` markup are gone from `index.html`.
 
 If a real form is ever wanted again, add a third-party handler (Formspree, Getform, Basin), a Google Form, or a serverless endpoint hosted elsewhere.
 

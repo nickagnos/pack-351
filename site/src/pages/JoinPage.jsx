@@ -16,7 +16,7 @@ export default function JoinPage({ go }) {
       <PageHero
         eyebrow="Join Pack 351"
         title="Let's get your scout started."
-        sub="No application, no payment up front. Drop in to any Monday meeting, or send us a quick email and a leader will walk your family through the next steps."
+        sub="No application, no payment up front. Drop in to any Tuesday meeting, or send us a quick email and a leader will walk your family through the next steps."
         image={asset('/photos/photo-camping.jpg')}
         imageAlt="Cub Scouts around a campfire"
       />
@@ -42,7 +42,7 @@ export default function JoinPage({ go }) {
                     1 · Drop in to a meeting
                   </div>
                   <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 14 }}>
-                    Most Monday nights, 6:30–7:30 PM at Central Baptist Church in Lindale. No sign-up
+                    Most Tuesday nights, 6:00–7:00 PM at Central Baptist Church in Lindale. No sign-up
                     needed. Just show up and see if it's a fit.
                   </p>
                   <button className="btn btn-ghost" onClick={() => go('events')}>See what we do →</button>
@@ -67,8 +67,8 @@ export default function JoinPage({ go }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
                 { icon: '💸', title: "What does it cost?", body: "$175/year covers dues, activity fees, and your scout's Handbook. Uniform is extra but we'll guide you. Scholarships are available, and no scout is ever turned away for finances." },
-                { icon: '📅', title: "When do we meet?", body: 'Most Monday nights, 6:30–7:30 PM at Central Baptist Church in Lindale.' },
-                { icon: '👀', title: "Can we visit before joining?", body: "Absolutely. Drop in to any Monday meeting. No sign-up needed. Just show up and see if it's a fit." },
+                { icon: '📅', title: "When do we meet?", body: 'Most Tuesday nights, 6:00–7:00 PM at Central Baptist Church in Lindale.' },
+                { icon: '👀', title: "Can we visit before joining?", body: "Absolutely. Drop in to any Tuesday meeting. No sign-up needed. Just show up and see if it's a fit." },
                 { icon: '👕', title: "Do we need a uniform right away?", body: "Nope. Wear whatever for the first meeting. We'll walk you through exactly what to get, and often have gently used gear available." },
               ].map(({ icon, title, body }) => (
                 <div key={title} className="card" style={{ padding: 18 }}>

@@ -84,7 +84,7 @@ const FAQS = [
 ];
 
 const NEW_STEPS = [
-  { n: '1', title: 'Come to your first meeting', body: "Show up any Monday at 6:30 PM at Central Baptist Church. No paperwork, no uniform. Just you and your scout. We'll take it from there." },
+  { n: '1', title: 'Come to your first meeting', body: "Show up any Tuesday at 6:00 PM at Central Baptist Church. No paperwork, no uniform. Just you and your scout. We'll take it from there." },
   { n: '2', title: 'Register online',            body: "After your visit, register through BeAScout.org or our Join page. You'll pay annual dues ($175) through the BSA portal." },
   { n: '3', title: "Get your scout's shirt",    body: "Order a blue Cub Scout shirt from ScoutShop.org. That's all you need to start. We'll help you with patches at your next meeting." },
   { n: '4', title: 'Download the Scouting app', body: 'The free Scouting America app has your scout\'s handbook, advancement tracker, and event notifications. Available on iOS and Android.' },

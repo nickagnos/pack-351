@@ -16,7 +16,7 @@ const SCENES = [
   { img: '/scroll-world/creek.jpg', eyebrow: 'Down by the creek', title: 'Creek days.',
     body: 'Exploring, fishing, and getting muddy. The best part of the year happens outside.' },
   { img: '/scroll-world/overlook.jpg', eyebrow: 'Ready to get started?', title: 'Your kid’s next adventure.',
-    body: 'Open to all K–5th graders. Drop in to any Monday meeting first, no pressure.', cta: true },
+    body: 'Open to all K–5th graders. Drop in to any Tuesday meeting first, no pressure.', cta: true },
 ];
 const VH_PER_SCENE = 118; // scroll distance (in vh) per scene
 

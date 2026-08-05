@@ -3,7 +3,7 @@ import React from 'react';
 // The at-a-glance pack facts, rehomed from the old Home page. Meeting time,
 // location, grade range, and cost.
 const FACTS = [
-  { icon: '📅', head: 'Most Mondays', sub: '6:30 – 7:30 PM' },
+  { icon: '📅', head: 'Most Tuesdays', sub: '6:00 – 7:00 PM' },
   { icon: '📍', head: 'Central Baptist Church', sub: 'Lindale, TX' },
   { icon: '🎓', head: 'K – 5th Grade', sub: 'Boys & girls welcome' },
   { icon: '💰', head: '$175 / year', sub: 'Scholarships available' },

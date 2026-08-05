@@ -11,17 +11,17 @@ import { asset } from '../asset';
 // the Facebook group. The three separate weekly Pack Meeting rows collapsed into one -
 // listing the same meeting three times was only ever a side effect of having dates.
 const EVENTS = [
-  { when: 'Most Mondays', title: 'Pack Meeting',          time: '6:30–7:30 PM', loc: 'Central Baptist Church', tag: 'Weekly',     tagBg: 'var(--navy)' },
-  { when: 'Summer',       title: 'Summer Campout',        time: 'Fri–Sun',      loc: 'Camp Pirtle, Gary TX',  tag: 'Overnight',  tagBg: '#166534' },
-  { when: 'Early fall',   title: 'Fall Kickoff Meeting',  time: 'Evening',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: 'var(--navy)' },
+  { when: 'Most Tuesdays', title: 'Pack Meeting',          time: '6:00–7:00 PM', loc: 'Central Baptist Church', tag: 'Weekly',     tagBg: 'var(--navy)' },
+  { when: 'Summer',        title: 'Summer Campout',        time: 'Fri–Sun',      loc: 'Camp Pirtle, Gary TX',  tag: 'Overnight',  tagBg: '#166534' },
+  { when: 'Early fall',    title: 'Fall Kickoff Meeting',  time: 'Evening',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: 'var(--navy)' },
   // Added alongside the popcorn hero image - the page shouldn't show a popcorn sale and
   // then never mention one. Remove this row if the Pack doesn't run a popcorn fundraiser.
-  { when: 'Fall',         title: 'Popcorn Sale',          time: 'Weekends',     loc: 'Around Lindale',         tag: 'Fundraiser', tagBg: '#b91c1c' },
-  { when: 'Fall',         title: 'Raingutter Regatta',    time: 'Morning',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#0369a1' },
-  { when: 'Fall',         title: 'Fall Campout',          time: 'Sat–Sun',      loc: 'Local campsite',         tag: 'Overnight',  tagBg: '#166534' },
-  { when: 'December',     title: 'Candy Cane Fundraiser', time: 'All day',      loc: 'Hideaway Community',     tag: 'Fundraiser', tagBg: '#b91c1c' },
-  { when: 'Winter',       title: 'Blue & Gold Banquet',   time: 'Evening',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#92400e' },
-  { when: 'Spring',       title: 'Pinewood Derby',        time: 'Morning',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#92400e' },
+  { when: 'Fall',          title: 'Popcorn Sale',          time: 'Weekends',     loc: 'Around Lindale',         tag: 'Fundraiser', tagBg: '#b91c1c' },
+  { when: 'Fall',          title: 'Raingutter Regatta',    time: 'Morning',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#0369a1' },
+  { when: 'Fall',          title: 'Fall Campout',          time: 'Sat–Sun',      loc: 'Local campsite',         tag: 'Overnight',  tagBg: '#166534' },
+  { when: 'December',      title: 'Candy Cane Fundraiser', time: 'All day',      loc: 'Hideaway Community',     tag: 'Fundraiser', tagBg: '#b91c1c' },
+  { when: 'Winter',        title: 'Blue & Gold Banquet',   time: 'Evening',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#92400e' },
+  { when: 'Spring',        title: 'Pinewood Derby',        time: 'Morning',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#92400e' },
 ];
 
 const FEATURED = [
@@ -62,7 +62,7 @@ export default function EventsPage({ go }) {
       <PageHero
         eyebrow="Events"
         title="A year with Pack 351"
-        sub="We meet most Monday nights, and the big events come around every year: campouts, the Pinewood Derby, the Raingutter Regatta, and our famous Hideaway candy cane fundraiser."
+        sub="We meet most Tuesday nights, and the big events come around every year: campouts, the Pinewood Derby, the Raingutter Regatta, and our famous Hideaway candy cane fundraiser."
         image={asset("/photos/photo-popcorn.jpg")}
         imageAlt="Pack 351 Scouts selling popcorn at a table outside a grocery store"
       />

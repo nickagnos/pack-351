@@ -35,7 +35,13 @@ button { font-family: inherit; cursor: pointer; }
 p { text-wrap: pretty; }
 input, select, textarea { font-family: 'Nunito', sans-serif; }
 
-.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+/* index.html sets viewport-fit=cover for the home cinematic, so content is no longer inset
+   from the notch automatically - the max() keeps text off it in landscape on notched phones. */
+.container {
+  max-width: 1160px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
 .section    { padding: 72px 0; }
 .section-sm { padding: 48px 0; }
 
@@ -113,7 +119,10 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
   .facts-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 @media (max-width: 600px) {
-  .container { padding: 0 16px; }
+  .container {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
   .section { padding: 48px 0; }
   .home-grid { grid-template-columns: 1fr !important; }
   .home-grid .ps-span2c { grid-column: span 1 !important; }

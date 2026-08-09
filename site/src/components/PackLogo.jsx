@@ -1,6 +1,9 @@
 import React from 'react';
 
-export default function PackLogo({ dark = false, onClick }) {
+// onPhoto: the logo is sitting on the home cinematic rather than a solid bar. --muted only
+// clears 4.5:1 on white; over a photo the tagline measured 1.9:1, so it takes the same navy
+// the wordmark uses.
+export default function PackLogo({ dark = false, onPhoto = false, onClick }) {
   return (
     <button onClick={onClick} style={{
       display: 'flex', alignItems: 'center', gap: 10,
@@ -21,7 +24,8 @@ export default function PackLogo({ dark = false, onClick }) {
           fontFamily: 'Barlow Condensed', fontWeight: 800, fontSize: 20,
           color: dark ? '#fff' : 'var(--navy)', lineHeight: 1.1,
         }}>Pack 351</div>
-        <div style={{ fontFamily: 'Nunito', fontSize: 11, color: dark ? 'rgba(255,255,255,.55)' : 'var(--muted)', marginTop: 1 }}>
+        <div style={{ fontFamily: 'Nunito', fontSize: 11, marginTop: 1,
+          color: dark ? 'rgba(255,255,255,.55)' : (onPhoto ? 'var(--navy)' : 'var(--muted)') }}>
           Cub Scouts · Lindale, TX
         </div>
       </div>

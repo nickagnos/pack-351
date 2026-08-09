@@ -45,6 +45,25 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
 .section    { padding: 72px 0; }
 .section-sm { padding: 48px 0; }
 
+/* The floating nav on the home cinematic. The fade needs room to die out: at 18px of padding
+   it had ~47px to go from 82% cream to nothing and ran out exactly at the bar's bottom edge,
+   which read as a milky band with a hard line under it rather than a fade. It now gets 54px
+   and an eased ramp. (A backdrop blur used to sit here too - at 1.5px it was invisible in
+   side-by-side renders, so it's gone rather than costing a compositor layer for nothing.)
+   pointer-events keeps the taller, empty padding strip from swallowing clicks on the photo. */
+.nav-home {
+  padding-bottom: 54px;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(250,247,240,.92) 0%, rgba(250,247,240,.86) 20%, rgba(250,247,240,.70) 40%,
+    rgba(250,247,240,.44) 60%, rgba(250,247,240,.18) 80%, rgba(250,247,240,0) 100%);
+}
+.nav-home > * { pointer-events: auto; }
+/* Phones have far less height to give away, and the photo is already cropped hard there. */
+@media (max-width: 700px) {
+  .nav-home { padding-bottom: 34px; }
+}
+
 .eyebrow {
   font-family: 'Nunito', sans-serif;
   font-weight: 700;

@@ -10,17 +10,12 @@ export default function SiteNav({ current, go }) {
   const isHome = current === 'home' && !open;
 
   return (
-    <nav style={{
+    // On Home the bar floats over the photo and its cream fade lives in .nav-home (styles.css),
+    // not inline - the fade has to be shorter on phones, and an inline background would beat
+    // the media query. Everywhere else it's the solid sticky bar.
+    <nav className={isHome ? 'nav-home' : undefined} style={{
       position: isHome ? 'fixed' : 'sticky', top: 0, left: 0, right: 0, zIndex: 100,
-      // On Home the bar floats over the photo. Fully transparent left the links and the logo
-      // tagline unreadable against bright scenes, so it gets a soft cream fade - the same
-      // device the scenes use behind their copy, rather than a hard bar that would break
-      // the full-bleed look.
-      background: isHome
-        ? 'linear-gradient(to bottom, rgba(250,247,240,.95) 0%, rgba(250,247,240,.82) 45%, rgba(250,247,240,0) 100%)'
-        : '#fff',
-      backdropFilter: isHome ? 'blur(1.5px)' : 'none',
-      paddingBottom: isHome ? 18 : 0,
+      ...(isHome ? {} : { background: '#fff', paddingBottom: 0 }),
       borderBottom: isHome ? 'none' : '1px solid var(--border)',
       boxShadow: isHome ? 'none' : '0 1px 6px rgba(0,0,0,.07)',
       transition: 'background .2s',
@@ -28,7 +23,7 @@ export default function SiteNav({ current, go }) {
       <div className="container" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 68,
       }}>
-        <PackLogo onClick={() => nav('home')} />
+        <PackLogo onClick={() => nav('home')} onPhoto={isHome} />
 
         <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           {links.map(([id, label]) => (

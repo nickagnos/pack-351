@@ -160,11 +160,18 @@ const SW_CSS = `
   transform-origin: 50% 52%; will-change: transform; backface-visibility: hidden; }
 /* Cream scrim behind the copy. The navy text sits directly on the photo, and golden-hour
    and firelight scenes never clear 3:1 on their own, so this floors the contrast regardless
-   of what image is dropped in. Sits above .sw-img, below .sw-copy; not scaled by Ken Burns. */
+   of what image is dropped in. Sits above .sw-img, below .sw-copy; not scaled by Ken Burns.
+
+   Centred on the copy block, not the bottom-left corner. Anchored at the corner it had to be
+   enormous to reach text sitting ~330px above that corner, and lifted 67% of the frame to do
+   it; centred, it lifts 34% and every run of copy measures *better* than it did, because the
+   cream goes where the text is instead of smearing across the corner. It stays on this
+   full-viewport layer rather than moving onto .sw-copy (as the mobile scrim does) - scoped to
+   that box the fade gets clipped into a hard-edged rectangle. */
 .sw-scene::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(135% 118% at 0% 100%,
-    rgba(250,247,240,.95) 0%, rgba(250,247,240,.90) 30%,
-    rgba(250,247,240,.60) 52%, rgba(250,247,240,0) 78%); }
+  background: radial-gradient(46% 36% at 23% 77%,
+    rgba(250,247,240,.97) 0%, rgba(250,247,240,.95) 50%,
+    rgba(250,247,240,.64) 78%, rgba(250,247,240,0) 100%); }
 .sw-copy { position: absolute; z-index: 2; left: clamp(24px,6vw,110px);
   --sw-copy-bottom: clamp(60px,14vh,150px); bottom: var(--sw-copy-bottom);
   max-width: min(560px,80vw); will-change: opacity, transform; }

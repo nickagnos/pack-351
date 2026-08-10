@@ -228,10 +228,9 @@ const SW_CSS = `
   .sw-rail button::before { content: ''; width: 9px; height: 9px; border-radius: 50%;
     background: rgba(27,48,104,.28); transition: background .2s, transform .2s; }
   .sw-rail button.sw-on::before { background: var(--gold); transform: scale(1.35); }
+  /* The bottom of the screen stacks dots (10-54px) then the hint (56-100px); the copy's
+     104px of bottom padding in the block below keeps it clear of both. */
   .sw-hint { bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
-  /* Bottom of the screen stacks dots (10-54px), then the hint (56-100px), then the copy.
-     At the stock clamp() the body text and the last scene's buttons landed on top of both. */
-  .sw-copy { --sw-copy-bottom: calc(112px + env(safe-area-inset-bottom, 0px)); }
 }
 /* Narrow viewports. The scene-wide sweep is the wrong shape here: to reach copy that sits a
    third of the way up the screen it has to be tall, and on a portrait phone the bottom
@@ -245,16 +244,29 @@ const SW_CSS = `
    so the fade is identical whatever the block height. Everything above that ramp is photo. */
 @media (max-width: 700px) {
   .sw-scene::after { background: none; }
-  /* z-index:-1 inside .sw-copy's own stacking context: behind the text, still above the photo. */
-  .sw-copy::before { content: ''; position: absolute; z-index: -1;
-    top: -132px; left: -100vw; right: -100vw; bottom: calc(-1 * var(--sw-copy-bottom));
-    background: linear-gradient(to bottom,
-      rgba(250,247,240,0) 0px, rgba(250,247,240,.45) 62px,
-      rgba(250,247,240,.88) 106px, rgba(250,247,240,.97) 132px,
-      rgba(250,247,240,.97) 100%); }
-  .sw-body { text-shadow: 0 0 10px var(--sw-bg), 0 0 20px var(--sw-bg); }
+  .sw-body { text-shadow: none; max-width: none; }
   /* No Ken Burns here, so nothing to promote. */
   .sw-scene .sw-img { will-change: auto; }
+
+  /* Portrait phones get a photo band over copy on cream rather than a full-bleed frame.
+     Full-bleed caps out at about a quarter of the picture: the stills are 1.85:1, so
+     covering a ~0.46:1 viewport means scaling them ~4x and throwing away the sides, and no
+     amount of scrim or zoom tuning gets that back - the photo has to occupy less height.
+
+     The band is sized from viewport *width*, because that (against the band's height) is
+     what sets how much of the frame survives: visible fraction = 100vw / (height x 1.846),
+     so 108vw shows ~50%. The % cap keeps it from eating a short phone alive, and
+     flex-shrink lets the copy - which won't go below its own content height - claw back
+     room on small screens, so the last scene's two buttons always fit. */
+  .sw-scene { display: flex; flex-direction: column; }
+  .sw-scene .sw-img { position: static; flex: 0 1 auto; height: min(108vw, 46%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 64px), transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 64px), transparent 100%); }
+  .sw-copy { position: static; flex: 1 1 auto; bottom: auto; max-width: none;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 clamp(24px,6vw,110px) calc(104px + env(safe-area-inset-bottom, 0px)); }
+  /* The copy sits on cream now, so it no longer needs a scrim of its own. */
+  .sw-copy::before { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .sw-scene .sw-img { transform: none !important; } .sw-hint .sw-arrow { animation: none; } }
 `;

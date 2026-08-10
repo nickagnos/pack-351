@@ -3,7 +3,7 @@
 The website for **Cub Scout Pack 351** in Lindale, Texas. Five pages — Home, About, Events,
 Join and Resources — built as a static site with Vite and React.
 
-**Live at:** https://nickagnos.github.io/pack-351/
+**Live at:** https://pack351tx.org/
 
 ## Running it locally
 
@@ -14,12 +14,11 @@ cd site
 npm install
 npm run dev      # http://localhost:5173
 npm run build    # production build → site/dist/
-npm run preview  # serve the production build at the real /pack-351/ base
+npm run preview  # serve the production build locally
 ```
 
-Use `npm run preview` rather than `npm run dev` when you want to check something that
-depends on the deployed URL structure — the dev server runs at `/`, the real site runs
-under `/pack-351/`.
+The site is served from the root of its own domain, so dev, preview and production all
+share the same URL structure — there's no base-path difference to check for.
 
 ## How it's laid out
 

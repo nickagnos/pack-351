@@ -28,12 +28,11 @@ function stripDocsFromBuild() {
   };
 }
 
-// Served from a GitHub Pages *project* site at https://<user>.github.io/pack-351/,
-// so the production build needs base '/pack-351/'. Local dev/preview stays at '/'.
-// All runtime asset URLs go through src/asset.js (import.meta.env.BASE_URL), so
-// they resolve correctly under either base. If you move to a custom domain or a
-// user/org page served at the root, change the build base back to '/'.
-export default defineConfig(({ command, isPreview }) => ({
-  base: command === 'build' || isPreview ? '/pack-351/' : '/',
+// No `base` here on purpose: the site is served from the root of its own domain
+// (https://pack351tx.org/), so Vite's default base of '/' is correct, and dev,
+// preview, and production all agree. Runtime asset URLs still go through
+// src/asset.js (import.meta.env.BASE_URL) rather than hardcoding '/', so a future
+// move back under a subpath is a one-line change here and nowhere else.
+export default defineConfig({
   plugins: [react(), stripDocsFromBuild()],
-}));
+});

@@ -77,6 +77,10 @@ names and real headshots — the section isn't worth restoring without both.
       diffusion renders worst.
 - [x] **GitHub Pages migration** (2026-07-15) — Netlify removed, Vite `base` set to
       `/pack-351/`, all asset URLs routed through `src/asset.js`.
+- [x] **Custom domain** (2026-08-09) — the site moved to <https://pack351tx.org/> (Porkbun
+      DNS → GitHub Pages). Vite `base` dropped back to the default `/`, `og:url`/`og:image`
+      repointed, and `site/public/CNAME` added so the domain ships in the Pages artifact.
+      The old `nickagnos.github.io/pack-351/` URL 301-redirects, so shared links still work.
 - [x] **Join form removed** — replaced with a no-backend contact CTA (drop in to a meeting,
       or a prefilled `mailto:`), since Pages has no form backend.
 - [x] **Local AI video — closed** (2026-07-15). Wan 2.2 and LTX both bob in place rather than

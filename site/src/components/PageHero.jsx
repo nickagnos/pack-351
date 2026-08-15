@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Warm, image-forward hero used at the top of every interior page. Echoes the
-// cream clay-diorama landing so the whole site reads as one designed world.
+// cream of the home hero so the whole site reads as one designed piece.
 export default function PageHero({ eyebrow, title, sub, image, imageAlt, actions }) {
   return (
     <div className="page-hero">

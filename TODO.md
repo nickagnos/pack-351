@@ -17,10 +17,12 @@ the push is what actually triggers the first deploy. Details in `CLAUDE.md` →
 
 The site is complete but several details are stand-ins. None block launch.
 
-- [ ] **Real photos.** Every image is AI-generated placeholder art. `site/public/photos/PHOTOS-NEEDED.md`
-      lists each filename and what it should show; drop a real photo in with the matching
-      name and it appears, no code changes. Same for the four home-page cinematic stills in
-      `site/public/scroll-world/`.
+- [ ] **Photos of our own Pack.** The site now ships real, licensed Scouting America
+      photography (2026-08-15), so this no longer blocks anything — but they're other units'
+      Scouts. `site/public/photos/PHOTOS.md` lists each filename and what it should show;
+      drop a Pack 351 photo in with the matching name and it appears, no code changes.
+      Update the `alt` text at the same time. Same for the four home-page cinematic stills
+      in `site/public/hero/`, which have tighter composition rules — see that folder's README.
 - [ ] **Charter year** — "Pack 351 has been part of the Lindale community for years" wants
       the real founding year (`src/pages/AboutPage.jsx`, "Our story").
 - [ ] **East Texas Area Council fee** — the site now shows Scouting America's published
@@ -36,7 +38,7 @@ The site is complete but several details are stand-ins. None block launch.
 
 - [ ] **Last 3 em dashes.** Down from 35. Rewrite the sentence rather than swapping
       punctuation. Remaining: `pages/ResourcesPage.jsx` (2, in the Band section) and the
-      screen-reader `<h1>` in `components/ScrollWorld.jsx`. Find them with
+      screen-reader `<h1>` in `components/HomeHero.jsx`. Find them with
       `grep -rn '—' site/src/`. **Leave en dashes (`–`) alone** — those are ranges like
       `K–5th graders` and are correct.
 - [ ] **"Our story"** — personalize with real Pack history and anecdotes (`pages/AboutPage.jsx`).
@@ -86,5 +88,7 @@ names and real headshots — the section isn't worth restoring without both.
       or a prefilled `mailto:`), since Pages has no form backend.
 - [x] **Local AI video — closed** (2026-07-15). Wan 2.2 and LTX both bob in place rather than
       committing to forward camera motion, and Draw Things' HTTP API can't do first-last-frame
-      conditioning. The shipped scroll camera is code-driven CSS/JS over FLUX stills, which is
-      deterministic and free. Don't reopen this without new models.
+      conditioning. The shipped scroll camera is code-driven CSS/JS over stills, which is
+      deterministic and free. (Those stills were FLUX renders at the time; replaced with real
+      Brand Center photography 2026-08-15 — the camera didn't change.) Don't reopen this
+      without new models.

@@ -4,11 +4,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // Vite copies public/ verbatim, which would publish our internal notes alongside the site
-// (PHOTOS-NEEDED.md, ranks/README.md, scroll-world/README.md). Those docs are written for
-// whoever maintains this repo, and PHOTOS-NEEDED.md in particular spells out that every
-// image is AI-generated placeholder art - not something to serve to families. They stay in
-// public/ because that's where they're useful (next to the folder you drop photos into);
-// this just keeps them out of the build.
+// (photos/PHOTOS.md, ranks/README.md, hero/README.md). Those docs are written for whoever
+// maintains this repo - asset provenance, Brand Center web_ids, licensing rules and
+// replacement gotchas - not something to serve to families. They stay in public/ because
+// that's where they're useful (next to the folder you drop photos into); this just keeps
+// them out of the build.
 function stripDocsFromBuild() {
   return {
     name: 'strip-docs-from-build',

@@ -14,7 +14,8 @@ pack-351/
       main.jsx                 ← React entry point
       styles.css               ← all CSS (global vars, utilities, responsive)
     public/
-      photos/                  ← drop real photos here (see PHOTOS-NEEDED.md)
+      photos/                  ← page photography (see PHOTOS.md)
+      hero/                    ← the four home-page cinematic stills (see that folder's README)
       ranks/                   ← official Cub Scout rank emblems (see that folder's README)
       CNAME                    ← the custom domain, shipped in the Pages artifact — don't delete
     index.html                 ← app entry HTML
@@ -35,7 +36,9 @@ npm run preview  # preview the production build locally
 Hash-based (`#/home`, `#/about`, `#/events`, `#/join`, `#/resources`). No server config or SPA fallback needed — all navigation lives in the URL hash, so the host only ever serves the base `index.html`. Works on GitHub Pages (and any static host) as-is.
 
 ## Adding or replacing photos
-1. Put the file in `site/public/photos/` with the exact filename from `PHOTOS-NEEDED.md`
+1. Put the file in `site/public/photos/` with the exact filename from `PHOTOS.md` (or in
+   `site/public/hero/` for the four home-page stills — that folder's README has the
+   composition rules the scroll camera and the cream scrim impose)
 2. Commit the photo and push to `main` — GitHub Pages rebuilds & redeploys automatically (Actions)
 3. No code changes needed — `PhotoSlot` automatically shows the image when `src` resolves (asset paths go through `src/asset.js`, which prefixes Vite's base URL)
 
@@ -51,7 +54,7 @@ Hash-based (`#/home`, `#/about`, `#/events`, `#/join`, `#/resources`). No server
   so change all of them or the site contradicts itself. As of 2026-08-04 it's *most Tuesdays,
   6:00 – 7:00 PM* at Central Baptist Church:
   `components/QuickFacts.jsx` (the `FACTS` array), `components/SiteFooter.jsx` (the Meetings
-  column), `components/ScrollWorld.jsx` (last scene's `body`), `pages/JoinPage.jsx` (×4: hero
+  column), `components/HomeHero.jsx` (last scene's `body`), `pages/JoinPage.jsx` (×4: hero
   `sub`, the "Drop in to a meeting" card, and two sidebar cards), `pages/EventsPage.jsx` (×2:
   the first `EVENTS` row and the hero `sub`), `pages/ResourcesPage.jsx` (the "Come to your
   first meeting" step), and `site/index.html` (the `og:description` meta tag — easy to miss,

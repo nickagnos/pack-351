@@ -1,7 +1,7 @@
-# Home-page scroll-world stills
+# Home-hero stills
 
 The four full-screen images behind the scrolling home page, wired up in
-`site/src/components/ScrollWorld.jsx` (the `SCENES` array). Replace a file here with one of
+`site/src/components/HomeHero.jsx` (the `SCENES` array). Replace a file here with one of
 the same name and the site picks it up with no code changes.
 
 As of 2026-08-15 these are **official Scouting America photography** from the Brand Center,
@@ -17,7 +17,7 @@ replacing the AI-generated clay-miniature stills that used to live here.
 ## Rules any replacement must follow
 
 1. **Keep the lower-left third empty, and keep people out of it.** The headline is navy,
-   sitting on the photo behind a cream radial scrim (`.sw-scene::after`). The scrim is strong
+   sitting on the photo behind a cream radial scrim (`.hh-scene::after`). The scrim is strong
    enough to carry any of these with no CSS change, but it works by washing that corner out to
    near-solid cream — so anything you care about seeing there disappears. The first `creek.jpg`
    put a canoe full of paddlers exactly there and they were bleached to ghosts. Put your
@@ -33,7 +33,7 @@ replacing the AI-generated clay-miniature stills that used to live here.
 ## Where these came from
 
 The **Scouting America Brand Center**, <https://scouting.webdamdb.com/bp/>. No login needed.
-See `../photos/PHOTOS-NEEDED.md` for the JSON API, the search gotchas, and the
+See `../photos/PHOTOS.md` for the JSON API, the search gotchas, and the
 downscale-don't-crop licensing rule — all of it applies here too.
 
 | File | Brand Center folder | Original asset | web_id | Shipped |

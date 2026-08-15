@@ -156,7 +156,7 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
   .facts-grid { grid-template-columns: 1fr 1fr !important; }
 }
 
-/* Interior page hero: warm, image-forward, matches the cream clay landing */
+/* Interior page hero: warm, image-forward, matches the cream of the home hero */
 .page-hero { background: var(--cream); padding: clamp(40px,6vw,74px) 0; border-bottom: 1px solid var(--border); }
 .page-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px,5vw,60px); align-items: center; }
 .page-hero-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: var(--navy);

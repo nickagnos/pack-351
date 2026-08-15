@@ -20,7 +20,7 @@ changes. Update the `alt` text at the same time — see "Alt text" below, it mat
 | `photo-handbook.jpg` | Resources (hero) | Scouts and adults working through an activity at a table |
 
 > The Home page uses none of these. It's the full-screen scrolling cinematic, whose four
-> stills live in `site/public/scroll-world/` — see that folder's README.
+> stills live in `site/public/hero/` — see that folder's README.
 
 ## Where these came from
 

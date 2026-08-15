@@ -23,8 +23,8 @@ the flat colour versions:
 `Lion-insignia`, `TIGER-color-insignia`, `Wolf rank-color-insignia`, `CS_bear-insignia`,
 `Webelos Oval-color-insignia`, `Arrow of Light-insignia`.
 
-Unlike everything in `../photos/`, these are **not placeholders** — they're the real
-emblems and shouldn't be swapped for anything else.
+These are the real, official emblems and shouldn't be swapped for anything else — not a
+redraw, not a lookalike.
 
 ## Notes for anyone replacing or re-downloading these
 

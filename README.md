@@ -26,21 +26,24 @@ share the same URL structure — there's no base-path difference to check for.
 site/
   src/
     pages/       one file per page
-    components/  shared UI — nav, footer, page hero, photo slot
+    components/  shared UI — HomeHero (the whole home page), nav, footer, page hero, photo slot
     App.jsx      hash router (#/home, #/about, …)
-    styles.css   all the CSS
+    styles.css   the CSS, except HomeHero's — that ships as HERO_CSS inside the component
   public/
-    photos/      site photography (see PHOTOS-NEEDED.md)
+    photos/      site photography (see PHOTOS.md)
     ranks/       official Cub Scout rank emblems
-    scroll-world/  the four home-page cinematic stills
+    hero/        the four home-page cinematic stills
 ```
 
 Routing is hash-based, so there's no server config or SPA fallback to worry about — the
 host only ever serves one `index.html`.
 
-**Every image on the site is AI-generated placeholder art**, waiting on real photos of the
-Pack. `site/public/photos/PHOTOS-NEEDED.md` lists what's needed and the exact filename each
-one should use; drop a file in with the right name and it appears, no code changes.
+**Every image on the site is official Scouting America photography**, licensed from the
+Brand Center for unit use — real, but not pictures of *our* Scouts. Good photos of Pack 351
+beat them: drop a file into `site/public/photos/` (or `site/public/hero/`) with the exact
+filename that's already there and it appears, no code changes. Each folder's markdown file
+lists the filenames, what each shot shows, where it came from, and the licensing rules that
+any replacement has to follow.
 
 ## Deploying
 

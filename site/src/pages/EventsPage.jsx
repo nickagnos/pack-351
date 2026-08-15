@@ -10,25 +10,71 @@ import { asset } from '../asset';
 // left column carries a season or a frequency and the exact dates go out by email and in
 // the Facebook group. The three separate weekly Pack Meeting rows collapsed into one -
 // listing the same meeting three times was only ever a side effect of having dates.
+// Rebuilt from the Pack's own "25-26 Pack Calendar" (the Canva doc linked off the old
+// Google Sites Joining Info page), which is the only complete record of a real Pack year.
+// Deliberately no dates: that calendar is reissued every year and every date on it moves,
+// so each row carries a season or a frequency and the note under the list points people at
+// email, Band and Facebook for the actual dates. Keep it that way.
+//
+// The seasons here are the real ones off that calendar, which is why some may read oddly:
+// the Pinewood Derby is January, Blue & Gold is early March, and the Regatta is an evening
+// event, not a morning one.
+const TAG = {
+  meeting:  { tag: '3–4× / month', tagBg: 'var(--navy)' },
+  pack:     { tag: 'Pack-wide',    tagBg: '#92400e' },
+  overnight:{ tag: 'Overnight',    tagBg: '#166534' },
+  fundraiser:{ tag: 'Fundraiser',  tagBg: '#b91c1c' },
+  service:  { tag: 'Service',      tagBg: '#0f766e' },
+  community:{ tag: 'Community',    tagBg: '#0369a1' },
+  newfam:   { tag: 'New families', tagBg: '#a16207' },
+  adults:   { tag: 'Adults',       tagBg: '#64748b' },
+};
+
 const EVENTS = [
-  { when: 'Most Tuesdays', title: 'Pack Meeting',          time: '6:00–7:00 PM', loc: 'Central Baptist Church', tag: 'Weekly',     tagBg: 'var(--navy)' },
-  { when: 'Summer',        title: 'Summer Campout',        time: 'Fri–Sun',      loc: 'Camp Pirtle, Gary TX',  tag: 'Overnight',  tagBg: '#166534' },
-  { when: 'Early fall',    title: 'Fall Kickoff Meeting',  time: 'Evening',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: 'var(--navy)' },
-  // Added alongside the popcorn hero image - the page shouldn't show a popcorn sale and
-  // then never mention one. Remove this row if the Pack doesn't run a popcorn fundraiser.
-  { when: 'Fall',          title: 'Popcorn Sale',          time: 'Weekends',     loc: 'Around Lindale',         tag: 'Fundraiser', tagBg: '#b91c1c' },
-  { when: 'Fall',          title: 'Raingutter Regatta',    time: 'Morning',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#0369a1' },
-  { when: 'Fall',          title: 'Fall Campout',          time: 'Sat–Sun',      loc: 'Local campsite',         tag: 'Overnight',  tagBg: '#166534' },
-  { when: 'December',      title: 'Candy Cane Fundraiser', time: 'All day',      loc: 'Hideaway Community',     tag: 'Fundraiser', tagBg: '#b91c1c' },
-  { when: 'Winter',        title: 'Blue & Gold Banquet',   time: 'Evening',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#92400e' },
-  { when: 'Spring',        title: 'Pinewood Derby',        time: 'Morning',      loc: 'Central Baptist Church', tag: 'Pack-wide',  tagBg: '#92400e' },
+  // Den meetings are the weekly rhythm; Pack meetings and the committee meeting are monthly.
+  // The old page collapsed all three into one row, which hid the difference.
+  { when: 'Most Tuesdays', title: 'Den Meeting',            time: '6:00–7:00 PM', loc: 'Central Baptist Church', ...TAG.meeting },
+  { when: 'Monthly',       title: 'Pack Meeting',           time: 'Evening',      loc: 'Central Baptist Church', ...TAG.pack },
+  { when: 'Monthly',       title: 'Pack Committee Meeting', time: 'Evening',      loc: 'Central Baptist Church', ...TAG.adults },
+
+  { when: 'August',        title: 'School Night for Scouting',      time: 'Evening', loc: 'Lindale schools',        ...TAG.newfam },
+  { when: 'August',        title: 'Cub Kick-off & Parent Orientation', time: 'Evening', loc: 'Central Baptist Church', ...TAG.newfam },
+
+  { when: 'Fall',          title: 'Popcorn Sale',           time: 'Weekends',     loc: 'Around Lindale',         ...TAG.fundraiser },
+  { when: 'Fall',          title: 'Raingutter Regatta',     time: 'Evening',      loc: 'Central Baptist Church', ...TAG.pack },
+  { when: 'Fall',          title: 'Scouting for Food',      time: 'Weekends',     loc: 'Around Lindale',         ...TAG.service },
+  { when: 'Fall',          title: 'Mom & Me Campout',       time: 'Fri–Sat',      loc: 'Camp Pirtle, Gary TX',   ...TAG.overnight },
+  { when: 'October',       title: 'Trunk or Treat',         time: 'Afternoon',    loc: 'CountryFest, Lindale',   ...TAG.community },
+  { when: 'Late October',  title: 'Spooktacular Campout',   time: 'Fri–Sun',      loc: 'American Legion',        ...TAG.overnight },
+  { when: 'November',      title: 'NASA Campout',           time: 'Weekend',      loc: 'Announced each year',    ...TAG.overnight },
+  { when: 'November',      title: 'Food Bank Service Project', time: 'Morning',   loc: 'East Texas Food Bank',   ...TAG.service },
+
+  // Canes go out in December and get collected back in January, so this one spans the break.
+  { when: 'Dec – Jan',     title: 'Candy Cane Fundraiser',  time: 'All day',      loc: 'Hideaway Community',     ...TAG.fundraiser },
+  { when: 'December',      title: 'Christmas Parade',       time: 'Afternoon',    loc: 'Lindale',                ...TAG.community },
+  { when: 'December',      title: 'Pack Caroling',          time: 'Evening',      loc: 'Lindale Specialty',      ...TAG.community },
+  { when: 'December',      title: 'Awards & Potluck',       time: 'Evening',      loc: 'Central Baptist Church', ...TAG.pack },
+
+  { when: 'Winter',        title: 'Pinewood Derby',         time: 'Morning',      loc: 'Central Baptist Church', ...TAG.pack },
+  { when: 'Winter',        title: 'Scout Sunday',           time: 'Morning',      loc: 'Central Baptist Church', ...TAG.pack },
+  { when: 'Late winter',   title: 'Blue & Gold Banquet & Bridging', time: 'Evening', loc: 'Central Baptist Church', ...TAG.pack },
+
+  { when: 'Spring',        title: 'Pack Campout',           time: 'Fri–Sun',      loc: 'American Legion',        ...TAG.overnight },
+  { when: 'Spring',        title: 'Dad & Me Campout',       time: 'Sat–Sun',      loc: 'Camp Pirtle, Gary TX',   ...TAG.overnight },
+  { when: 'Spring',        title: 'Pack Service Project',   time: 'Morning',      loc: 'Central Baptist Church', ...TAG.service },
+  { when: 'Spring',        title: 'Fire & Nature Festival', time: 'Daytime',      loc: 'Announced each year',    ...TAG.community },
+  { when: 'Spring',        title: 'Plant Sale',             time: 'Morning',      loc: 'Around Lindale',         ...TAG.fundraiser },
+  { when: 'Spring',        title: 'End of Year Awards',     time: 'Evening',      loc: 'Central Baptist Church', ...TAG.pack },
+
+  { when: 'Varies',        title: 'Spirit Night',           time: 'Evening',      loc: 'Whataburger, Lindale',   ...TAG.fundraiser },
+  { when: 'Summer',        title: 'Summer Fun outings',     time: 'Varies',       loc: 'Around Lindale',         ...TAG.community },
 ];
 
 const FEATURED = [
   {
     src: '/photos/photo-pinewood-derby.jpg',
-    alt: 'Scouts building pinewood derby cars at a workbench',
-    label: 'photo: scouts building pinewood derby cars',
+    alt: 'A Cub Scout painting a pinewood derby car at a workbench',
+    label: 'photo: building a pinewood derby car',
     bg: '#c9a86c',
     title: 'Pinewood Derby',
     when: 'Every spring',
@@ -36,8 +82,8 @@ const FEATURED = [
   },
   {
     src: '/photos/photo-regatta.jpg',
-    alt: 'Scouts building balsa wood sailboats for the Raingutter Regatta',
-    label: 'photo: scouts building regatta sailboats',
+    alt: 'Cub Scouts in uniform racing boats down a water-filled trough at a raingutter regatta',
+    label: 'photo: raingutter regatta',
     bg: '#6a9fb5',
     title: 'Raingutter Regatta',
     when: 'Every fall',
@@ -45,12 +91,17 @@ const FEATURED = [
   },
   {
     src: '/photos/photo-candy-cane.jpg',
-    alt: 'Candy cane fundraiser in the Hideaway neighborhood',
-    label: 'photo: candy cane fundraiser in Hideaway neighborhood',
+    alt: 'Cub Scouts carrying bags door to door across a neighborhood lawn',
+    label: 'photo: cub scouts on a door-to-door fundraiser',
     bg: '#b87878',
     title: 'Candy Cane Fundraiser',
     when: 'Every December',
     desc: 'Our Scouts "plant" giant 3-foot lawn candy canes at homes all across the Hideaway community. A beloved Lindale tradition, and our biggest fundraiser of the year.',
+    // The order form is a Google Form that the Pack opens and closes each season, so it reads
+    // "no longer accepting responses" for most of the year. The link text says so rather than
+    // sending a September visitor to what looks like a broken page.
+    linkHref: 'https://docs.google.com/forms/d/e/1FAIpQLSfEZ7BEpcEvaSmMZ-zHFp-7knelAdLUdkdCWMW0yiQNWQe86w/viewform',
+    linkText: 'Order form (opens each December) →',
   },
 ];
 
@@ -63,8 +114,8 @@ export default function EventsPage({ go }) {
         eyebrow="Events"
         title="A year with Pack 351"
         sub="We meet most Tuesday nights, and the big events come around every year: campouts, the Pinewood Derby, the Raingutter Regatta, and our famous Hideaway candy cane fundraiser."
-        image={asset("/photos/photo-popcorn.jpg")}
-        imageAlt="Pack 351 Scouts selling popcorn at a table outside a grocery store"
+        image={asset("/photos/photo-pack-year.jpg")}
+        imageAlt="Cub Scouts and leaders carrying camping gear across a field"
       />
 
       {/* Signature events */}
@@ -79,6 +130,14 @@ export default function EventsPage({ go }) {
                   <span className="eyebrow" style={{ marginBottom: 8 }}>{e.when}</span>
                   <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 26, color: 'var(--navy)', marginBottom: 10 }}>{e.title}</h3>
                   <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65 }}>{e.desc}</p>
+                  {e.linkHref && (
+                    <a
+                      href={e.linkHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: 'inline-block', marginTop: 12, fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}
+                    >{e.linkText}</a>
+                  )}
                 </div>
               </div>
             ))}
@@ -93,7 +152,11 @@ export default function EventsPage({ go }) {
           </div>
           {/* Dates came off this page, so it has to say where to actually get them. */}
           <p style={{ fontSize: 14, color: 'var(--muted)', textAlign: 'center', marginTop: 24 }}>
-            Exact dates are set each year and go out by email and in our Facebook group.{' '}
+            Exact dates are set each year and go out by email, on Band, and in our{' '}
+            <a href="https://www.facebook.com/groups/1094659333885105/" target="_blank" rel="noopener noreferrer"
+               style={{ color: 'var(--navy)', fontWeight: 700, textDecoration: 'underline' }}>
+              private Facebook group
+            </a>. Your den leader also sends reminders.{' '}
             <a href="mailto:txcspack351@gmail.com" style={{ color: 'var(--navy)', fontWeight: 700, textDecoration: 'underline' }}>
               Email us
             </a>{' '}

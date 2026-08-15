@@ -16,7 +16,7 @@ import { asset } from '../asset';
 const LINKS = [
   {
     name: 'Annual Health & Medical Record',
-    note: 'Parts A & B for every Scout, yearly. Part C needs a doctor and is only for resident camp',
+    note: 'Parts A & B for every Scout, yearly. Part C needs a doctor and is only for resident camp. Background and FAQ at scouting.org/health-and-safety/ahmr',
     kind: 'pdf',
     href: 'https://filestore.scouting.org/filestore/HealthSafety/pdf/680-001_ABC.pdf',
   },
@@ -62,31 +62,77 @@ const LINKS = [
     kind: 'web',
     href: 'https://etacbsa.org/',
   },
+  // The four below were on the old Google Sites page and were lost in the rebuild.
+  {
+    name: 'Pinewood Derby rules',
+    note: 'Official car specs and race rules. Read before you start cutting',
+    kind: 'web',
+    href: 'https://www.scoutshop.org/pwd-rules',
+  },
+  {
+    name: 'Cub Scout uniform guide',
+    note: "Scouting America's own guide to what goes where, rank by rank",
+    kind: 'web',
+    href: 'https://www.scouting.org/programs/cub-scouts/cub-scout-uniform/',
+  },
+  {
+    name: 'Council event registration',
+    note: 'Sign up for East Texas Area Council camps and district events',
+    kind: 'web',
+    href: 'https://scoutingevent.com/?OrgKey=BSA585',
+  },
+  {
+    name: 'New family Welcome Packet',
+    note: "What to expect in your first months of Cub Scouting. Good to read before you join. Large file (9 MB), so use wifi",
+    kind: 'pdf',
+    href: 'https://www.scouting.org/wp-content/uploads/2023/07/512-73523WelcomeNewCSFamily_WEB.pdf',
+  },
+  {
+    name: 'Family Talent Survey',
+    note: 'Tell us what you can help with. Every parent has something the Pack needs',
+    kind: 'web',
+    href: 'https://docs.google.com/forms/d/e/1FAIpQLScmC5-pxZ7VKXeuQZ0srvcCO5ZJxrxoaFvMFMZaTD7KcU9Ewg/viewform',
+  },
 ];
 
+// Most of the policy detail below (camping rules, the school-closure rule, snacks, pack trips,
+// the volunteer roles) was recovered from the Pack's old Google Sites FAQ, which the rebuild
+// had dropped. Two answers here previously contradicted it and have been corrected: parents
+// are required to stay at meetings, not merely welcome, and the belt and hat are required
+// uniform parts rather than optional.
 const FAQS = [
   { q: "What does my scout actually do at a pack meeting?",
-    a: "Every meeting has an opening ceremony, den time (scouts work on rank adventures with their leader), and a closing. Most meetings include a hands-on activity or game. It's structured but fun, about 45–60 minutes." },
+    a: "Every meeting has an opening ceremony, den time (scouts work on rank adventures with their leader), and a closing. Most meetings include a hands-on activity or game. It's structured but fun, about 45–60 minutes. We meet three to four times a month, most Tuesdays." },
   { q: "How much does it cost, and what if we can't afford it?",
-    a: "$175/year covers BSA national dues, council fees, and your scout's Handbook. Uniform and special events are extra. If cost is a barrier, just ask. We have scholarships and no one is ever turned away for finances." },
-  { q: "Do we have to camp? Do parents have to come?",
-    a: "Camping is encouraged but never required. Parents are always welcome, and we actually need adult volunteers for overnights. Many parents say it's their favorite part of Scouting." },
+    a: "Scouting America's national fee is $85/year, plus a fee from the East Texas Area Council. That covers registration, the awards your scout earns, a Pinewood Derby car kit, a Raingutter Regatta boat kit, and insurance for all official Scouting events. Pack 351 charges no dues of its own, which keeps us among the most affordable packs around. Uniform and camping food are the only other costs. If money is a barrier, just ask — we have scholarships, it stays confidential, and no scout is ever turned away." },
+  { q: "Do parents have to stay at meetings?",
+    a: "Yes. Scouting is a family program, and a parent or guardian is expected to stay for the whole meeting, for every age group. You'll help your scout and pitch in with the other parents to keep the den running. Pack meetings are for the whole family." },
+  { q: "When does my scout get to go camping, and what are the rules?",
+    a: "We camp about twice a year. Kindergarten through 3rd grade go family camping, where a parent comes along, at BSA-approved or council-run camps. Webelos may camp as a den, but each scout still needs a parent or guardian there — if that's impossible, guardianship can be transferred in writing to another parent on the trip, though not to the den or pack leader running it. Arrow of Light dens can camp with a Scouts BSA troop as part of their rank requirements, again with a parent present. Camping is encouraged but never required, and we always need adult volunteers for overnights." },
   { q: "What do we actually need for the uniform?",
-    a: "The blue Cub Scout shirt with your rank badge is the main piece. Pants, belt, and neckerchief are optional for most meetings. Don't buy anything before your first meeting. We'll walk you through it and often have used gear to share." },
-  { q: "Can both boys and girls join?",
-    a: "Yes! Cub Scouts has welcomed all genders since 2018. All kids in Kindergarten through 5th grade are welcome in Pack 351." },
+    a: "Scouts are uniformed from the waist up, so what you buy is the hat, the blue Cub Scout shirt, and the belt. Neckerchiefs and slides are gifted to scouts at the end-of-year advancement ceremony when they earn their next rank, so don't buy those. Pants and shorts are optional. Don't buy anything before your first meeting — we'll walk you through exactly what your scout needs and often have gently used gear to share." },
+  { q: "Can both boys and girls join? How old do they need to be?",
+    a: "Yes! Cub Scouts has welcomed all genders since 2018. It's for kids in Kindergarten through 5th grade, roughly ages 5 to 10. A youth older than 10 who has finished 5th grade can't join Cub Scouts, but may be eligible for Scouts BSA. Citizenship isn't required for youth or adults; families living outside the US can find their national Scouting organization at scout.org." },
   { q: "My kid has an allergy or accommodation. Is that okay?",
-    a: "Absolutely. Let us know during sign-up and we'll make sure your den leader is informed. All scouts are welcome." },
+    a: "Definitely, yes. The Cub Scout program adapts to a wide range of needs, and there are training materials to help leaders do it well. Please tell your den leader and the Cubmaster what we need to know so we're ready to support your scout properly." },
+  { q: "What about holidays and bad weather?",
+    a: "Rule of thumb: if school is closed for the day, or closes early because of weather, we don't meet. There are one or two other dates each year that experience says aren't worth holding — the day before Thanksgiving, for one. You'll hear about those ahead of time." },
+  { q: "Are there snacks?",
+    a: "Each den decides for itself, and most run a rotating list — one family brings a snack each week, so over a school year your turn comes around once or twice. Nothing fancy. A juice box and a shared bag of pretzels is exactly right. Find a sale and stock up." },
+  { q: "What are Pack trips?",
+    a: "Things the whole family does together outside the weekly meetings — a bowling night, a skating party, marching in a parade, sometimes building a float. We're limited mostly by imagination, and the one rule is that it has to be fun." },
   { q: "How is Pack 351 organized? Who's in charge?",
-    a: "The Cubmaster leads pack-wide meetings. Den leaders run each den. A Pack Committee (parent volunteers) handles finances, events, and logistics. It's truly a community effort." },
+    a: "The Cubmaster leads pack-wide meetings and den leaders run each den — ideally two leaders per den plus a rotating parent assistant. A Pack Committee of parent volunteers handles finances, events, and logistics, alongside the chartered organization representative. There's also a uniform coordinator who quietly helps families who need it." },
+  { q: "How can I help? I've never done anything like this.",
+    a: "Every parent has something worth sharing, and it doesn't have to be leading a den — running one activity at a campout, setting up tables, or helping clean up all count. Leader manuals, apps, and training make stepping up easier than it looks, and there are monthly Roundtable meetings where leaders swap ideas. As we say: many hands make light work. Tell any leader you're interested, or fill in the Family Talent Survey linked above." },
   { q: "What's the real time commitment?",
     a: "Most families spend 1–2 hours per week on meetings. Big events like campouts and the derby require more, but they're entirely optional. We work hard to make every hour worth it." },
 ];
 
 const NEW_STEPS = [
-  { n: '1', title: 'Come to your first meeting', body: "Show up any Tuesday at 6:00 PM at Central Baptist Church. No paperwork, no uniform. Just you and your scout. We'll take it from there." },
-  { n: '2', title: 'Register online',            body: "After your visit, register through BeAScout.org or our Join page. You'll pay annual dues ($175) through the BSA portal." },
-  { n: '3', title: "Get your scout's shirt",    body: "Order a blue Cub Scout shirt from ScoutShop.org. That's all you need to start. We'll help you with patches at your next meeting." },
+  { n: '1', title: 'Come to your first meeting', body: "Show up any Tuesday at 6:00 PM at Central Baptist Church. No paperwork, no uniform. Just you and your scout. We'll take it from there. The Welcome Packet linked above is a good read beforehand if you like knowing what you're walking into." },
+  { n: '2', title: 'Register online',            body: "After your visit, register through BeAScout.org or our Join page. You'll pay the national and council fees through the BSA portal. While you're at it, fill in the Family Talent Survey linked above so we know what you'd enjoy helping with." },
+  { n: '3', title: "Get your scout's shirt",    body: "Order the hat, blue Cub Scout shirt, and belt from ScoutShop.org, or pick them up at the East Texas Area Council Scout Shop in Tyler. The shirt is the only thing you truly need on day one. We'll help you with patches at your next meeting." },
   { n: '4', title: 'Download the Scouting app', body: 'The free Scouting America app has your scout\'s handbook, advancement tracker, and event notifications. Available on iOS and Android.' },
   { n: '5', title: 'Complete the medical form', body: "Download and fill out Parts A & B of the Annual Health & Medical Record. Your den leader needs this on file. Grab it from the links at the top of this page." },
 ];
@@ -101,7 +147,7 @@ export default function ResourcesPage({ go }) {
         title="Everything in one place."
         sub={'Links, forms, FAQs, the uniform guide. Bookmark this page. It answers 95% of new family questions and saves a lot of "quick question" emails.'}
         image={asset("/photos/photo-handbook.jpg")}
-        imageAlt="A Cub Scout and a parent going through the handbook and forms at the kitchen table"
+        imageAlt="Cub Scouts and parents working through an activity together at a table"
       />
 
       {/* Everything below used to sit behind a four-tab switcher. It's now stacked, with
@@ -142,9 +188,9 @@ export default function ResourcesPage({ go }) {
                   </div>
                 ))}
               </div>
+              {/* Derby rules used to be an "email us" - they're linked in the grid above now. */}
               <p style={{ marginTop: 16, fontSize: 13, color: 'var(--muted)' }}>
-                Looking for our Pinewood Derby or Regatta rules, or help with fees? Those are handled
-                inside the Pack, so just email{' '}
+                Need help with fees, or not sure where to start? Just email{' '}
                 <a href="mailto:txcspack351@gmail.com" style={{ color: 'var(--navy)' }}>txcspack351@gmail.com</a>{' '}
                 and we'll sort you out. No Scout is ever turned away over money.
               </p>
@@ -154,23 +200,31 @@ export default function ResourcesPage({ go }) {
       {/* UNIFORM */}
       <div className="section" style={{ background: '#fff', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
         <div className="container">
-              <SectionHeader eyebrow="What to wear" title="The Cub Scout uniform" sub="Here's what's actually needed, what's optional, and a few money-saving tips." />
+              <SectionHeader eyebrow="What to wear" title="The Cub Scout uniform" sub="Scouts are uniformed from the waist up. Here's what you buy, what's optional, what you never need to buy, and a few money-saving tips." />
               <div className="uniform-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
                 <div>
+                  {/* Hat and belt belong in Required - the Pack uniforms scouts waist-up, which
+                      is what the old site spelled out. They were listed as optional here. */}
                   <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 24, color: 'var(--navy)', marginBottom: 14 }}>Required</h3>
-                  {['Blue Cub Scout shirt (with rank badge)', 'Pack 351 numeral patch', 'BSA patch (left shoulder)', 'Council shoulder patch'].map(item => (
+                  {['Blue Cub Scout shirt (with rank badge)', 'Cub Scout hat (matches your scout’s den)', 'Scout belt & buckle', 'Pack 351 numeral patch', 'BSA patch (left shoulder)', 'Council shoulder patch'].map(item => (
                     <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 0', borderBottom: '1px solid var(--border)' }}>
                       <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'var(--gold)', flexShrink: 0 }} />
                       <span style={{ fontSize: 15 }}>{item}</span>
                     </div>
                   ))}
                   <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 24, color: 'var(--navy)', margin: '28px 0 14px' }}>Optional (but nice)</h3>
-                  {['Blue Cub Scout pants / shorts', 'Scout belt & buckle', 'Neckerchief & slide', 'Activity shirt (for events)'].map(item => (
+                  {['Blue Cub Scout pants / shorts', 'Activity shirt (for events)'].map(item => (
                     <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 0', borderBottom: '1px solid var(--border)' }}>
                       <div style={{ width: 18, height: 18, borderRadius: '50%', border: '2px solid var(--border)', flexShrink: 0 }} />
                       <span style={{ fontSize: 15, color: 'var(--muted)' }}>{item}</span>
                     </div>
                   ))}
+                  {/* Called out separately so nobody buys one: these are earned, not purchased. */}
+                  <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 24, color: 'var(--navy)', margin: '28px 0 14px' }}>Don’t buy — these are gifts</h3>
+                  <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7, margin: 0 }}>
+                    Neckerchiefs and slides are given to scouts at the end-of-year advancement
+                    ceremony when they earn their next rank. Save your money.
+                  </p>
                 </div>
                 <div>
                   <div className="card" style={{ padding: 24, background: 'var(--gold-light)', border: '1px solid #fde68a' }}>
@@ -178,8 +232,9 @@ export default function ResourcesPage({ go }) {
                     {[
                       "Don't buy anything before your first meeting. We'll tell you exactly what your scout needs.",
                       "We often have gently used uniforms available from families whose scouts have aged out. Just ask!",
-                      "ScoutShop.org has everything. The shirt is the only thing you need on day one.",
-                      "Iron-on patches work fine. Sewn patches are more durable but not required.",
+                      "ScoutShop.org has everything, or visit the East Texas Area Council Scout Shop at 1331 E. 5th Street in Tyler, across from Tyler Junior College. Tell them your scout's den level and Pack 351 and they'll sort you out.",
+                      "The shirt is the only thing you truly need on day one. Iron-on patches work fine; sewn patches last longer but aren't required.",
+                      "If a uniform is a financial stretch, speak to our uniform coordinator or any pack leader. We'll help, and it stays confidential.",
                     ].map((tip, i) => (
                       <div key={i} style={{ display: 'flex', gap: 10, marginBottom: 14 }}>
                         <span style={{ fontFamily: 'Barlow Condensed', fontWeight: 800, color: 'var(--gold-dark)', flexShrink: 0 }}>{i + 1}.</span>

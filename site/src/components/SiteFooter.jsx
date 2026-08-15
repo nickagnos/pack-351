@@ -45,13 +45,17 @@ export default function SiteFooter({ go }) {
                 txcspack351@gmail.com
               </a>
               <div>
+                {/* The numeric group ID, taken off the old Google Sites page, which linked
+                    it twice. The previous vanity URL (/groups/351cubscouts) was a guess and
+                    did not resolve. The group is private, so a family who clicks gets a join
+                    prompt - hence the label. */}
                 <a
-                  href="https://www.facebook.com/groups/351cubscouts"
+                  href="https://www.facebook.com/groups/1094659333885105/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: 'rgba(255,255,255,.7)', textDecoration: 'none' }}
                 >
-                  Facebook Group
+                  Facebook Group (private)
                 </a>
               </div>
             </div>

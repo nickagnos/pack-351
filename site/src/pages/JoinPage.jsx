@@ -18,7 +18,7 @@ export default function JoinPage({ go }) {
         title="Let's get your scout started."
         sub="No application, no payment up front. Drop in to any Tuesday meeting, or send us a quick email and a leader will walk your family through the next steps."
         image={asset('/photos/photo-camping.jpg')}
-        imageAlt="Cub Scouts around a campfire"
+        imageAlt="Cub Scouts sitting around a campsite in a grassy meadow"
       />
 
       {/* Get started + sidebar */}
@@ -66,7 +66,7 @@ export default function JoinPage({ go }) {
             {/* Sidebar */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
-                { icon: '💸', title: "What does it cost?", body: "$175/year covers dues, activity fees, and your scout's Handbook. Uniform is extra but we'll guide you. Scholarships are available, and no scout is ever turned away for finances." },
+                { icon: '💸', title: "What does it cost?", body: "Scouting America's national fee is $85/year, plus an East Texas Area Council fee. That covers registration, the awards your scout earns, a Pinewood Derby kit, a Raingutter Regatta boat kit, and insurance for official Scouting events. The Pack charges no dues of its own. Uniform and camping food are the only other costs. Scholarships are available, and no scout is ever turned away for finances." },
                 { icon: '📅', title: "When do we meet?", body: 'Most Tuesday nights, 6:00–7:00 PM at Central Baptist Church in Lindale.' },
                 { icon: '👀', title: "Can we visit before joining?", body: "Absolutely. Drop in to any Tuesday meeting. No sign-up needed. Just show up and see if it's a fit." },
                 { icon: '👕', title: "Do we need a uniform right away?", body: "Nope. Wear whatever for the first meeting. We'll walk you through exactly what to get, and often have gently used gear available." },

@@ -6,7 +6,10 @@ const FACTS = [
   { icon: '📅', head: 'Most Tuesdays', sub: '6:00 – 7:00 PM' },
   { icon: '📍', head: 'Central Baptist Church', sub: 'Lindale, TX' },
   { icon: '🎓', head: 'K – 5th Grade', sub: 'Boys & girls welcome' },
-  { icon: '💰', head: '$175 / year', sub: 'Scholarships available' },
+  // $85 is Scouting America's published national fee for Cub Scouts (effective May 2024).
+  // The East Texas Area Council fee is on top and isn't published anywhere public, so the
+  // band deliberately shows the part we can source rather than an invented total. See TODO.md.
+  { icon: '💰', head: '$85 / year + council fee', sub: 'Scholarships available' },
 ];
 
 export default function QuickFacts() {

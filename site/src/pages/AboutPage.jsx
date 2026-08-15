@@ -27,7 +27,7 @@ export default function AboutPage({ go }) {
         title={<>A Pack built by<br />families, for families.</>}
         sub="Pack 351 is chartered by Central Baptist Church in Lindale, TX. We're parents, kids, and leaders who believe the best childhood memories are made outside, with a little mud on your boots."
         image={asset("/photos/photo-den-meeting.jpg")}
-        imageAlt="A Pack 351 den meeting: scouts around a table working on a project with their den leader"
+        imageAlt="Cub Scouts and a leader working on a project together around a table at a den meeting"
         actions={<button className="btn btn-primary" onClick={() => go('join')}>Join Pack 351 →</button>}
       />
       <QuickFacts />
@@ -55,15 +55,15 @@ export default function AboutPage({ go }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <PhotoSlot
                 src={asset("/photos/photo-hiking.jpg")}
-                alt="Scouts hiking a trail"
-                label="photo: scouts hiking a trail"
+                alt="Cub Scouts walking a sunlit wooded trail"
+                label="photo: cub scouts on a wooded trail"
                 bg="#8ab58a"
                 style={{ height: 210, borderRadius: 8 }}
               />
               <PhotoSlot
                 src={asset("/photos/photo-candy-cane.jpg")}
-                alt="Candy cane fundraiser in the Hideaway neighborhood"
-                label="photo: candy cane fundraiser, Hideaway neighborhood"
+                alt="Cub Scouts carrying bags door to door across a neighborhood lawn"
+                label="photo: cub scouts on a door-to-door fundraiser"
                 bg="#c09090"
                 style={{ height: 165, borderRadius: 8 }}
               />
@@ -98,10 +98,14 @@ export default function AboutPage({ go }) {
               </div>
             ))}
           </div>
-          {/* The emblems are registered Scouting America marks, so they get an attribution
-              line. Kept small and muted - it's a legal courtesy, not page content. */}
+          {/* The emblems are registered Scouting America marks, and the site's photographs
+              come from the Scouting America Brand Center under its unit-use terms, so both
+              get an attribution line. Kept small and muted - it's a legal courtesy, not page
+              content. The photos show Scouts from other units, not Pack 351; the alt text
+              throughout is written so nothing claims otherwise. */}
           <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', marginTop: 18 }}>
             Rank emblems are trademarks of Scouting America, used by Pack 351 as a chartered unit.
+            Photography courtesy of the Scouting America Brand Center.
           </p>
         </div>
       </div>

@@ -23,12 +23,13 @@ The site is complete but several details are stand-ins. None block launch.
       `site/public/scroll-world/`.
 - [ ] **Charter year** — "Pack 351 has been part of the Lindale community for years" wants
       the real founding year (`src/pages/AboutPage.jsx`, "Our story").
-- [ ] **Annual cost** — shows $175/year in three places; confirm against the council rate
+- [ ] **East Texas Area Council fee** — the site now shows Scouting America's published
+      national fee ($85/year, effective May 2024) "+ council fee", because ETAC does not
+      publish its council fee anywhere public and the old $175 figure was unsourced. Get the
+      real council number from the committee and fill it in
       (`components/QuickFacts.jsx`, `pages/JoinPage.jsx`, `pages/ResourcesPage.jsx`).
-- [ ] **Facebook group URL** — `https://www.facebook.com/groups/351cubscouts` in
-      `src/components/SiteFooter.jsx`; confirm it's right.
-- [ ] **Popcorn Sale** — the Events row and the storefront hero image were added together.
-      Confirm the Pack actually runs one, or remove both.
+      The old Google Sites FAQ said $80 national + $20 council, but that $80 predates the
+      May 2024 increase, so the $20 may be stale too.
 - [ ] **Copyright year** — footer shows © 2026.
 
 ## Copy polish

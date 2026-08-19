@@ -18,7 +18,7 @@ export default function SiteFooter({ go }) {
           <div>
             <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 17, color: 'var(--gold)', marginBottom: 14 }}>Quick Links</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-              {[['About', 'about'], ['Events', 'events'], ['Resources', 'resources'], ['Join Us', 'join']].map(([l, id]) => (
+              {[['About', 'about'], ['Events', 'events'], ['Candy Canes', 'candy-canes'], ['Resources', 'resources'], ['Join Us', 'join']].map(([l, id]) => (
                 <button key={id} onClick={() => go(id)} style={{
                   fontFamily: 'Nunito', fontSize: 14, color: 'rgba(255,255,255,.7)',
                   background: 'none', border: 'none', cursor: 'pointer',

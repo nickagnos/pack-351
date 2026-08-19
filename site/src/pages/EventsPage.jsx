@@ -96,12 +96,11 @@ const FEATURED = [
     bg: '#b87878',
     title: 'Candy Cane Fundraiser',
     when: 'Every December',
-    desc: 'Our Scouts "plant" giant 3-foot lawn candy canes at homes all across the Hideaway community. A beloved Lindale tradition, and our biggest fundraiser of the year.',
-    // The order form is a Google Form that the Pack opens and closes each season, so it reads
-    // "no longer accepting responses" for most of the year. The link text says so rather than
-    // sending a September visitor to what looks like a broken page.
-    linkHref: 'https://docs.google.com/forms/d/e/1FAIpQLSfEZ7BEpcEvaSmMZ-zHFp-7knelAdLUdkdCWMW0yiQNWQe86w/viewform',
-    linkText: 'Order form (opens each December) →',
+    desc: 'Our Scouts "plant" giant 5-foot lawn candy canes at homes all across the Hideaway community. A beloved Lindale tradition, and our biggest fundraiser of the year.',
+    // Deliberately no month here. The candy canes page owns the ordering status (its
+    // ORDERING_OPEN flag), so restating the window on this card would only drift out of sync.
+    linkTo: 'candy-canes',
+    linkText: 'Order candy canes →',
   },
 ];
 
@@ -130,6 +129,18 @@ export default function EventsPage({ go }) {
                   <span className="eyebrow" style={{ marginBottom: 8 }}>{e.when}</span>
                   <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 26, color: 'var(--navy)', marginBottom: 10 }}>{e.title}</h3>
                   <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65 }}>{e.desc}</p>
+                  {/* linkTo is an in-app route, linkHref an outside link. Internal navigation is
+                      always a go() button here, never an <a href="#/...">. */}
+                  {e.linkTo && (
+                    <button
+                      onClick={() => go(e.linkTo)}
+                      style={{
+                        display: 'inline-block', marginTop: 12, fontSize: 14, fontWeight: 700,
+                        color: 'var(--navy)', background: 'none', border: 'none', padding: 0,
+                        cursor: 'pointer', textDecoration: 'underline',
+                      }}
+                    >{e.linkText}</button>
+                  )}
                   {e.linkHref && (
                     <a
                       href={e.linkHref}

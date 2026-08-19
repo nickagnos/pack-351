@@ -3,7 +3,11 @@ import PackLogo from './PackLogo';
 
 export default function SiteNav({ current, go }) {
   const [open, setOpen] = React.useState(false);
-  const links = [['about', 'About'], ['events', 'Events'], ['resources', 'Resources']];
+  // "Hideaway Candy Canes" renders at 185px, against 74/80/104 for the other three. That puts
+  // the whole desktop row at 755px, which clears the 772px available at the old 820px
+  // breakpoint by just 18px - fine until Barlow Condensed fails to load and a wider fallback
+  // renders. styles.css switches to the hamburger at 900px instead of 820px to cover that.
+  const links = [['about', 'About'], ['events', 'Events'], ['candy-canes', 'Hideaway Candy Canes'], ['resources', 'Resources']];
   const nav = (p) => { go(p); setOpen(false); };
   // On the home cinematic the nav floats over the scene (transparent overlay); everywhere
   // else it's the solid sticky bar.

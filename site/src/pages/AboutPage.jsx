@@ -46,11 +46,14 @@ export default function AboutPage({ go }) {
                 doing the things that make Scouting worth it: camping under East Texas stars, building and racing
                 pinewood derby cars, sailing balsa boats down rain gutters, and leaving places better than we found them.
               </p>
-              <p style={{ color: 'var(--muted)', lineHeight: 1.75 }}>
-                Every December you'll find our Scouts planting hundreds of three-foot candy canes in
+              <p style={{ color: 'var(--muted)', lineHeight: 1.75, marginBottom: 16 }}>
+                Every December you'll find our Scouts planting hundreds of five-foot candy canes in
                 yards across the Hideaway community. It's become one of our most beloved traditions,
                 and a great fundraiser for the Pack.
               </p>
+              <button className="btn btn-ghost btn-sm" onClick={() => go('candy-canes')}>
+                Order candy canes →
+              </button>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <PhotoSlot

@@ -85,7 +85,9 @@ names and real headshots — the section isn't worth restoring without both.
       repointed, and `site/public/CNAME` added so the domain ships in the Pages artifact.
       The old `nickagnos.github.io/pack-351/` URL 301-redirects, so shared links still work.
 - [x] **Join form removed** — replaced with a no-backend contact CTA (drop in to a meeting,
-      or a prefilled `mailto:`), since Pages has no form backend.
+      or a prefilled `mailto:`), since Pages has no form backend. **Superseded 2026-08-19**: the
+      Pack's own Interest Form, recovered from the old Google Sites joining page, is now embedded
+      on the Join page as a third path. Still no backend — Google collects the responses.
 - [x] **Local AI video — closed** (2026-07-15). Wan 2.2 and LTX both bob in place rather than
       committing to forward camera motion, and Draw Things' HTTP API can't do first-last-frame
       conditioning. The shipped scroll camera is code-driven CSS/JS over stills, which is

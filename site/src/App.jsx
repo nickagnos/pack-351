@@ -3,6 +3,7 @@ import SiteNav from './components/SiteNav';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import EventsPage from './pages/EventsPage';
+import CandyCanesPage from './pages/CandyCanesPage';
 import JoinPage from './pages/JoinPage';
 import ResourcesPage from './pages/ResourcesPage';
 
@@ -14,6 +15,7 @@ const TITLES = {
   home:      'Pack 351 · Cub Scouts · Lindale, TX',
   about:     'About · Pack 351 · Cub Scouts · Lindale, TX',
   events:    'Events · Pack 351 · Cub Scouts · Lindale, TX',
+  'candy-canes': 'Hideaway Candy Canes · Pack 351 · Cub Scouts · Lindale, TX',
   join:      'Join · Pack 351 · Cub Scouts · Lindale, TX',
   resources: 'Resources · Pack 351 · Cub Scouts · Lindale, TX',
 };
@@ -43,6 +45,7 @@ export default function App() {
       {page === 'home'      && <HomePage      go={go} />}
       {page === 'about'     && <AboutPage     go={go} />}
       {page === 'events'    && <EventsPage    go={go} />}
+      {page === 'candy-canes' && <CandyCanesPage go={go} />}
       {page === 'join'      && <JoinPage      go={go} />}
       {page === 'resources' && <ResourcesPage go={go} />}
     </>

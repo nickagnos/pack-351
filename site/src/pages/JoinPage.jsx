@@ -1,6 +1,8 @@
 import React from 'react';
 import SiteFooter from '../components/SiteFooter';
+import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
+import FormEmbed from '../components/FormEmbed';
 import { asset } from '../asset';
 
 const CONTACT_EMAIL = 'txcspack351@gmail.com';
@@ -10,13 +12,33 @@ const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Joining Pa
     "Scout's name:\nScout's grade:\nParent name:\nBest phone (optional):\n"
   )}`;
 
+// The Pack's own interest form, recovered from the old Google Sites joining page where it was
+// embedded rather than linked - which is why the 2026-08-15 content audit missed it. Responses
+// land in the Pack's Google account, so if it ever stops working that's a Google-side fix, not
+// a code one.
+const INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSebpfiiOkjATRM82sql_qjqakCm2iDDT7Fmywpu1_so7iL8qA/viewform';
+// The old Google Sites page embedded this same form at 1392, but that clips Google's own
+// "Never submit passwords" footer and leaves the frame with an internal scrollbar, so this runs
+// slightly taller. Re-measure if questions are added or removed - the whole form has to fit,
+// footer included, or families get a scrollbar inside a scrollbar.
+// Unlike the candy cane order form there's no open/closed flag here: this one stays open year
+// round. If it ever does get closed, the embed will read "no longer accepting responses" with
+// nothing explaining why, so add a status banner like the candy canes page has.
+const FORM_HEIGHT = 1490;
+
+// Anchors can't be <a href="#interest-form"> on this site: App.jsx derives the route from
+// window.location.hash, so any bare hash that isn't "#/route" resolves to a page that doesn't
+// exist and renders a blank screen. Scroll the element instead and leave the hash alone.
+const scrollToForm = () =>
+  document.getElementById('interest-form')?.scrollIntoView({ behavior: 'smooth' });
+
 export default function JoinPage({ go }) {
   return (
     <div>
       <PageHero
         eyebrow="Join Pack 351"
         title="Let's get your scout started."
-        sub="No application, no payment up front. Drop in to any Tuesday meeting, or send us a quick email and a leader will walk your family through the next steps."
+        sub="No application, no payment up front. Drop in to any Tuesday meeting, send us a quick email, or leave your details on our interest form — a leader will walk your family through the next steps."
         image={asset('/photos/photo-camping.jpg')}
         imageAlt="Cub Scouts sitting around a campsite in a grassy meadow"
       />
@@ -26,14 +48,14 @@ export default function JoinPage({ go }) {
         <div className="container">
           <div className="join-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: 60, alignItems: 'start' }}>
 
-            {/* Two ways to join */}
+            {/* Three ways to join */}
             <div>
               <h2 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 32, color: 'var(--navy)', marginBottom: 16 }}>
-                Two easy ways to join
+                Three easy ways to join
               </h2>
               <p style={{ color: 'var(--muted)', lineHeight: 1.75, marginBottom: 28 }}>
-                There's no form to fill out. Come see us in person, or reach out and we'll help you
-                with everything: your scout's den, gear, cost, and when to show up.
+                Pick whichever is easiest. However you reach us, we'll help you with everything:
+                your scout's den, gear, cost, and when to show up.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -60,6 +82,18 @@ export default function JoinPage({ go }) {
                     Email us to get started →
                   </a>
                 </div>
+
+                <div className="card" style={{ padding: 22 }}>
+                  <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22, color: 'var(--navy)', marginBottom: 6 }}>
+                    3 · Fill out the interest form
+                  </div>
+                  <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 14 }}>
+                    Leave your name, your scout's grade, and how you'd like to be reached. A leader
+                    follows up with information about events and how to join. It also asks whether
+                    you'd like to help out — "maybe" is a perfectly good answer.
+                  </p>
+                  <button className="btn btn-ghost" onClick={scrollToForm}>Go to the form ↓</button>
+                </div>
               </div>
             </div>
 
@@ -84,6 +118,25 @@ export default function JoinPage({ go }) {
             </div>
 
           </div>
+        </div>
+      </div>
+
+      {/* Full width rather than inside the column above: the form is natively 640px and the
+          left column is only ~650px at the widest, which leaves it cramped from 900px down.
+          scrollMarginTop clears the 68px sticky nav - without it the "Go to the form" button
+          scrolls this heading underneath the bar. */}
+      <div className="section" id="interest-form" style={{ paddingTop: 0, scrollMarginTop: 88 }}>
+        <div className="container">
+          <SectionHeader
+            eyebrow="Interest form"
+            title="Tell us about your scout"
+            sub="Thanks for your interest in our Pack! We'll reach out with information about events and how to join."
+          />
+          <FormEmbed
+            url={INTEREST_FORM_URL}
+            title="Pack 351 Interest Form"
+            height={FORM_HEIGHT}
+          />
         </div>
       </div>
 

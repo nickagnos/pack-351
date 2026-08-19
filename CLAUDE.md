@@ -1,7 +1,7 @@
 # Pack 351 Website — CLAUDE.md
 
 ## What this project is
-A static marketing website for **Cub Scout Pack 351** in Lindale, TX. Five pages: Home, About, Events, Join, Resources. Built with Vite + React, **live on GitHub Pages** at <https://pack351tx.org/> (went live 2026-08-03 at the github.io URL, custom domain 2026-08-09) — see [Hosting & deployment](#hosting--deployment).
+A static marketing website for **Cub Scout Pack 351** in Lindale, TX. Six pages: Home, About, Events, Hideaway Candy Canes, Join, Resources. Built with Vite + React, **live on GitHub Pages** at <https://pack351tx.org/> (went live 2026-08-03 at the github.io URL, custom domain 2026-08-09) — see [Hosting & deployment](#hosting--deployment).
 
 ## Project layout
 ```
@@ -33,7 +33,7 @@ npm run preview  # preview the production build locally
 ```
 
 ## Routing
-Hash-based (`#/home`, `#/about`, `#/events`, `#/join`, `#/resources`). No server config or SPA fallback needed — all navigation lives in the URL hash, so the host only ever serves the base `index.html`. Works on GitHub Pages (and any static host) as-is.
+Hash-based (`#/home`, `#/about`, `#/events`, `#/candy-canes`, `#/join`, `#/resources`). No server config or SPA fallback needed — all navigation lives in the URL hash, so the host only ever serves the base `index.html`. Works on GitHub Pages (and any static host) as-is.
 
 ## Adding or replacing photos
 1. Put the file in `site/public/photos/` with the exact filename from `PHOTOS.md` (or in
@@ -61,12 +61,27 @@ Hash-based (`#/home`, `#/about`, `#/events`, `#/join`, `#/resources`). No server
   it's the Facebook/iMessage link-preview text). Verify with
   `grep -rniE 'monday|tuesday|6:00|7:00' site/src site/index.html`.
 - **Contact email for the Join page**: `CONTACT_EMAIL` in `src/pages/JoinPage.jsx`
+- **Candy cane ordering**: `ORDERING_OPEN` in `src/pages/CandyCanesPage.jsx` — a single
+  boolean, flipped by hand each season. Ordering opens in **October**; the canes go out in
+  December and are collected in January. The flag drives the status banner and the height of
+  the embedded Google Form, because a cross-origin iframe can't report whether the form is
+  open. Flip it to `true` when the Pack opens the form, and back to `false` when it closes,
+  or the page will tell families the wrong thing. The Events page card deliberately names no
+  month so there's only one place to update.
 
-## The join form → now a contact CTA (Netlify Forms removed)
+## The join form → a Google Form (Netlify Forms removed)
 
-The old join form POSTed to Netlify's form handler, which doesn't work on GitHub Pages (static hosting, no form backend), so it was **removed** (2026-07-15). The Join page now offers two no-backend paths: **drop in to a Tuesday meeting**, or **email us** via a prefilled `mailto:` link (`CONTACT_EMAIL` in `src/pages/JoinPage.jsx`). The hidden Netlify `<form>` + `data-netlify` markup are gone from `index.html`.
+The original join form POSTed to Netlify's form handler, which doesn't work on GitHub Pages (static hosting, no form backend), so it was **removed** (2026-07-15) and the hidden Netlify `<form>` + `data-netlify` markup came out of `index.html`. The Join page now offers **three** paths, none of which need a backend:
 
-If a real form is ever wanted again, add a third-party handler (Formspree, Getform, Basin), a Google Form, or a serverless endpoint hosted elsewhere.
+1. **Drop in to a Tuesday meeting**
+2. **Email us** — a prefilled `mailto:` link (`CONTACT_EMAIL` in `src/pages/JoinPage.jsx`)
+3. **The Pack 351 Interest Form** — a Google Form embedded in the page (`INTEREST_FORM_URL`, added 2026-08-19)
+
+The interest form was recovered from the old Google Sites joining page, where it was *embedded* rather than linked — which is why the 2026-08-15 content audit, which worked off that page's visible links, missed it. **Responses land in the Pack's own Google account**, so if submissions stop arriving that's a Google-side problem, not a code one. The form has no open/closed flag because it stays open year-round; if it ever gets closed the embed will read "no longer accepting responses" with nothing explaining why, so add a status banner like `CandyCanesPage.jsx` has.
+
+Both embeds go through `components/FormEmbed.jsx`, which owns the `?embedded=true` suffix, the a11y `title`, and the "open in a new tab" fallback for browsers that block third-party frames. **Heights are hardcoded per form** — a cross-origin iframe can't size itself — so re-measure if either form's questions change.
+
+**Don't link to an in-page section with `<a href="#something">`.** `App.jsx` derives the route from `window.location.hash`, so any bare hash that isn't `#/route` resolves to a nonexistent page and renders a blank screen. Scroll the element instead (see `scrollToForm` in `JoinPage.jsx`).
 
 ## Hosting & deployment
 

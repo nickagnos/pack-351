@@ -13,7 +13,7 @@ changes. Update the `alt` text at the same time — see "Alt text" below, it mat
 | `photo-den-meeting.jpg` | About (hero) | Scouts and a leader working on a project around a table |
 | `photo-hiking.jpg` | About ("Our story") | A Scout walking a pine-woods trail |
 | `photo-candy-cane.jpg` | About + Events (card) | Scouts carrying bags door to door from a pickup |
-| `photo-pack-year.jpg` | Events (hero) | Scouts and leaders carrying camping gear across a field |
+| `photo-pack-year.jpg` | Events (hero) | Scouts and leaders setting up a tent together in a meadow |
 | `photo-pinewood-derby.jpg` | Events (card) | A Scout painting a pinewood derby car |
 | `photo-regatta.jpg` | Events (card) | Scouts racing boats down a water trough — a real raingutter regatta |
 | `photo-camping.jpg` | Join (hero) | Scouts around a campsite in a grassy meadow |
@@ -32,7 +32,7 @@ as the rank emblems in `../ranks/`. No login is needed to browse or download.
 | `photo-den-meeting.jpg` | Day Camp / Den or Pack Meeting | `AL6I6054_photo_CSBC.jpg` | `M78MdrM1NRP6` | 1280x853 |
 | `photo-hiking.jpg` | Hiking | `_DSC7558 treated_photo_CSBC.jpg` | `539yW2XiFJ3T` | 1000x665 |
 | `photo-candy-cane.jpg` | Scouting For Food | `20231227-13-55-12-10-photo-CSBC.jpg` | `wxmzJExHlOn83YPQ` | 1000x667 |
-| `photo-pack-year.jpg` | Camping | `AT4A6850-cropped-photo-CSBC.JPG` | `Ar8jcjT4mQL096Jb` | 1400x916 |
+| `photo-pack-year.jpg` | Camping | `AT4A8317-photo-CSBC.JPG` | `MN8YNLRviCc31EpP` | 1400x949 |
 | `photo-pinewood-derby.jpg` | Pinewood Derby | `AT4A1326-photo-CSBC.JPG` | `ch0Ea1gKhFg61snE` | 1000x667 |
 | `photo-regatta.jpg` | Day Camp / Den or Pack Meeting | `20231203-13-05-10-07-photo-CSBC.jpg` | `UMrYXyOz26L032tj` | 1000x666 |
 | `photo-camping.jpg` | Camping | `193A5000-photo-CSBC.JPG` | `UpO5V64wlKO11gmQ` | 1400x937 |
@@ -68,7 +68,11 @@ place and the alt text describes what's actually shown, not the event named on t
   photography in the Brand Center at all** (searched: popcorn, fundraising, sales, Trail's
   End, camp card — zero image results; popcorn is Trail's End branding, not Scouting
   America's). The Events hero is now a general campout scene, which suits the page title
-  "A year with Pack 351" better than a fundraiser did.
+  "A year with Pack 351" better than a fundraiser did. It changed frames again on 2026-08-19:
+  it used to be `AT4A6850-cropped`, and the home hero's scene 1 is now the *uncropped* original
+  of that same photograph — the same people on the same afternoon would have been on two pages.
+  Whenever you swap one of these, check the other slots for the same shoot; the Brand Center
+  publishes several crops of one frame under different names.
 
 ## Getting more from the Brand Center
 

@@ -114,7 +114,7 @@ export default function EventsPage({ go }) {
         title="A year with Pack 351"
         sub="We meet most Tuesday nights, and the big events come around every year: campouts, the Pinewood Derby, the Raingutter Regatta, and our famous Hideaway candy cane fundraiser."
         image={asset("/photos/photo-pack-year.jpg")}
-        imageAlt="Cub Scouts and leaders carrying camping gear across a field"
+        imageAlt="Cub Scouts and adult leaders setting up a tent in a meadow"
       />
 
       {/* Signature events */}

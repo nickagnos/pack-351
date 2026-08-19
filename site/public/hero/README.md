@@ -9,7 +9,7 @@ replacing the AI-generated clay-miniature stills that used to live here.
 
 | # | File | Copy over it | What it shows |
 |---|---|---|---|
-| 1 | `trail.jpg` | *It starts outside.* | Scouts walking toward camera on a sunlit wooded trail |
+| 1 | `trail.jpg` | *It starts outside.* | Leaders and Scouts carrying camp gear across a sunlit meadow |
 | 2 | `campground.jpg` | *First campout, first s'more.* | Scouts roasting marshmallows over a campfire ring, golden hour |
 | 3 | `creek.jpg` | *Creek days.* | Scouts fishing along a grassy creek bank |
 | 4 | `overlook.jpg` | *Your kid's next adventure.* + Join buttons | Four Scouts grinning at camera, backlit |
@@ -29,6 +29,12 @@ replacing the AI-generated clay-miniature stills that used to live here.
    the long edge.
 4. **No other unit's pack number.** See below — this is the single most common reason a
    good-looking candidate had to be rejected.
+5. **Scene 1 must show a Pack, not just kids: adult leaders and Scouts in the same frame.**
+   The first `trail.jpg` from real photography was seven Cub Scouts on a wooded trail who all
+   read as girls, with no adult anywhere in it — so the first thing a prospective family saw
+   said "girls' unit, no grown-ups." It's also the `og:image`, so it was the link-preview card
+   too. A mixed group with leaders in it is worth giving up a prettier frame for; see below,
+   almost nothing in the library has both.
 
 ## Where these came from
 
@@ -38,7 +44,7 @@ downscale-don't-crop licensing rule — all of it applies here too.
 
 | File | Brand Center folder | Original asset | web_id | Shipped |
 |---|---|---|---|---|
-| `trail.jpg` | Hiking | `193A3528-photo-CSBC.jpg` | `JCPc8dHjpb11Ir8c` | 1800x1200 |
+| `trail.jpg` | Camping | `AT4A6850-photo-CSBC.JPG` | `gd1lFHUWloQ01M4x` | 1800x1200 |
 | `campground.jpg` | Camping | `AT4A3607-edited-photo-CSBC.JPG` | `cUy9BWxDZsM01AiZ` | 1800x1174 |
 | `creek.jpg` | Fishing | `AT4A5915-photo-CSBC.JPG` | `kOkUX46Wt657cSF9` | 1800x1129 |
 | `overlook.jpg` | General | `AR1A4041-photo-CSBC.jpg` | `qW0YI8cCdV642otx` | 1800x1200 |
@@ -55,10 +61,19 @@ the URL in Facebook's Sharing Debugger or the old card keeps showing.
   on their shirts. On Pack 351's own home page that reads as careless. All four finals wear
   only the generic Cub Scouts diamond. Check at full size, not in a thumbnail grid; the
   numbers are invisible at thumbnail scale and obvious at hero scale.
-- **Only ~5 of the 26 most-downloaded Camping/Cookout assets serve a rendition above 1280px.**
-  Availability is per-asset and unrelated to the catalog dimensions the API reports. The
-  first pass silently upscaled a 1280px file to 1800px; verify the source is at least as
-  large as your target before resizing.
+- **Only ~15% of the library serves a rendition above 1280px** — 244 of the 1,602 Cub Scouts
+  assets. Availability is per-asset and unrelated to the catalog dimensions the API reports
+  (plenty of 8192x5464 originals only serve `1280`). The first pass silently upscaled a 1280px
+  file to 1800px; verify the source is at least as large as your target before resizing.
+  **Pre-filter on `web_id` length: the assets that serve `2000` are exactly the ones with
+  16-character ids**, and the short-id ones never do. That one check cuts the download list by
+  six-sevenths before you fetch anything.
+- **Almost every group shot with adults in it is burned by a pack number.** Searching the whole
+  catalog for scene 1's replacement turned up one usable frame. The recurring offenders are the
+  shoots wearing Pack 726, 799, 738, 192, 489, 608 and 152 shirts — if you recognise those
+  hoodies in a thumbnail, skip the asset rather than open it. Everything that survived both the
+  size floor and the number rule was children-only, which is what makes `AT4A6850` worth
+  keeping: two leaders, a mixed group of Scouts, and clean shirts.
 - **The old "scene 2 must have no people" rule is retired.** It existed because diffusion
   models mangled figures, so an empty landscape was the only safe option. With real
   photography that constraint is gone — scene 2 is now the warmest, most people-full frame

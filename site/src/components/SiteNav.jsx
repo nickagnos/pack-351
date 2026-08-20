@@ -1,7 +1,7 @@
 import React from 'react';
 import PackLogo from './PackLogo';
 import { pageHref } from '../asset';
-import { NAV_LINKS } from '../routes.js';
+import { NAV_LINKS, BEASCOUT_REGISTER_URL } from '../routes.js';
 
 export default function SiteNav({ current }) {
   const [open, setOpen] = React.useState(false);
@@ -48,7 +48,12 @@ export default function SiteNav({ current }) {
         </div>
 
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <a className="btn btn-primary nav-desktop-links" href={pageHref('join')}>
+          {/* "Join" always means registering with Scouting America (2026-08-20 messaging
+              split), so this goes straight to the pack's registration, not the Join page.
+              The Join page stays reachable via the footer's "Join Us" and the hero's
+              "Get Info". External link, so target/rel like every other off-site anchor. */}
+          <a className="btn btn-primary nav-desktop-links" href={BEASCOUT_REGISTER_URL}
+             target="_blank" rel="noopener noreferrer">
             Join Now →
           </a>
           <button
@@ -70,8 +75,11 @@ export default function SiteNav({ current }) {
 
       {open && (
         <div style={{ borderTop: '1px solid var(--border)', background: '#fff', padding: '8px 16px 16px' }}>
-          {[...links, { slug: 'join', navLabel: 'Join Now' }].map(({ slug, navLabel }) => (
-            <a key={slug} href={pageHref(slug)} style={{
+          {/* The gold entry mirrors the desktop "Join Now" button: registration, not /join. */}
+          {[...links, { slug: 'join', navLabel: 'Join Now', href: BEASCOUT_REGISTER_URL, external: true }]
+            .map(({ slug, navLabel, href, external }) => (
+            <a key={slug} href={href || pageHref(slug)}
+               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} style={{
               display: 'block', width: '100%', textAlign: 'left',
               fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22,
               color: slug === 'join' ? '#fff' : 'var(--navy)',

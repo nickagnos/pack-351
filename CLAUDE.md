@@ -182,9 +182,9 @@ canvas ratio ever changes.
   (its drop-in path was removed 2026-08-20). Verify with
   `grep -rniE 'monday|tuesday|6:00|7:00' site/src`.
 - **Official registration link**: `BEASCOUT_REGISTER_URL` in `src/routes.js` — one constant,
-  used in four places (the home hero's gold "Join Pack 351" button, the Join page's "1 · Join:
-  register with Scouting America" card, and twice on Info: the links grid and step 2 of "Your
-  first 30 days"). The Join page also links `BEASCOUT_HOME_URL` (local to `JoinPage.jsx`) —
+  used in six places (the nav's "Join Now →" button, desktop + hamburger; the home hero's gold
+  "Join Pack 351" button; the Join page's "1 · Join: register with Scouting America" card; and
+  twice on Info: the links grid and step 2 of "Your first 30 days"). The Join page also links `BEASCOUT_HOME_URL` (local to `JoinPage.jsx`) —
   Scouting America's *general* Be A Scout page for families new to Scouting; don't confuse
   the two.
   The `unitId` is Pack-specific, so **don't copy one from another pack's site**. To re-verify
@@ -215,10 +215,12 @@ Both embeds go through `components/FormEmbed.jsx`, which owns the `?embedded=tru
 
 Since the 2026-08-20 messaging split, **the label decides the landing spot**:
 
-- Anything that says **Join** (the nav's "Join Now →", the footer's "Join Us", the 404
-  cards, the home hero's gold button when it's an internal link) goes to the **top of
-  `/join`**, where the first card is the Scouting America registration. `pageHref('join')`
-  now returns the bare path — `PAGE_ANCHORS` in `src/routes.js` is empty.
+- Anything that says **Join Now** (the nav's desktop button and its hamburger twin) and the
+  home hero's gold "Join Pack 351" go **straight to `BEASCOUT_REGISTER_URL`** — off-site to
+  Scouting America's registration.
+- Links *named after the page* (the footer's "Join Us", the 404 cards) go to the **top of
+  `/join`**, where the first card is that same registration. `pageHref('join')` now returns
+  the bare path — `PAGE_ANCHORS` in `src/routes.js` is empty.
 - Anything that says **Get Info** (the home hero's ghost button) anchors to the form
   explicitly: `pageHref('join', JOIN_FORM_ID)`.
 

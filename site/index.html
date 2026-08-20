@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- viewport-fit=cover lets the home cinematic run edge to edge behind the notch and home
+    <!-- viewport-fit=cover lets the home hero run edge to edge behind the notch and home
          indicator. It also means env(safe-area-inset-*) stops resolving to 0, which the home
-         hero's hint/dots and .container's side padding rely on to stay out of those areas. -->
+         hero's mobile copy padding and .container's side padding rely on to stay out of
+         those areas. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <!-- Legacy hash links. Until 2026-08-19 every page of this site was a fragment
@@ -15,8 +16,11 @@
          So this runs before anything else and rewrites them.
 
          The ^#/ anchor is what makes real section anchors safe - /join#interest-form and
-         /resources#uniform don't match, only the old #/route shape does. replace() rather
+         /info#uniform don't match, only the old #/route shape does. replace() rather
          than assign() so the dead URL doesn't land in the back button.
+
+         'resources' maps to 'info' because the page was renamed on 2026-08-20 with no
+         redirect - old #/resources links predate that and shouldn't dead-end on a 404.
 
          It also runs on hashchange, not just at load: clicking an old #/candy-canes link
          while already on the site only changes the fragment, which is a same-document
@@ -26,7 +30,10 @@
       (function () {
         function go() {
           var m = location.hash.match(/^#\/([a-z-]*)/);
-          if (m) location.replace('/' + (m[1] === 'home' ? '' : m[1]) + location.search);
+          if (m) {
+            var slug = m[1] === 'home' ? '' : m[1] === 'resources' ? 'info' : m[1];
+            location.replace('/' + slug + location.search);
+          }
         }
         addEventListener('hashchange', go);
         go();

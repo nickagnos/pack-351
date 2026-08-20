@@ -159,13 +159,13 @@ const NEW_STEPS = [
   { n: '5', title: 'Download the Scouting app', body: 'The free Scouting America app has your scout\'s handbook, advancement tracker, and event notifications. Available on iOS and Android.' },
 ];
 
-export default function ResourcesPage() {
+export default function InfoPage() {
   const [openFaq, setOpenFaq] = React.useState(null);
 
   return (
     <div>
       <PageHero
-        eyebrow="Resources"
+        eyebrow="Info"
         title="Everything in one place."
         sub={'Links, forms, FAQs, the uniform guide. Bookmark this page. It answers 95% of new family questions and saves a lot of "quick question" emails.'}
         image={asset("/photos/photo-handbook.jpg")}

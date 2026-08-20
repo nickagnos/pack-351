@@ -5,12 +5,12 @@ import AboutPage from './pages/AboutPage';
 import EventsPage from './pages/EventsPage';
 import CandyCanesPage from './pages/CandyCanesPage';
 import JoinPage from './pages/JoinPage';
-import ResourcesPage from './pages/ResourcesPage';
+import InfoPage from './pages/InfoPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // There is no router. Each page is a real HTML document prerendered by prerender.js and
 // served at its own path, so navigation is a plain <a href> and a full page load — which
-// is also what frees the URL fragment for section anchors (/resources#uniform).
+// is also what frees the URL fragment for section anchors (/info#uniform).
 //
 // `page` is a slug from routes.js. The build passes it in through entry-server.jsx; the
 // browser derives the same value from location.pathname in main.jsx, so the hydrated tree
@@ -21,7 +21,7 @@ const PAGES = {
   events: EventsPage,
   'candy-canes': CandyCanesPage,
   join: JoinPage,
-  resources: ResourcesPage,
+  info: InfoPage,
   404: NotFoundPage,
 };
 

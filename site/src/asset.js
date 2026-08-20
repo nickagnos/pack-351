@@ -10,7 +10,7 @@ export const asset = (p) => import.meta.env.BASE_URL + String(p).replace(/^\//, 
 // link goes through this rather than hardcoding a path, for the same reason asset() exists:
 // the base lives in exactly one place. routes.js can't read import.meta.env itself (Node
 // imports it during the build), so the base is applied here. Pass `hash` for a section:
-// pageHref('resources', 'uniform') → '/resources#uniform'. A leading '#' is stripped rather
+// pageHref('info', 'uniform') → '/info#uniform'. A leading '#' is stripped rather
 // than doubled, so callers can pass it either way.
 //
 // `hash` defaults to the page's own anchor from PAGE_ANCHORS, which is how every link to

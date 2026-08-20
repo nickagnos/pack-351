@@ -207,6 +207,11 @@ The original join form POSTed to Netlify's form handler, which doesn't work on G
 1. **Join** — `BEASCOUT_REGISTER_URL` (create a my.Scouting account, register, pay fees)
 2. **Get info: the Pack 351 Interest Form** — a Google Form embedded in the page (`INTEREST_FORM_URL`, added 2026-08-19)
 
+The interest form is embedded on **two pages**: `/join#interest-form` and `/info#interest-form`
+(directly below the Info hero, added 2026-08-20). `INTEREST_FORM_URL` and
+`INTEREST_FORM_HEIGHT` live in `src/routes.js` so both embeds stay in lockstep — if the
+form's questions change, re-measure once there and both pages follow.
+
 The interest form was recovered from the old Google Sites joining page, where it was *embedded* rather than linked — which is why the 2026-08-15 content audit, which worked off that page's visible links, missed it. **Responses land in the Pack's own Google account**, so if submissions stop arriving that's a Google-side problem, not a code one. The form has no open/closed flag because it stays open year-round; if it ever gets closed the embed will read "no longer accepting responses" with nothing explaining why, so add a status banner like `CandyCanesPage.jsx` has.
 
 Both embeds go through `components/FormEmbed.jsx`, which owns the `?embedded=true` suffix, the a11y `title`, and the "open in a new tab" fallback for browsers that block third-party frames. **Heights are hardcoded per form** — a cross-origin iframe can't size itself — so re-measure if either form's questions change. The Join page passes `loading="eager"`; the candy cane form keeps the default `lazy` (see below for why).
@@ -253,7 +258,7 @@ The anchors that exist (used by the short links — see below):
 | `/events` | `#signature` `#calendar` |
 | `/candy-canes` | `#status` `#form` `#how-it-works` |
 | `/join` | `#ways-to-join` `#questions` `#interest-form` |
-| `/info` | `#links` `#uniform` `#new-families` `#band` `#faq` |
+| `/info` | `#interest-form` `#links` `#uniform` `#new-families` `#band` `#faq` |
 
 Clearance under the 68px sticky nav comes from one `html { scroll-padding-top: 88px }` in
 `styles.css`, not per-element `scroll-margin`. Deep-linking a *single* FAQ item won't work —

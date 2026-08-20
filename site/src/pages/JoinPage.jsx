@@ -4,21 +4,7 @@ import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import FormEmbed from '../components/FormEmbed';
 import { asset } from '../asset';
-import { JOIN_FORM_ID, BEASCOUT_REGISTER_URL } from '../routes.js';
-
-// The Pack's own interest form, recovered from the old Google Sites joining page where it was
-// embedded rather than linked - which is why the 2026-08-15 content audit missed it. Responses
-// land in the Pack's Google account, so if it ever stops working that's a Google-side fix, not
-// a code one.
-const INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSebpfiiOkjATRM82sql_qjqakCm2iDDT7Fmywpu1_so7iL8qA/viewform';
-// The old Google Sites page embedded this same form at 1392, but that clips Google's own
-// "Never submit passwords" footer and leaves the frame with an internal scrollbar, so this runs
-// slightly taller. Re-measure if questions are added or removed - the whole form has to fit,
-// footer included, or families get a scrollbar inside a scrollbar.
-// Unlike the candy cane order form there's no open/closed flag here: this one stays open year
-// round. If it ever does get closed, the embed will read "no longer accepting responses" with
-// nothing explaining why, so add a status banner like the candy canes page has.
-const FORM_HEIGHT = 1490;
+import { JOIN_FORM_ID, BEASCOUT_REGISTER_URL, INTEREST_FORM_URL, INTEREST_FORM_HEIGHT } from '../routes.js';
 
 // Scouting America's general join page (scouting.org/join redirects here): what scouts do,
 // programs by age, fees FAQ, and a ZIP unit finder. Distinct from BEASCOUT_REGISTER_URL in
@@ -139,7 +125,7 @@ export default function JoinPage() {
           <FormEmbed
             url={INTEREST_FORM_URL}
             title="Pack 351 Interest Form"
-            height={FORM_HEIGHT}
+            height={INTEREST_FORM_HEIGHT}
             loading="eager"
           />
         </div>

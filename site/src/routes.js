@@ -134,6 +134,21 @@ export const routeFor = (slug) => ALL_PAGES.find(r => r.slug === slug);
 // one place and not the others would fail silently. Change it here and JoinPage.jsx follows.
 export const JOIN_FORM_ID = 'interest-form';
 
+// The Pack's own interest form, recovered from the old Google Sites joining page where it was
+// embedded rather than linked - which is why the 2026-08-15 content audit missed it. Responses
+// land in the Pack's Google account, so if it ever stops working that's a Google-side fix, not
+// a code one. Embedded on BOTH /join and /info (2026-08-20), which is why it lives here and
+// not in a page file - one URL, one height, both embeds follow.
+export const INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSebpfiiOkjATRM82sql_qjqakCm2iDDT7Fmywpu1_so7iL8qA/viewform';
+// The old Google Sites page embedded this same form at 1392, but that clips Google's own
+// "Never submit passwords" footer and leaves the frame with an internal scrollbar, so this runs
+// slightly taller. Re-measure if questions are added or removed - the whole form has to fit,
+// footer included, or families get a scrollbar inside a scrollbar.
+// Unlike the candy cane order form there's no open/closed flag here: this one stays open year
+// round. If it ever does get closed, the embed will read "no longer accepting responses" with
+// nothing explaining why, so add a status banner like the candy canes page has.
+export const INTEREST_FORM_HEIGHT = 1490;
+
 // Slugs whose links land on a section rather than the top of the page. pageHref() reads this
 // as its default. Empty since 2026-08-20: "Join" links used to anchor to the interest form,
 // but the messaging was split — "Join" now means registering with Scouting America (the card

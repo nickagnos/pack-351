@@ -2,8 +2,9 @@ import React from 'react';
 import SiteFooter from '../components/SiteFooter';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
+import FormEmbed from '../components/FormEmbed';
 import { asset, pageHref } from '../asset';
-import { BEASCOUT_REGISTER_URL } from '../routes.js';
+import { BEASCOUT_REGISTER_URL, JOIN_FORM_ID, INTEREST_FORM_URL, INTEREST_FORM_HEIGHT } from '../routes.js';
 
 // Every link here was checked on 2026-08-02, and each PDF was opened to confirm it is the
 // document it claims to be (the old Part C link had been 404ing for who knows how long).
@@ -171,6 +172,26 @@ export default function InfoPage() {
         image={asset("/photos/photo-handbook.jpg")}
         imageAlt="Cub Scouts and parents working through an activity together at a table"
       />
+
+      {/* INTEREST FORM - first thing under the hero, same embed as /join. The id reuses
+          JOIN_FORM_ID so /info#interest-form works with the same fragment vocabulary;
+          ids are per-document, so sharing the string across pages is fine. Eager because
+          it's at the top of the page - a lazy 1490px frame would blank the first view. */}
+      <div className="section" id={JOIN_FORM_ID}>
+        <div className="container">
+          <SectionHeader
+            eyebrow="Interest form"
+            title="Tell us about your scout"
+            sub="Thanks for your interest in our Pack! We'll reach out with information about events and how to join."
+          />
+          <FormEmbed
+            url={INTEREST_FORM_URL}
+            title="Pack 351 Interest Form"
+            height={INTEREST_FORM_HEIGHT}
+            loading="eager"
+          />
+        </div>
+      </div>
 
       {/* Everything below used to sit behind a four-tab switcher. It's now stacked, with
           alternating cream/white backgrounds doing the work the tab bar used to do:

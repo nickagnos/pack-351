@@ -51,7 +51,8 @@ downscale-don't-crop licensing rule — all of it applies here too.
 `trail.jpg`'s dimensions are hardcoded in `site/src/routes.js` (`imageWidth`/`imageHeight`
 on the home and 404 entries) and in `site/index.html`'s fallback og: block, so **if you
 replace it, update those numbers** and re-scrape the URL in Facebook's Sharing Debugger or
-the old card keeps showing.
+the old card keeps showing. `npm run build` fails on a mismatch in `routes.js` (it reads the
+real size out of the file), but the copy in `index.html` is dev-only and unchecked.
 
 ## What to watch for when picking replacements
 

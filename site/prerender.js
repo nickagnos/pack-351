@@ -22,6 +22,36 @@ const dist = path.join(root, 'dist');
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// The real pixel size of a JPEG or PNG, read straight out of the header. No dependency:
+// both formats we ship put their dimensions somewhere cheap to reach, and pulling an image
+// library into a build that otherwise needs none is a bad trade for twenty lines.
+function imageSize(file) {
+  const buf = fs.readFileSync(file);
+  // PNG: 8-byte signature, then the IHDR chunk, whose first two fields are the dimensions.
+  if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) {
+    return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+  }
+  // JPEG: walk the marker segments to the frame header. No fixed offset works - EXIF blocks
+  // and colour profiles sit between the start of the file and the frame. SOF0-SOF15 carry
+  // the size; C4/C8/CC share that range but are Huffman/arithmetic tables, not frames.
+  if (buf.length > 4 && buf.readUInt16BE(0) === 0xffd8) {
+    let off = 2;
+    while (off + 9 < buf.length) {
+      if (buf[off] !== 0xff) { off++; continue; }   // resync past padding
+      const marker = buf[off + 1];
+      if (marker === 0xff) { off++; continue; }     // fill byte
+      // Standalone markers carry no length field, so they can't be skipped by one.
+      if (marker === 0x01 || (marker >= 0xd0 && marker <= 0xd9)) { off += 2; continue; }
+      if (marker >= 0xc0 && marker <= 0xcf &&
+          marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+        return { height: buf.readUInt16BE(off + 5), width: buf.readUInt16BE(off + 7) };
+      }
+      off += 2 + buf.readUInt16BE(off + 2);
+    }
+  }
+  return null;
+}
+
 const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 
 // The two markers index.html carries around the home page's own head tags. Everything
@@ -39,6 +69,32 @@ if (!template.includes(HEAD_START) || !template.includes(HEAD_END)) {
 if (!template.includes('<div id="root"></div>')) {
   throw new Error('index.html is missing <div id="root"></div>');
 }
+
+// og:image:width/height are what Facebook lays a share card out with *before* it downloads
+// the picture, so a stale number renders the preview at the wrong shape - and it fails
+// silently, on someone else's server, long after the commit. The numbers are hand-written in
+// routes.js, and the Brand Center licence forbids cropping and pushes every replacement
+// through a downscale, which is precisely the operation that changes them. So check the
+// declarations against the files rather than trusting them. Runs after the template guards
+// above so a build that skipped `vite build` reports that, not a missing image.
+for (const route of ALL_PAGES) {
+  const file = path.join(dist, route.image.replace(/^\//, ''));
+  const real = imageSize(file);
+  if (!real) {
+    throw new Error(
+      `${route.image}: could not read its dimensions - only JPEG and PNG are parsed here, ` +
+      `and og:image has to be a raster the scrapers accept anyway (see CLAUDE.md).`
+    );
+  }
+  if (real.width !== route.imageWidth || real.height !== route.imageHeight) {
+    throw new Error(
+      `${route.image} is ${real.width}x${real.height}, but src/routes.js declares ` +
+      `${route.imageWidth}x${route.imageHeight} for /${route.slug}. Update imageWidth/` +
+      `imageHeight there to match the file, then re-scrape in Facebook's Sharing Debugger.`
+    );
+  }
+}
+console.log(`verified og:image dimensions for ${ALL_PAGES.length} pages`);
 
 function head(route) {
   const url = SITE_URL + pagePath(route.slug);

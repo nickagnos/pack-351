@@ -4,7 +4,7 @@ import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import FormEmbed from '../components/FormEmbed';
 import { asset, pageHref } from '../asset';
-import { BEASCOUT_REGISTER_URL, JOIN_FORM_ID, INTEREST_FORM_URL, INTEREST_FORM_HEIGHT } from '../routes.js';
+import { BEASCOUT_REGISTER_URL, INTEREST_FORM_ID, INTEREST_FORM_URL, INTEREST_FORM_HEIGHT } from '../routes.js';
 
 // Every link here was checked on 2026-08-02, and each PDF was opened to confirm it is the
 // document it claims to be (the old Part C link had been 404ing for who knows how long).
@@ -21,6 +21,16 @@ const LINKS = [
     note: "Scouting America's official registration for our pack. You'll need a my.Scouting account — it asks you to sign in or create one first",
     kind: 'web',
     href: BEASCOUT_REGISTER_URL,
+  },
+  {
+    // Scouting America's general join page (scouting.org/join redirects here): what scouts
+    // do, programs by age, fees FAQ, and a ZIP unit finder. Distinct from the pack-specific
+    // registration link above. Linked directly because the scouting.org redirect adds a hop
+    // and sits behind a bot challenge. Moved here when /join (its old home) became a redirect.
+    name: 'Be A Scout',
+    note: "Brand new to Scouting? Scouting America's join page explains what scouts do, the programs for every age, and what it costs",
+    kind: 'web',
+    href: 'https://beascout.scouting.org/',
   },
   {
     name: 'Annual Health & Medical Record',
@@ -173,11 +183,10 @@ export default function InfoPage() {
         imageAlt="Cub Scouts and parents working through an activity together at a table"
       />
 
-      {/* INTEREST FORM - first thing under the hero, same embed as /join. The id reuses
-          JOIN_FORM_ID so /info#interest-form works with the same fragment vocabulary;
-          ids are per-document, so sharing the string across pages is fine. Eager because
-          it's at the top of the page - a lazy 1490px frame would blank the first view. */}
-      <div className="section" id={JOIN_FORM_ID}>
+      {/* INTEREST FORM - first thing under the hero, and since /join became a redirect the
+          only embed of it on the site. Eager because it's at the top of the page - a lazy
+          1490px frame would blank the first view. */}
+      <div className="section" id={INTEREST_FORM_ID}>
         <div className="container">
           <SectionHeader
             eyebrow="Interest form"
@@ -422,7 +431,9 @@ export default function InfoPage() {
                 </div>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                   <a href="mailto:txcspack351@gmail.com" className="btn btn-ghost btn-sm">Email Cubmaster</a>
-                  <a className="btn btn-navy btn-sm" href={pageHref('join')}>Join &amp; we'll reach out</a>
+                  {/* Anchors to the form at the top of this page - "get info" wording, not
+                      "join": the form doesn't enrol anyone (2026-08-20 messaging split). */}
+                  <a className="btn btn-navy btn-sm" href={`#${INTEREST_FORM_ID}`}>Fill out the interest form ↑</a>
                 </div>
               </div>
         </div>

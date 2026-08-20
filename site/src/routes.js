@@ -90,11 +90,19 @@ export const ROUTES = [
     imageAlt: 'Cub Scouts and parents working through an activity together at a table',
   },
   {
+    // Not a content page any more (2026-08-20): /join IS the join action, so it forwards
+    // straight to Scouting America's registration. GitHub Pages can't 301, so `redirect`
+    // makes prerender.js emit a meta refresh and JoinPage.jsx backs it with a script and a
+    // visible fallback link. noindex keeps a bare forwarding page out of search results
+    // (and out of the sitemap - prerender.js filters on it); the og: fields stay so a
+    // shared pack351tx.org/join still unfurls with our card, not a blank one.
     slug: 'join',
     navLabel: null,
-    footerLabel: 'Join Us',
+    footerLabel: null,
+    noindex: true,
+    redirect: BEASCOUT_REGISTER_URL,
     title: 'Join · Pack 351 · Cub Scouts · Lindale, TX',
-    description: 'Join Cub Scout Pack 351 in Lindale, TX: create a Scouting America account to register your scout, or get info through our interest form and a leader will reach out.',
+    description: "Register your scout with Cub Scout Pack 351 in Lindale, TX through Scouting America's official Be A Scout registration.",
     image: '/photos/photo-camping.jpg',
     imageWidth: 1400,
     imageHeight: 937,
@@ -127,18 +135,17 @@ export const FOOTER_LINKS = ROUTES.filter(r => r.footerLabel);
 
 export const routeFor = (slug) => ALL_PAGES.find(r => r.slug === slug);
 
-// The id on the Join page's interest-form section. It lives here, with the rest of the URL
-// vocabulary, because it IS part of a URL: "Get Info" CTAs point at /join#interest-form,
-// and go.pack351tx.org/join is configured outside this repo to do the same. A bare fragment
-// that matches no element scrolls nowhere and reports no error, so renaming this string in
-// one place and not the others would fail silently. Change it here and JoinPage.jsx follows.
-export const JOIN_FORM_ID = 'interest-form';
+// The id on the Info page's interest-form section. It lives here, with the rest of the URL
+// vocabulary, because it IS part of a URL: "Get Info" CTAs point at /info#interest-form.
+// A bare fragment that matches no element scrolls nowhere and reports no error, so renaming
+// this string in one place and not the others would fail silently. Change it here and
+// InfoPage.jsx follows. (It was the Join page's form id until /join became a redirect.)
+export const INTEREST_FORM_ID = 'interest-form';
 
 // The Pack's own interest form, recovered from the old Google Sites joining page where it was
 // embedded rather than linked - which is why the 2026-08-15 content audit missed it. Responses
 // land in the Pack's Google account, so if it ever stops working that's a Google-side fix, not
-// a code one. Embedded on BOTH /join and /info (2026-08-20), which is why it lives here and
-// not in a page file - one URL, one height, both embeds follow.
+// a code one. Embedded on /info, below the hero.
 export const INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSebpfiiOkjATRM82sql_qjqakCm2iDDT7Fmywpu1_so7iL8qA/viewform';
 // The old Google Sites page embedded this same form at 1392, but that clips Google's own
 // "Never submit passwords" footer and leaves the frame with an internal scrollbar, so this runs
@@ -150,11 +157,10 @@ export const INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSebpf
 export const INTEREST_FORM_HEIGHT = 1490;
 
 // Slugs whose links land on a section rather than the top of the page. pageHref() reads this
-// as its default. Empty since 2026-08-20: "Join" links used to anchor to the interest form,
-// but the messaging was split — "Join" now means registering with Scouting America (the card
-// at the TOP of /join), and only "Get Info" CTAs go to the form, explicitly via
-// pageHref('join', JOIN_FORM_ID). A generated "Join" link that skipped past the register
-// card to land on the form would say one thing and do the other.
+// as its default. Empty since 2026-08-20: the messaging was split — anything labelled "Join"
+// goes to BEASCOUT_REGISTER_URL (and /join itself redirects there), while "Get Info" CTAs go
+// to the interest form explicitly via pageHref('info', INTEREST_FORM_ID). A generated link
+// that said one thing and did the other is what this split removed.
 export const PAGE_ANCHORS = {};
 
 // The path a slug lives at. `base` always ends in a slash (Vite's BASE_URL convention),

@@ -23,7 +23,9 @@ export default function NotFoundPage() {
       <div className="section">
         <div className="container">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 640 }}>
-            {ROUTES.filter(r => r.slug !== 'home').map(r => (
+            {/* Only labelled routes: the /join redirect stub has no label and shouldn't get
+                a card - a lost visitor clicking it would be bounced off-site mid-recovery. */}
+            {ROUTES.filter(r => r.slug !== 'home' && (r.footerLabel || r.navLabel)).map(r => (
               <a key={r.slug} className="card" href={pageHref(r.slug)}
                  style={{ display: 'block', padding: '16px 20px' }}>
                 <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 20, color: 'var(--navy)', marginBottom: 4 }}>

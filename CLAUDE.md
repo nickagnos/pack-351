@@ -1,7 +1,7 @@
 # Pack 351 Website — CLAUDE.md
 
 ## What this project is
-A static marketing website for **Cub Scout Pack 351** in Lindale, TX. Six pages: Home, About, Events, Hideaway Candy Canes, Join, Info. Built with Vite + React and **prerendered to static HTML** (real URLs like `/about`, not `#/about`), **live on GitHub Pages** at <https://pack351tx.org/> (went live 2026-08-03 at the github.io URL, custom domain 2026-08-09) — see [Hosting & deployment](#hosting--deployment).
+A static marketing website for **Cub Scout Pack 351** in Lindale, TX. Five pages — Home, About, Events, Hideaway Candy Canes, Info — plus `/join`, a redirect stub that forwards to Scouting America's registration. Built with Vite + React and **prerendered to static HTML** (real URLs like `/about`, not `#/about`), **live on GitHub Pages** at <https://pack351tx.org/> (went live 2026-08-03 at the github.io URL, custom domain 2026-08-09) — see [Hosting & deployment](#hosting--deployment).
 
 ## Project layout
 ```
@@ -38,9 +38,10 @@ npm run preview  # preview the production build locally
 ## Routing — real URLs, prerendered
 
 Each page is a real document at a real path: `/`, `/about`, `/events`, `/candy-canes`,
-`/join`, `/info`, plus `/404.html`. (`/info` was `/resources` until 2026-08-20 — renamed
-with **no redirect**, so old `/resources` links 404; only the legacy hash shim maps
-`#/resources` → `/info`.) **There is no router.** Navigation is a plain
+`/info`, plus `/404.html`, plus `/join` — a **redirect stub** that forwards to
+`BEASCOUT_REGISTER_URL` (see the joining section below). (`/info` was `/resources` until
+2026-08-20 — renamed with **no redirect**, so old `/resources` links 404; only the legacy
+hash shim maps `#/resources` → `/info`.) **There is no router.** Navigation is a plain
 `<a href="/about">` and a full page load; `App.jsx` just picks a page component for the slug
 it's given.
 
@@ -182,11 +183,12 @@ canvas ratio ever changes.
   (its drop-in path was removed 2026-08-20). Verify with
   `grep -rniE 'monday|tuesday|6:00|7:00' site/src`.
 - **Official registration link**: `BEASCOUT_REGISTER_URL` in `src/routes.js` — one constant,
-  used in six places (the nav's "Join Now →" button, desktop + hamburger; the home hero's gold
-  "Join Pack 351" button; the Join page's "1 · Join: register with Scouting America" card; and
-  twice on Info: the links grid and step 2 of "Your first 30 days"). The Join page also links `BEASCOUT_HOME_URL` (local to `JoinPage.jsx`) —
-  Scouting America's *general* Be A Scout page for families new to Scouting; don't confuse
-  the two.
+  used everywhere a "Join"-labelled action appears (the nav's "Join Now →", desktop +
+  hamburger; the home hero's gold button; the footer's "Join Pack 351 →"; two About-page
+  buttons; the Info links grid and step 2 of "Your first 30 days"; and the `/join` redirect
+  itself — `grep -rn BEASCOUT_REGISTER_URL site/src` for the current list). The Info links
+  grid also carries `https://beascout.scouting.org/` ("Be A Scout") — Scouting America's
+  *general* join page for families new to Scouting; don't confuse the two.
   The `unitId` is Pack-specific, so **don't copy one from another pack's site**. To re-verify
   it, search ZIP 75771 on <https://beascout.scouting.org> — our listing reads "Pack 0351
   Central Baptist Church, Lindale, TX" and its "Apply Now" carries the id. Note the link
@@ -202,46 +204,37 @@ canvas ratio ever changes.
 
 ## The join form → a Google Form (Netlify Forms removed)
 
-The original join form POSTed to Netlify's form handler, which doesn't work on GitHub Pages (static hosting, no form backend), so it was **removed** (2026-07-15) and the hidden Netlify `<form>` + `data-netlify` markup came out of `index.html`. The Join page was then simplified again (2026-08-20, dropping its drop-in and email paths) to **two** paths, neither needing a backend, with deliberate labels — **"Join" is only ever the Scouting America registration; the interest form is "get info", never "join"**:
+The original join form POSTed to Netlify's form handler, which doesn't work on GitHub Pages (static hosting, no form backend), so it was **removed** (2026-07-15) and the hidden Netlify `<form>` + `data-netlify` markup came out of `index.html`. Joining then went through several 2026-08-20 simplifications and ended at two things, neither needing a backend, with deliberate labels — **"Join" is only ever the Scouting America registration; the interest form is "get info", never "join"**:
 
-1. **Join** — `BEASCOUT_REGISTER_URL` (create a my.Scouting account, register, pay fees)
-2. **Get info: the Pack 351 Interest Form** — a Google Form embedded in the page (`INTEREST_FORM_URL`, added 2026-08-19)
-
-The interest form is embedded on **two pages**: `/join#interest-form` and `/info#interest-form`
-(directly below the Info hero, added 2026-08-20). `INTEREST_FORM_URL` and
-`INTEREST_FORM_HEIGHT` live in `src/routes.js` so both embeds stay in lockstep — if the
-form's questions change, re-measure once there and both pages follow.
+1. **Join** — `BEASCOUT_REGISTER_URL` (create a my.Scouting account, register, pay fees).
+   **`/join` itself is a redirect stub** to that URL, not a content page — see below.
+2. **Get info: the Pack 351 Interest Form** — a Google Form embedded on `/info#interest-form`,
+   directly below the Info hero (`INTEREST_FORM_URL` + `INTEREST_FORM_HEIGHT` in
+   `src/routes.js`; the section id is `INTEREST_FORM_ID`, also there)
 
 The interest form was recovered from the old Google Sites joining page, where it was *embedded* rather than linked — which is why the 2026-08-15 content audit, which worked off that page's visible links, missed it. **Responses land in the Pack's own Google account**, so if submissions stop arriving that's a Google-side problem, not a code one. The form has no open/closed flag because it stays open year-round; if it ever gets closed the embed will read "no longer accepting responses" with nothing explaining why, so add a status banner like `CandyCanesPage.jsx` has.
 
-Both embeds go through `components/FormEmbed.jsx`, which owns the `?embedded=true` suffix, the a11y `title`, and the "open in a new tab" fallback for browsers that block third-party frames. **Heights are hardcoded per form** — a cross-origin iframe can't size itself — so re-measure if either form's questions change. The Join page passes `loading="eager"`; the candy cane form keeps the default `lazy` (see below for why).
+Both this form and the candy cane one go through `components/FormEmbed.jsx`, which owns the `?embedded=true` suffix, the a11y `title`, and the "open in a new tab" fallback for browsers that block third-party frames. **Heights are hardcoded per form** — a cross-origin iframe can't size itself — so re-measure if either form's questions change. The interest form passes `loading="eager"` (it's the first thing under the Info hero; a deferred 1490px frame would blank the first view); the candy cane form keeps the default `lazy` (see below for why). `styles.css` turns off smooth scrolling under `prefers-reduced-motion`.
 
-### "Join" links land at the top; "Get Info" links land on the form
+### /join is a redirect; the label decides where every link goes
 
-Since the 2026-08-20 messaging split, **the label decides the landing spot**:
+Since the 2026-08-20 messaging split, **anything labelled "Join" performs the join** — it
+goes to `BEASCOUT_REGISTER_URL`, Scouting America's registration for this pack — and
+**anything labelled "Get Info" goes to the interest form** at `/info#interest-form`
+(`pageHref('info', INTEREST_FORM_ID)`). No link says one thing and does the other; that
+mismatch is the confusion this rework removed.
 
-- Anything that says **Join Now** (the nav's desktop button and its hamburger twin) and the
-  home hero's gold "Join Pack 351" go **straight to `BEASCOUT_REGISTER_URL`** — off-site to
-  Scouting America's registration.
-- Links *named after the page* (the footer's "Join Us", the 404 cards) go to the **top of
-  `/join`**, where the first card is that same registration. `pageHref('join')` now returns
-  the bare path — `PAGE_ANCHORS` in `src/routes.js` is empty.
-- Anything that says **Get Info** (the home hero's ghost button) anchors to the form
-  explicitly: `pageHref('join', JOIN_FORM_ID)`.
-
-A "Join" link that skipped past the register card to land on the interest form would say one
-thing and do the other — that mismatch is the confusion the 2026-08-20 rework removed. Before
-that date the polarity was reversed (`PAGE_ANCHORS = { join: JOIN_FORM_ID }`, every join link
-anchored to the form); if a page-wide default anchor is ever wanted again, `PAGE_ANCHORS` is
-still wired into `pageHref` and works by adding the entry back.
+**`/join` itself forwards to the registration** (the route's `redirect` field): GitHub Pages
+can't 301, so `prerender.js` writes a `<meta http-equiv="refresh">` into its head,
+`JoinPage.jsx` backs it with a `location.replace` script, and a visible "Continue →" link
+catches anything that blocks both. The route is `noindex`, out of the sitemap, and has no
+nav/footer label — internal "Join" links go **directly** to `BEASCOUT_REGISTER_URL` rather
+than through the stub, so `/join` exists only for links already in the wild.
+`PAGE_ANCHORS` in `src/routes.js` is empty; `NotFoundPage.jsx` filters unlabelled routes out
+of its cards so the stub never shows up as an empty card there.
 
 ⚠️ **`pagePath`, not `pageHref`, is what `prerender.js` uses** for `canonical`, `og:url` and
-`sitemap.xml`. Those must stay bare `/join`. Don't "fix" an anchor into `pagePath`.
-
-The form still loads eagerly (`loading="eager"`) — `go.pack351tx.org/join` and the hero's
-"Get Info" land straight on it, and a deferred 1490px frame would put a blank rectangle on
-screen at the moment of highest intent. `styles.css` turns off smooth scrolling under
-`prefers-reduced-motion`, since arriving at the anchor is otherwise a ~1400px animated sweep.
+`sitemap.xml` — don't "fix" an anchor into `pagePath`.
 
 **Section anchors work now.** This used to be forbidden — the hash was the router, so
 `<a href="#form">` resolved to a nonexistent route and rendered a blank screen, and
@@ -257,7 +250,6 @@ The anchors that exist (used by the short links — see below):
 | `/about` | `#story` `#dens` `#facts` `#charter` |
 | `/events` | `#signature` `#calendar` |
 | `/candy-canes` | `#status` `#form` `#how-it-works` |
-| `/join` | `#ways-to-join` `#questions` `#interest-form` |
 | `/info` | `#interest-form` `#links` `#uniform` `#new-families` `#band` `#faq` |
 
 Clearance under the 68px sticky nav comes from one `html { scroll-padding-top: 88px }` in
@@ -294,7 +286,7 @@ The destinations it points at:
 | Short link | Destination |
 |---|---|
 | `go.pack351tx.org/cc` | `https://pack351tx.org/candy-canes#form` |
-| `go.pack351tx.org/join` | `https://pack351tx.org/join#interest-form` |
+| `go.pack351tx.org/join` | `https://pack351tx.org/join#interest-form` — ⚠️ stale: /join now redirects to registration and drops the fragment. Re-point to `https://pack351tx.org/info#interest-form` (the form) or straight to `BEASCOUT_REGISTER_URL` (registration), whichever the printed material promises |
 | `go.pack351tx.org/forms` | `https://pack351tx.org/info#links` |
 | `go.pack351tx.org/uniform` | `https://pack351tx.org/info#uniform` |
 | `go.pack351tx.org/faq` | `https://pack351tx.org/info#faq` |

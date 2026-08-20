@@ -5,6 +5,7 @@ import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import QuickFacts from '../components/QuickFacts';
 import { asset, pageHref } from '../asset';
+import { BEASCOUT_REGISTER_URL } from '../routes.js';
 
 // Official rank emblems from the Scouting America Brand Center (scouting.webdamdb.com).
 // They ship as JPEGs on a white field, which is why they sit on the white `.card` with no
@@ -28,7 +29,7 @@ export default function AboutPage() {
         sub="Pack 351 is chartered by Central Baptist Church in Lindale, TX. We're parents, kids, and leaders who believe the best childhood memories are made outside, with a little mud on your boots."
         image={asset("/photos/photo-den-meeting.jpg")}
         imageAlt="Cub Scouts and a leader working on a project together around a table at a den meeting"
-        actions={<a className="btn btn-primary" href={pageHref('join')}>Join Pack 351 →</a>}
+        actions={<a className="btn btn-primary" href={BEASCOUT_REGISTER_URL} target="_blank" rel="noopener noreferrer">Join Pack 351 →</a>}
       />
       <QuickFacts id="facts" />
 
@@ -126,7 +127,7 @@ export default function AboutPage() {
             <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 28, color: 'var(--navy)' }}>Central Baptist Church</h3>
             <p style={{ color: 'var(--muted)', marginTop: 6 }}>Lindale, TX · Our home base</p>
           </div>
-          <a className="btn btn-primary" href={pageHref('join')}>Join Pack 351 →</a>
+          <a className="btn btn-primary" href={BEASCOUT_REGISTER_URL} target="_blank" rel="noopener noreferrer">Join Pack 351 →</a>
         </div>
       </div>
 

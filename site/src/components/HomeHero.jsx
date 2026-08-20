@@ -1,6 +1,6 @@
 import React from 'react';
 import { asset, pageHref } from '../asset';
-import { BEASCOUT_REGISTER_URL, JOIN_FORM_ID } from '../routes.js';
+import { BEASCOUT_REGISTER_URL, INTEREST_FORM_ID } from '../routes.js';
 
 // The home hero: one full-viewport still with the join actions on it. It used to be a
 // four-scene scroll-scrubbed cinematic (see git history for the camera), but families found
@@ -63,7 +63,7 @@ export default function HomeHero() {
               <span className="hh-btn-mark"><img src={asset('/cub-scouts-logo.jpg')} alt="" /></span>
               Join Pack 351
             </a>
-            <a className="hh-btn hh-btn-ghost hh-btn-marked" href={pageHref('join', JOIN_FORM_ID)}>
+            <a className="hh-btn hh-btn-ghost hh-btn-marked" href={pageHref('info', INTEREST_FORM_ID)}>
               <span className="hh-btn-mark"><img src={asset('/pack-logo.png')} alt="" /></span>
               Get Info →
             </a>

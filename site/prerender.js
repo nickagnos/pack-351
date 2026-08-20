@@ -45,6 +45,10 @@ function head(route) {
   const tags = [
     `<title>${esc(route.title)}</title>`,
     `<meta name="description" content="${esc(route.description)}" />`,
+    // A redirect route (currently /join → Scouting America registration) forwards in the
+    // head, before the body even parses; JoinPage.jsx backs this with a script and a visible
+    // link for anything that ignores meta refresh. GitHub Pages can't serve a real 301.
+    route.redirect ? `<meta http-equiv="refresh" content="0;url=${esc(route.redirect)}" />` : null,
     // noindex on 404.html only: the server hands that body back under whatever bad URL was
     // requested, and there is no end to those.
     route.noindex ? '<meta name="robots" content="noindex" />' : null,
@@ -73,12 +77,12 @@ for (const route of ALL_PAGES) {
   console.log(`prerendered ${pageFile(route.slug)}`);
 }
 
-// Only the six real pages go in the sitemap - not 404.html. No <lastmod>: nothing here
-// tracks when a page's content actually changed, and a build timestamp would claim every
-// page changed on every deploy.
+// Only the real content pages go in the sitemap - not 404.html, and not noindex'd routes
+// (the /join redirect stub). No <lastmod>: nothing here tracks when a page's content
+// actually changed, and a build timestamp would claim every page changed on every deploy.
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${ROUTES.map(r => `  <url><loc>${SITE_URL + pagePath(r.slug)}</loc></url>`).join('\n')}
+${ROUTES.filter(r => !r.noindex).map(r => `  <url><loc>${SITE_URL + pagePath(r.slug)}</loc></url>`).join('\n')}
 </urlset>
 `;
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap);

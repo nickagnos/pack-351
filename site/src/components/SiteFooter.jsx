@@ -1,7 +1,7 @@
 import React from 'react';
 import PackLogo from './PackLogo';
 import { pageHref } from '../asset';
-import { FOOTER_LINKS } from '../routes.js';
+import { FOOTER_LINKS, BEASCOUT_REGISTER_URL } from '../routes.js';
 
 export default function SiteFooter() {
   return (
@@ -61,7 +61,10 @@ export default function SiteFooter() {
                 </a>
               </div>
             </div>
-            <a className="btn btn-primary btn-sm" href={pageHref('join')} style={{ marginTop: 16 }}>
+            {/* "Join" always means Scouting America's registration (2026-08-20 split);
+                /join itself is just a redirect to this same URL, so link it directly. */}
+            <a className="btn btn-primary btn-sm" href={BEASCOUT_REGISTER_URL}
+               target="_blank" rel="noopener noreferrer" style={{ marginTop: 16 }}>
               Join Pack 351 →
             </a>
           </div>

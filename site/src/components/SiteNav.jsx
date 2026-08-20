@@ -49,9 +49,9 @@ export default function SiteNav({ current }) {
 
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           {/* "Join" always means registering with Scouting America (2026-08-20 messaging
-              split), so this goes straight to the pack's registration, not the Join page.
-              The Join page stays reachable via the footer's "Join Us" and the hero's
-              "Get Info". External link, so target/rel like every other off-site anchor. */}
+              split), so this goes straight to the pack's registration. /join itself is just
+              a redirect stub for links already in the wild - nothing internal links it.
+              External link, so target/rel like every other off-site anchor. */}
           <a className="btn btn-primary nav-desktop-links" href={BEASCOUT_REGISTER_URL}
              target="_blank" rel="noopener noreferrer">
             Join Now →

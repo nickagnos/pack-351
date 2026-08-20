@@ -12,9 +12,10 @@ import React from 'react';
 // and there's a band of dead cream under it.
 //
 // `loading` defaults to lazy, which is right for a form the reader scrolls down to. Pass
-// 'eager' where the form is what the reader lands on - every "Join" button on the site now
-// points at /join#interest-form, so on that page the frame is the first thing on screen and
-// deferring it would show a tall blank rectangle at the moment of highest intent.
+// 'eager' where the form is what the reader lands on - the interest form sits directly
+// below the Info hero and "Get Info" links target /info#interest-form, so there the frame
+// is on screen immediately and deferring it would show a tall blank rectangle at the
+// moment of highest intent.
 export default function FormEmbed({ url, title, height, loading = 'lazy' }) {
   return (
     <>

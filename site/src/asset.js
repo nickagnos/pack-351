@@ -13,10 +13,11 @@ export const asset = (p) => import.meta.env.BASE_URL + String(p).replace(/^\//, 
 // pageHref('info', 'uniform') → '/info#uniform'. A leading '#' is stripped rather
 // than doubled, so callers can pass it either way.
 //
-// `hash` defaults to the page's own anchor from PAGE_ANCHORS, which is how every link to
-// /join lands on the interest form — including the ones built by mapping over ROUTES, where
-// the call site never names the slug it's linking. Getting this wrong is silent: a fragment
-// that matches no element scrolls nowhere and reports no error. Pass '' for the bare path.
+// `hash` defaults to the page's own anchor from PAGE_ANCHORS — currently empty, so every
+// generated link is a bare path, but the mechanism stays: add an entry there and every
+// mapped link to that slug (ROUTES/FOOTER_LINKS) gains the anchor with no call-site changes.
+// Getting a fragment wrong is silent: one that matches no element scrolls nowhere and
+// reports no error. Pass '' to force the bare path when a default anchor exists.
 export const pageHref = (slug, hash = PAGE_ANCHORS[slug]) =>
   pagePath(slug, import.meta.env.BASE_URL) +
   (hash ? '#' + String(hash).replace(/^#/, '') : '');

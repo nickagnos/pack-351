@@ -21,10 +21,9 @@
    fifteen anchored sections, and it applies to the browser's own jump on a cold load of a
    deep link (/info#uniform) as well as to in-page clicks. */
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
-/* The join buttons land on /join#interest-form, which is a ~1400px animated scroll on arrival.
-   That's a long sweep to force on someone who has asked the OS for less motion, and it's the
-   site's primary call to action, so it jumps instead. HomeHero's HERO_CSS makes the same
-   concession for the cinematic. */
+/* "Get Info" links land on /info#interest-form, which is an animated scroll on arrival.
+   That's a long sweep to force on someone who has asked the OS for less motion, so it
+   jumps instead. */
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   font-family: 'Nunito', sans-serif;

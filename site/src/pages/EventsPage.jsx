@@ -77,7 +77,10 @@ const FEATURED = [
     label: 'photo: building a pinewood derby car',
     bg: '#c9a86c',
     title: 'Pinewood Derby',
-    when: 'Every spring',
+    // Winter, not spring. The Pack's own calendar puts the Derby in January (see the note at
+    // the top of this file), and the EVENTS row below has always said Winter - this card was
+    // the odd one out, contradicting the list a few hundred pixels beneath it.
+    when: 'Every winter',
     desc: "Build a car. Race it. It's that simple, and that exciting. Scouts and parents spend weeks in the garage perfecting their design. The whole Pack comes out to watch.",
   },
   {
@@ -90,9 +93,9 @@ const FEATURED = [
     desc: 'Scouts build balsa wood sailboats and race them down a water-filled rain gutter. The only motor allowed? Lung power. Expect soggy sleeves and big grins.',
   },
   {
-    src: '/photos/photo-candy-cane.jpg',
-    alt: 'Cub Scouts carrying bags door to door across a neighborhood lawn',
-    label: 'photo: cub scouts on a door-to-door fundraiser',
+    src: '/candy-cane-scene.svg',
+    alt: 'Illustration of a house on a winter night with large candy canes planted in a row along the front lawn',
+    label: 'illustration: candy canes on a snowy front lawn',
     bg: '#b87878',
     title: 'Candy Cane Fundraiser',
     when: 'Every December',

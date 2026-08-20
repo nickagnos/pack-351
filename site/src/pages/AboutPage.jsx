@@ -64,9 +64,9 @@ export default function AboutPage() {
                 style={{ height: 210, borderRadius: 8 }}
               />
               <PhotoSlot
-                src={asset("/photos/photo-candy-cane.jpg")}
-                alt="Cub Scouts carrying bags door to door across a neighborhood lawn"
-                label="photo: cub scouts on a door-to-door fundraiser"
+                src={asset("/candy-cane-scene.svg")}
+                alt="Illustration of a house on a winter night with large candy canes planted in a row along the front lawn"
+                label="illustration: candy canes on a snowy front lawn"
                 bg="#c09090"
                 style={{ height: 165, borderRadius: 8 }}
               />
@@ -105,10 +105,15 @@ export default function AboutPage() {
               come from the Scouting America Brand Center under its unit-use terms, so both
               get an attribution line. Kept small and muted - it's a legal courtesy, not page
               content. The photos show Scouts from other units, not Pack 351; the alt text
-              throughout is written so nothing claims otherwise. */}
+              throughout is written so nothing claims otherwise.
+
+              Deliberately says "marks" rather than naming the rank emblems: the Cub Scouts
+              diamond now appears on the home page too, and this line is the site's only
+              attribution, so it has to cover every Scouting America mark we display - not
+              just the six on this page. */}
           <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', marginTop: 18 }}>
-            Rank emblems are trademarks of Scouting America, used by Pack 351 as a chartered unit.
-            Photography courtesy of the Scouting America Brand Center.
+            The Cub Scouts logo and the rank emblems are trademarks of Scouting America, used by
+            Pack 351 as a chartered unit. Photography courtesy of the Scouting America Brand Center.
           </p>
         </div>
       </div>

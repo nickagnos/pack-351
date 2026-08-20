@@ -71,10 +71,12 @@ export const ROUTES = [
     footerLabel: 'Candy Canes',
     title: 'Hideaway Candy Canes · Pack 351 · Cub Scouts · Lindale, TX',
     description: 'Every December our Scouts plant giant 5-foot lawn candy canes across the Hideaway community. Order form, how it works, and when ordering opens.',
-    image: '/photos/photo-candy-cane.jpg',
-    imageWidth: 1000,
-    imageHeight: 667,
-    imageAlt: 'Cub Scouts carrying bags door to door across a neighborhood lawn',
+    // The share card can't be the animated SVG - Facebook needs a static raster - so this is
+    // the still PNG rendered from it. Regenerate both together; see CLAUDE.md.
+    image: '/candy-cane-scene.png',
+    imageWidth: 1200,
+    imageHeight: 800,
+    imageAlt: 'Illustration of a house on a winter night with large candy canes planted in a row along the front lawn',
   },
   {
     slug: 'resources',

@@ -34,8 +34,8 @@ export default function CandyCanesPage() {
         eyebrow="Our biggest fundraiser"
         title="Hideaway Candy Canes"
         sub='Our Scouts "plant" giant 5-foot lawn candy canes at homes all across the Hideaway community. A beloved Lindale tradition, and our biggest fundraiser of the year.'
-        image={asset('/photos/photo-candy-cane.jpg')}
-        imageAlt="Cub Scouts carrying bags door to door across a neighborhood lawn"
+        image={asset('/candy-cane-scene.svg')}
+        imageAlt="Illustration of a house on a winter night with large candy canes planted in a row along the front lawn"
       />
 
       <div className="section">

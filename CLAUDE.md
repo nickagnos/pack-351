@@ -82,6 +82,77 @@ sitemap, so nothing else needs touching.
   `site/index.html`. Those URLs were live from 2026-08-03 to 2026-08-19 and are in the wild.
   Don't remove it.
 
+## The two logos
+
+`site/public/pack-logo.png` and `site/public/cub-scouts-logo.jpg` are **not** interchangeable,
+and the difference is legal, not aesthetic:
+
+- **`pack-logo.png`** is the Pack's own artwork — a customisable template that packs personalise.
+  That's why it could be keyed transparent. It's 166×125, so **46px tall is its ceiling** before
+  it softens on a retina screen. Rendered by `components/PackLogo.jsx` (nav + footer) and again
+  in the home cinematic's final scene.
+- **`cub-scouts-logo.jpg`** is the official Cub Scouts diamond, a Scouting America trademark.
+  From the Brand Center, folder *Program Logos*, `web_id` **`0bNcE8JnHR5q`**
+  (`CubScoutsLogo-FullColor-CSBC.jpg`, 7500×7500 at source; the 2000px rendition downscaled to
+  320 at quality 90, matching `ranks/README.md`).
+
+  ⚠️ **Don't key its white background transparent, and don't crop the ®.** The Brand Center
+  licence forbids derivative works — *"not edit or create any derivative work based on the asset
+  unless it is labeled as an 'editable template'"* — and `ranks/README.md` says the ® and ™ "are
+  part of the image and must not be cropped out." That's why it sits on a white clear-space chip
+  (`.hh-btn-mark` in `HomeHero.jsx`) rather than being cut out. Downscale only.
+
+Both marks live **inside** the home cinematic's two call-to-action buttons, not in a row of
+their own. The chip does double duty there: it's what makes the white-backed Cub Scouts JPEG
+sit legibly on the gold button, and it's what keeps the navy-lettered Pack mark visible when
+the ghost button flips to navy on hover. Their `alt` is empty on purpose — the button text
+already names them, so a real alt would have a screen reader say it twice.
+
+There is **no plain Scouting America corporate logo** in the Cub Scouts Brand Portal — its
+`Logos` folder holds only "A250" 250th-anniversary lockups, which would date the page. The Cub
+Scouts diamond is the right mark for a Cub Scout pack anyway.
+
+Displaying these marks is what the About page attribution line covers (`AboutPage.jsx`); it
+names the Cub Scouts logo explicitly because that mark is on the home page, away from the line.
+
+## The candy cane scene (original artwork)
+
+`site/public/candy-cane-scene.svg` is the one image on the site that is **not** a photograph:
+a hand-drawn winter scene — house, lit windows, falling snow, and five large candy canes
+planted along the front lawn. It replaced a Brand Center stand-in (a Scouting For Food
+door-to-door shot) because the library has no candy-cane-fundraiser photography at all, so
+nothing in it could show the thing the page actually sells.
+
+- **It animates**, and it does so with CSS *inside* the SVG. That works from a plain
+  `<img src>` — an SVG in an `<img>` runs its own CSS but loads no external resources and
+  executes no JS. That's why one file serves all three placements with no component changes,
+  and why nothing in it may reference an external font or image.
+- **It honours `prefers-reduced-motion`** via a media query inside the SVG's own `<style>`.
+- **Drawn at 1600×1000 (16:10)** to match `.page-hero-img-wrap`. Every container crops it with
+  `object-fit: cover`, so the house and the middle three canes sit inside the centre 60% and
+  survive the narrower crops on the About column (165px tall) and the Events card (200px).
+
+### The share card is a separate file
+
+`candy-cane-scene.png` (1200×800) is a still rendered from the SVG, because `og:image` must be
+a static raster — Facebook won't animate an SVG, and most scrapers won't accept one at all.
+**The two must be regenerated together** or the share card drifts from the page. To re-render
+after editing the SVG:
+
+```bash
+npm run build && npm run preview          # serve it
+cat > site/dist/_ogshot.html <<'EOF'
+<!doctype html><meta charset="utf-8">
+<style>html,body{margin:0;padding:0;overflow:hidden}img{display:block;width:1200px;height:800px}</style>
+<img src="/candy-cane-scene.svg" alt="">
+EOF
+# screenshot http://localhost:4173/_ogshot.html at exactly 1200x800, save as
+# site/public/candy-cane-scene.png, then delete the temp file.
+```
+
+`routes.js` hardcodes `imageWidth: 1200` / `imageHeight: 800`, so change those too if the
+canvas ratio ever changes.
+
 ## Adding or replacing photos
 1. Put the file in `site/public/photos/` with the exact filename from `PHOTOS.md` (or in
    `site/public/hero/` for the four home-page stills — that folder's README has the

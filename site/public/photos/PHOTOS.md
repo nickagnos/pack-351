@@ -61,9 +61,13 @@ as the rank emblems in `../ranks/`. No login is needed to browse or download.
 The Brand Center has no photograph of either of these, so the nearest honest analogue is in
 place and the alt text describes what's actually shown, not the event named on the card:
 
-- **`photo-candy-cane.jpg`** — no candy-cane-fundraiser imagery exists. This is a
-  Scouting For Food drive: Scouts carrying bags door to door, which is at least the same
-  *shape* of activity as the Hideaway candy cane run.
+- **`photo-candy-cane.jpg`** — **retired 2026-08-20, no longer referenced by any page.**
+  No candy-cane-fundraiser imagery exists in the Brand Center; this was a Scouting For Food
+  drive standing in for it, on the grounds that door-to-door was at least the same *shape* of
+  activity. It has been replaced everywhere by `public/candy-cane-scene.svg`, original artwork
+  that shows the actual thing — five-foot canes planted on a snowy lawn — which no photograph
+  in the library can. The file is left in place because it's a decent generic service-project
+  shot if one is ever wanted; delete it if it's still unused a season from now.
 - **`photo-pack-year.jpg`** — replaces the old `photo-popcorn.jpg`. There is **no popcorn
   photography in the Brand Center at all** (searched: popcorn, fundraising, sales, Trail's
   End, camp card — zero image results; popcorn is Trail's End branding, not Scouting

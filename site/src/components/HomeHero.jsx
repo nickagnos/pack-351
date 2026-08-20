@@ -142,17 +142,32 @@ export default function HomeHero() {
               <div className="hh-eyebrow">{s.eyebrow}</div>
               <h2 className="hh-title">{s.title}</h2>
               <p className="hh-body">{s.body}</p>
-              {/* Three actions, in decreasing order of commitment. The gold one is Scouting
-                  America's official registration for this pack - it leaves the site, so it
-                  takes target/rel like every other external link here. The interest form and
-                  the meeting link stay behind it, because the body copy above promises a
-                  no-pressure visit and should have something to click. */}
+              {/* Two actions, in decreasing order of commitment: Scouting America's official
+                  registration for this pack (it leaves the site, so it takes target/rel like
+                  every other external link here), then our own interest form. Each carries its
+                  own mark, which is what makes the hand-off to Scouting America credible.
+
+                  Both marks sit on a white chip. The Cub Scouts diamond has to: it's a Brand
+                  Center JPEG on solid white and the licence forbids keying it transparent (see
+                  CLAUDE.md), so a chip is the only compliant way to put it on a gold button.
+                  The Pack mark doesn't have to, but takes one anyway - it's dark navy lettering
+                  and the ghost button turns navy on hover, where it would vanish. PackLogo
+                  makes the same concession for the footer.
+
+                  alt="" because these are decorative here: the button text already says
+                  "Join the Cub Scouts", and a real alt would have a screen reader announce
+                  the name twice. */}
               {s.cta && (
                 <div className="hh-cta">
-                  <a className="hh-btn hh-btn-primary" href={BEASCOUT_REGISTER_URL}
-                     target="_blank" rel="noopener noreferrer">Join the Cub Scouts</a>
-                  <a className="hh-btn hh-btn-ghost" href={pageHref('join')}>Join Pack 351 →</a>
-                  <a className="hh-btn hh-btn-ghost" href={pageHref('events')}>Come to a meeting</a>
+                  <a className="hh-btn hh-btn-primary hh-btn-marked" href={BEASCOUT_REGISTER_URL}
+                     target="_blank" rel="noopener noreferrer">
+                    <span className="hh-btn-mark"><img src={asset('/cub-scouts-logo.jpg')} alt="" /></span>
+                    Join the Cub Scouts
+                  </a>
+                  <a className="hh-btn hh-btn-ghost hh-btn-marked" href={pageHref('join')}>
+                    <span className="hh-btn-mark"><img src={asset('/pack-logo.png')} alt="" /></span>
+                    Join Pack 351 →
+                  </a>
                 </div>
               )}
             </div>
@@ -213,12 +228,33 @@ const HERO_CSS = `
 .hh-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; line-height: .98; color: var(--navy);
   font-size: clamp(44px,6.4vw,92px); letter-spacing: -.5px; margin-bottom: 16px; text-shadow: 0 2px 30px var(--hh-bg); }
 .hh-body { font-size: clamp(16px,1.5vw,20px); line-height: 1.6; color: var(--muted); max-width: 460px; }
-.hh-cta { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+/* Grid, not flex, so the two buttons are the same width. Flex sized each to its own text,
+   which left a ragged edge - obvious once they stack on a phone. auto-fit does the responsive
+   work without a media query: two 244px columns while the block is wide, one full-width column
+   below ~430px. The 210px floor is what forces that switch before a column gets too narrow for
+   "Join the Cub Scouts" (218px natural, and wider again if Barlow Condensed fails to load). */
+.hh-cta { margin-top: 26px; display: grid; gap: 12px; max-width: 500px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
 .hh-btn { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: .5px;
   padding: 13px 26px; border-radius: 9px; border: 2px solid transparent; cursor: pointer;
-  text-decoration: none; line-height: 1;
-  display: inline-flex; align-items: center; gap: 6px; transition: transform .12s, background .12s; }
+  text-decoration: none; line-height: 1; white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  transition: transform .12s, background .12s; }
 .hh-btn:active { transform: translateY(1px); }
+/* A button carrying a mark. The chip is taller than the 18px text line, so the vertical
+   padding comes down to keep the button from ballooning. Padding is symmetric because the
+   content is centred - an asymmetric gutter would throw the centring off. */
+.hh-btn-marked { padding: 7px 16px; gap: 10px; }
+/* White clear-space chip. The Cub Scouts artwork is a JPEG on solid white that the licence
+   forbids editing, so rather than key the white out we lean into it - a white rounded box on
+   the gold reads as a deliberate badge where a bare square would read as a rendering bug. It
+   also stays white when the ghost button flips to navy on hover, which is what keeps the
+   navy-lettered Pack mark legible there. */
+.hh-btn-mark { background: #fff; border-radius: 6px; padding: 3px; display: inline-flex;
+  align-items: center; justify-content: center; flex-shrink: 0; }
+/* Height-driven with width auto so neither mark can ever be distorted. 28px against
+   pack-logo.png's 125px source is ~4.5x density; the Cub Scouts file is 320px, ~11x. */
+.hh-btn-mark img { height: 28px; width: auto; display: block; }
 .hh-btn-primary { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
 .hh-btn-primary:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
 .hh-btn-ghost { background: transparent; color: var(--navy); border-color: var(--navy); }

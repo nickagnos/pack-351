@@ -46,8 +46,9 @@ link previews see a real page per URL, and `#anchors` are free for linking to se
 Adding or renaming a page means editing `src/routes.js` — it feeds the nav, the footer, the
 prerender loop and the sitemap.
 
-**Every image on the site is official Scouting America photography**, licensed from the
-Brand Center for unit use — real, but not pictures of *our* Scouts. Good photos of Pack 351
+**Every photograph on the site is official Scouting America photography**, licensed from the
+Brand Center for unit use — real, but not pictures of *our* Scouts. (The one exception is the
+candy cane scene, which is original artwork drawn in SVG — see `CLAUDE.md`.) Good photos of Pack 351
 beat them: drop a file into `site/public/photos/` (or `site/public/hero/`) with the exact
 filename that's already there and it appears, no code changes. Each folder's markdown file
 lists the filenames, what each shot shows, where it came from, and the licensing rules that

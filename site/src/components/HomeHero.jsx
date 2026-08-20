@@ -1,5 +1,5 @@
 import React from 'react';
-import { asset, pageHref } from '../asset';
+import { asset, pageHref, JOIN_CTA_HREF } from '../asset';
 
 // The home hero: a scroll-scrubbed photographic cinematic. Scroll drives a deterministic
 // "camera": each scene pushes in (Ken Burns) + drifts (parallax) and cross-fades to the
@@ -143,7 +143,7 @@ export default function HomeHero() {
               <p className="hh-body">{s.body}</p>
               {s.cta && (
                 <div className="hh-cta">
-                  <a className="hh-btn hh-btn-primary" href={pageHref('join')}>Join Pack 351 →</a>
+                  <a className="hh-btn hh-btn-primary" href={JOIN_CTA_HREF}>Join Pack 351 →</a>
                   <a className="hh-btn hh-btn-ghost" href={pageHref('events')}>Come to a meeting</a>
                 </div>
               )}

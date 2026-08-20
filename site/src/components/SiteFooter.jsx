@@ -1,6 +1,6 @@
 import React from 'react';
 import PackLogo from './PackLogo';
-import { pageHref } from '../asset';
+import { pageHref, JOIN_CTA_HREF } from '../asset';
 import { FOOTER_LINKS } from '../routes.js';
 
 export default function SiteFooter() {
@@ -61,7 +61,7 @@ export default function SiteFooter() {
                 </a>
               </div>
             </div>
-            <a className="btn btn-primary btn-sm" href={pageHref('join')} style={{ marginTop: 16 }}>
+            <a className="btn btn-primary btn-sm" href={JOIN_CTA_HREF} style={{ marginTop: 16 }}>
               Join Pack 351 →
             </a>
           </div>

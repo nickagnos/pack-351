@@ -4,6 +4,7 @@ import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import FormEmbed from '../components/FormEmbed';
 import { asset, pageHref } from '../asset';
+import { JOIN_FORM_ID } from '../routes.js';
 
 const CONTACT_EMAIL = 'txcspack351@gmail.com';
 const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Joining Pack 351')}` +
@@ -88,7 +89,7 @@ export default function JoinPage() {
                   </p>
                   {/* A real fragment link now that the hash is no longer the router, and the
                       form is in the HTML at parse time, so the browser's own scroll handles it. */}
-                  <a className="btn btn-ghost" href="#interest-form">Go to the form ↓</a>
+                  <a className="btn btn-ghost" href={`#${JOIN_FORM_ID}`}>Go to the form ↓</a>
                 </div>
               </div>
             </div>
@@ -120,8 +121,11 @@ export default function JoinPage() {
       {/* Full width rather than inside the column above: the form is natively 640px and the
           left column is only ~650px at the widest, which leaves it cramped from 900px down.
           The sticky nav is cleared by scroll-padding-top on <html> in styles.css, which does
-          the same job for every anchor on the site. */}
-      <div className="section" id="interest-form" style={{ paddingTop: 0 }}>
+          the same job for every anchor on the site.
+
+          The id comes from routes.js because it's a published URL, not a local detail: every
+          "Join" button on the site lands here, and so does go.pack351tx.org/join. */}
+      <div className="section" id={JOIN_FORM_ID} style={{ paddingTop: 0 }}>
         <div className="container">
           <SectionHeader
             eyebrow="Interest form"
@@ -132,6 +136,7 @@ export default function JoinPage() {
             url={INTEREST_FORM_URL}
             title="Pack 351 Interest Form"
             height={FORM_HEIGHT}
+            loading="eager"
           />
         </div>
       </div>

@@ -112,6 +112,14 @@ export const FOOTER_LINKS = ROUTES.filter(r => r.footerLabel);
 
 export const routeFor = (slug) => ALL_PAGES.find(r => r.slug === slug);
 
+// The id on the Join page's interest-form section. It lives here, with the rest of the URL
+// vocabulary, because it IS part of a URL: every "Join" call-to-action on the site points at
+// /join#interest-form rather than the top of the page, and go.pack351tx.org/join is
+// configured outside this repo to do the same. A bare fragment that matches no element
+// scrolls nowhere and reports no error, so renaming this string in one place and not the
+// others would fail silently in every one of them. Change it here and JoinPage.jsx follows.
+export const JOIN_FORM_ID = 'interest-form';
+
 // The path a slug lives at. `base` always ends in a slash (Vite's BASE_URL convention),
 // and home is the base itself rather than "/home".
 export const pagePath = (slug, base = '/') => base + (slug === 'home' ? '' : slug);

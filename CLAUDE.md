@@ -126,7 +126,30 @@ The original join form POSTed to Netlify's form handler, which doesn't work on G
 
 The interest form was recovered from the old Google Sites joining page, where it was *embedded* rather than linked — which is why the 2026-08-15 content audit, which worked off that page's visible links, missed it. **Responses land in the Pack's own Google account**, so if submissions stop arriving that's a Google-side problem, not a code one. The form has no open/closed flag because it stays open year-round; if it ever gets closed the embed will read "no longer accepting responses" with nothing explaining why, so add a status banner like `CandyCanesPage.jsx` has.
 
-Both embeds go through `components/FormEmbed.jsx`, which owns the `?embedded=true` suffix, the a11y `title`, and the "open in a new tab" fallback for browsers that block third-party frames. **Heights are hardcoded per form** — a cross-origin iframe can't size itself — so re-measure if either form's questions change.
+Both embeds go through `components/FormEmbed.jsx`, which owns the `?embedded=true` suffix, the a11y `title`, and the "open in a new tab" fallback for browsers that block third-party frames. **Heights are hardcoded per form** — a cross-origin iframe can't size itself — so re-measure if either form's questions change. The Join page passes `loading="eager"`; the candy cane form keeps the default `lazy` (see below for why).
+
+### The join buttons go to the form, not to `/join`
+
+As of 2026-08-20, **six** call-to-action buttons point at `/join#interest-form` rather than the
+top of the page: the desktop nav and hamburger "Join Now" (`SiteNav.jsx`), the home cinematic's
+final scene (`HomeHero.jsx`), the footer Contact column (`SiteFooter.jsx`), and the About page's
+hero and charter strip (`AboutPage.jsx`). Someone clicking a join button has already decided, so
+they land on the form instead of the preamble.
+
+They all use **`JOIN_CTA_HREF` from `src/asset.js`**, which is built from **`JOIN_FORM_ID` in
+`src/routes.js`** — the same constant `JoinPage.jsx` uses for the section's `id`. That
+indirection earns its keep: a fragment that matches no element scrolls nowhere and reports no
+error, so a rename would break all six buttons *and* `go.pack351tx.org/join` in silence. Change
+the id in `routes.js` and everything follows.
+
+Two deliberate exceptions, both still pointing at plain `/join`: the footer's **"Join Us"** quick
+link (it's a site map, not a CTA — it comes from `FOOTER_LINKS`) and Resources' **"Join & we'll
+reach out"**. The 404 page's card links likewise.
+
+Because the form is now the landing view rather than something you scroll to, it loads eagerly —
+a deferred 1490px frame would put a blank rectangle on screen at the moment of highest intent —
+and `styles.css` turns off smooth scrolling under `prefers-reduced-motion`, since arriving at the
+anchor is otherwise a ~1400px animated sweep.
 
 **Section anchors work now.** This used to be forbidden — the hash was the router, so
 `<a href="#form">` resolved to a nonexistent route and rendered a blank screen, and

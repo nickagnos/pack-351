@@ -1,6 +1,6 @@
 import React from 'react';
 import PackLogo from './PackLogo';
-import { pageHref } from '../asset';
+import { pageHref, JOIN_CTA_HREF } from '../asset';
 import { NAV_LINKS } from '../routes.js';
 
 export default function SiteNav({ current }) {
@@ -48,7 +48,7 @@ export default function SiteNav({ current }) {
         </div>
 
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <a className="btn btn-primary nav-desktop-links" href={pageHref('join')}>
+          <a className="btn btn-primary nav-desktop-links" href={JOIN_CTA_HREF}>
             Join Now →
           </a>
           <button
@@ -70,8 +70,10 @@ export default function SiteNav({ current }) {
 
       {open && (
         <div style={{ borderTop: '1px solid var(--border)', background: '#fff', padding: '8px 16px 16px' }}>
-          {[...links, { slug: 'join', navLabel: 'Join Now' }].map(({ slug, navLabel }) => (
-            <a key={slug} href={pageHref(slug)} style={{
+          {/* Join carries its own href so it lands on the interest form like the desktop
+              button does; the four nav links take the plain page path. */}
+          {[...links, { slug: 'join', navLabel: 'Join Now', href: JOIN_CTA_HREF }].map(({ slug, navLabel, href }) => (
+            <a key={slug} href={href || pageHref(slug)} style={{
               display: 'block', width: '100%', textAlign: 'left',
               fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22,
               color: slug === 'join' ? '#fff' : 'var(--navy)',

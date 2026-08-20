@@ -10,7 +10,12 @@ import React from 'react';
 // A cross-origin iframe can't size itself to its content, so height is always a fixed number
 // the caller measures: too short and the form gets its own scrollbar inside the page, too tall
 // and there's a band of dead cream under it.
-export default function FormEmbed({ url, title, height }) {
+//
+// `loading` defaults to lazy, which is right for a form the reader scrolls down to. Pass
+// 'eager' where the form is what the reader lands on - every "Join" button on the site now
+// points at /join#interest-form, so on that page the frame is the first thing on screen and
+// deferring it would show a tall blank rectangle at the moment of highest intent.
+export default function FormEmbed({ url, title, height, loading = 'lazy' }) {
   return (
     <>
       <iframe
@@ -18,7 +23,7 @@ export default function FormEmbed({ url, title, height }) {
         title={title}
         width="100%"
         height={height}
-        loading="lazy"
+        loading={loading}
         style={{ border: 0, maxWidth: '100%', display: 'block' }}
       >
         Loading the form…

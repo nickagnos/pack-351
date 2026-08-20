@@ -27,6 +27,12 @@ const INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSebpfiiOkjAT
 // nothing explaining why, so add a status banner like the candy canes page has.
 const FORM_HEIGHT = 1490;
 
+// Scouting America's general join page (scouting.org/join redirects here): what scouts do,
+// programs by age, fees FAQ, and a ZIP unit finder. Distinct from BEASCOUT_REGISTER_URL in
+// routes.js, which is our pack's own registration. Linked directly because the scouting.org
+// redirect adds a hop and sits behind a bot challenge.
+const BEASCOUT_HOME_URL = 'https://beascout.scouting.org/';
+
 export default function JoinPage() {
   return (
     <div>
@@ -114,6 +120,14 @@ export default function JoinPage() {
                      target="_blank" rel="noopener noreferrer">
                     Register with Pack 351 →
                   </a>
+                  <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, marginTop: 14, marginBottom: 0 }}>
+                    Brand new to Scouting? Scouting America's{' '}
+                    <a href={BEASCOUT_HOME_URL} target="_blank" rel="noopener noreferrer"
+                       style={{ color: 'var(--navy)', fontWeight: 700, textDecoration: 'underline' }}>
+                      Be A Scout
+                    </a>{' '}
+                    site explains what scouts do, the programs for every age, and what it costs.
+                  </p>
                 </div>
               </div>
             </div>

@@ -80,7 +80,7 @@ const LINKS = [
     kind: 'web',
     href: 'https://etacbsa.org/',
   },
-  // The four below were on the old Google Sites page and were lost in the rebuild.
+  // The five below were on the old Google Sites page and were lost in the rebuild.
   {
     name: 'Pinewood Derby rules',
     note: 'Official car specs and race rules. Read before you start cutting',

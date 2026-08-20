@@ -1,4 +1,4 @@
-// Turns the single-page build into six real HTML documents.
+// Turns the single-page build into seven real HTML documents (six routes + 404.html).
 //
 // Runs last in `npm run build`, after the client build (dist/) and the SSR build (dist-ssr/).
 // For every page in the manifest it renders the React tree to a string, drops it into the
@@ -26,7 +26,7 @@ const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 
 // The two markers index.html carries around the home page's own head tags. Everything
 // between them is replaced per page; everything outside is shared and copied verbatim,
-// which is how the legacy-hash shim and the static og: tags reach all six files.
+// which is how the legacy-hash shim and the static og: tags reach all seven files.
 const HEAD_START = '<!--head-->';
 const HEAD_END = '<!--/head-->';
 if (!template.includes(HEAD_START) || !template.includes(HEAD_END)) {

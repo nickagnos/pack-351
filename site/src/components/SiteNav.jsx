@@ -5,15 +5,15 @@ import { NAV_LINKS, BEASCOUT_REGISTER_URL } from '../routes.js';
 
 export default function SiteNav({ current }) {
   const [open, setOpen] = React.useState(false);
-  // "Hideaway Candy Canes" renders at 185px, against 74/80/104 for the other three. That puts
-  // the whole desktop row at 755px, which clears the 772px available at the old 820px
-  // breakpoint by just 18px - fine until Barlow Condensed fails to load and a wider fallback
-  // renders. styles.css switches to the hamburger at 900px instead of 820px to cover that.
+  // "Hideaway Candy Canes" dominates the desktop row's width (it renders ~2.5x wider than any
+  // other label), so at an 820px breakpoint the row cleared the available width by only a few
+  // px - fine until Barlow Condensed fails to load and a wider fallback renders. styles.css
+  // switches to the hamburger at 900px instead to cover that.
   //
   // The link list comes from routes.js rather than being spelled out here: the nav and the
   // footer used to keep separate hardcoded arrays, with the tuples in opposite orders.
   const links = NAV_LINKS;
-  // On the home cinematic the nav floats over the scene (transparent overlay); everywhere
+  // On the home hero the nav floats over the photo (transparent overlay); everywhere
   // else it's the solid sticky bar.
   const isHome = current === 'home' && !open;
 
@@ -37,7 +37,7 @@ export default function SiteNav({ current }) {
           {links.map(({ slug, navLabel }) => (
             <a key={slug} href={pageHref(slug)} style={{
               fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 18,
-              // --muted only clears 4.5:1 on a solid white bar; over the scenes it needs navy
+              // --muted only clears 4.5:1 on a solid white bar; over the hero photo it needs navy
               color: (current === slug || isHome) ? 'var(--navy)' : 'var(--muted)',
               textDecoration: 'none',
               padding: '8px 18px', borderRadius: 6,

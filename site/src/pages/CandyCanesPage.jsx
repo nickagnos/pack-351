@@ -85,7 +85,7 @@ export default function CandyCanesPage() {
           <div id="how-it-works" style={{ marginTop: 64 }}>
             <SectionHeader eyebrow="How it works" title="A Lindale tradition" />
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 48, alignItems: 'start' }}
-                 className="join-grid">
+                 className="split-grid">
               <p style={{ color: 'var(--muted)', lineHeight: 1.75 }}>
                 Every December you'll find our Scouts planting hundreds of five-foot candy canes in
                 yards across the Hideaway community. It's become one of our most beloved traditions,

@@ -5,14 +5,14 @@ import { asset } from '../asset';
 // the "PACK 351" wording itself - only the tagline is rendered as text beside it.
 //
 // The PNG's background is keyed to transparent because this sits on three different surfaces:
-// the white interior nav, the cream-over-photo gradient on the home cinematic, and the navy
+// the white interior nav, the cream-over-photo gradient on the home hero, and the navy
 // footer. A flat-background image would show a box on two of them.
 //
 // dark: the footer's navy-dark background. The artwork is dark blue lettering, which all but
 // disappears there, so it gets a white chip - the print convention of a clear-space box - rather
 // than a recolored second copy of the file.
 //
-// onPhoto: the logo is sitting on the home cinematic rather than a solid bar. --muted only
+// onPhoto: the logo is sitting on the home hero photo rather than a solid bar. --muted only
 // clears 4.5:1 on white; over a photo the tagline measured 1.9:1, so it takes navy instead.
 export default function PackLogo({ dark = false, onPhoto = false, href }) {
   const logo = (

@@ -14,10 +14,12 @@ permissions:
   pages: write
   id-token: write
 
-# Only one deploy at a time; let a newer push supersede an in-progress run.
+# Only one deploy at a time. Not cancel-in-progress: GitHub's guidance for Pages —
+# cancelling mid-deploy can leave the Pages deployment wedged rather than superseded.
+# A newer push just queues behind the running one.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -29,11 +31,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
       - run: npm run build
+      # Prerendering is the whole point of the build: refuse to publish if any of the
+      # seven expected documents is missing (a silently-empty prerender would otherwise
+      # deploy "successfully").
+      - name: Verify prerendered pages
+        run: |
+          for f in index about events candy-canes info join 404; do
+            test -f "dist/$f.html" || { echo "missing dist/$f.html" >&2; exit 1; }
+          done
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/dist

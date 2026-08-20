@@ -11,7 +11,7 @@ back.
 
 | File | Job | What it shows |
 |---|---|---|
-| `overlook.jpg` | The hero — *Your kid's next adventure.* + the two Join buttons | Four Scouts grinning at camera, backlit |
+| `overlook.jpg` | The hero — *Your kid's next adventure.* + the Join and Get Info buttons | Four Scouts grinning at camera, backlit |
 | `trail.jpg` | The `og:image` (home + 404 link-preview card) — **not on the page** | Leaders and Scouts carrying camp gear across a sunlit meadow |
 
 Both are **official Scouting America photography** from the Brand Center (as of

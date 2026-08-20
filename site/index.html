@@ -15,7 +15,7 @@
          to real paths they would silently serve the home page: a wrong page, not an error.
          So this runs before anything else and rewrites them.
 
-         The ^#/ anchor is what makes real section anchors safe - /join#interest-form and
+         The ^#/ anchor is what makes real section anchors safe - /info#interest-form and
          /info#uniform don't match, only the old #/route shape does. replace() rather
          than assign() so the dead URL doesn't land in the back button.
 

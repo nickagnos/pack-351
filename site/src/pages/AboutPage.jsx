@@ -89,9 +89,9 @@ export default function AboutPage() {
                   src={asset(d.img)}
                   alt={`${d.name} rank emblem`}
                   // Capped on BOTH axes. Height alone isn't enough: Arrow of Light is a 2.5:1
-                  // rectangle while the other five are square-ish, so a shared height renders
-                  // it two and a half times wider than its neighbours. The max-width reins it
-                  // in and lets the diamonds grow a little.
+                  // rectangle while the rest are square-ish (Webelos is a tall oval), so a
+                  // shared height renders it two and a half times wider than its neighbours.
+                  // The max-width reins it in and lets the diamonds grow a little.
                   style={{
                     display: 'block', width: '100%', maxWidth: 104, height: 66,
                     objectFit: 'contain', margin: '0 auto 12px',

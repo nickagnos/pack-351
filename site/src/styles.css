@@ -43,8 +43,9 @@ button { font-family: inherit; cursor: pointer; }
 p { text-wrap: pretty; }
 input, select, textarea { font-family: 'Nunito', sans-serif; }
 
-/* index.html sets viewport-fit=cover for the home cinematic, so content is no longer inset
-   from the notch automatically - the max() keeps text off it in landscape on notched phones. */
+/* index.html sets viewport-fit=cover for the edge-to-edge home hero, so content is no longer
+   inset from the notch automatically - the max() keeps text off it in landscape on notched
+   phones. */
 .container {
   max-width: 1160px; margin: 0 auto;
   padding-left: max(24px, env(safe-area-inset-left));
@@ -53,7 +54,7 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
 .section    { padding: 72px 0; }
 .section-sm { padding: 48px 0; }
 
-/* The floating nav on the home cinematic. The fade needs room to die out: at 18px of padding
+/* The floating nav on the home hero. The fade needs room to die out: at 18px of padding
    it had ~47px to go from 82% cream to nothing and ran out exactly at the bar's bottom edge,
    which read as a milky band with a hard line under it rather than a fade. It now gets 54px
    and an eased ramp. (A backdrop blur used to sit here too - at 1.5px it was invisible in
@@ -136,17 +137,13 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
 }
 
 /* Responsive */
-/* 900px, not 820: with "Hideaway Candy Canes" the desktop row measures 755px, which clears the
-   772px available at 820 by only 18px - close enough that a font fallback would overflow it.
-   The hamburger takes over sooner instead. */
+/* 900px, not 820: "Hideaway Candy Canes" makes the desktop link row wide enough that at 820px
+   it cleared the available width by only a few px - close enough that a font fallback would
+   overflow it. The hamburger takes over sooner instead. */
 @media (max-width: 900px) {
   .nav-desktop-links { display: none !important; }
   .nav-hamburger-btn { display: flex !important; }
   .footer-grid { grid-template-columns: 1fr 1fr !important; }
-  .home-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
-  .home-grid .ps-span2r { grid-row: span 1 !important; }
-  .home-grid .ps-span2c { grid-column: span 2 !important; }
-  .facts-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 @media (max-width: 600px) {
   .container {
@@ -154,17 +151,14 @@ input, select, textarea { font-family: 'Nunito', sans-serif; }
     padding-right: max(16px, env(safe-area-inset-right));
   }
   .section { padding: 48px 0; }
-  .home-grid { grid-template-columns: 1fr !important; }
-  .home-grid .ps-span2c { grid-column: span 1 !important; }
   .den-grid { grid-template-columns: repeat(3, 1fr) !important; }
   .events-featured-grid { grid-template-columns: 1fr !important; }
-  .join-grid { grid-template-columns: 1fr !important; }
+  .split-grid { grid-template-columns: 1fr !important; }
   .uniform-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
   /* Two columns leaves ~170px per card, which wraps the link names to one word per line
      and pushes the right-hand card past the container edge. */
   .links-grid { grid-template-columns: 1fr !important; }
   .footer-grid { grid-template-columns: 1fr !important; }
-  .facts-grid { grid-template-columns: 1fr 1fr !important; }
 }
 
 /* Interior page hero: warm, image-forward, matches the cream of the home hero */

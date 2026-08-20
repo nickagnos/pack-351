@@ -39,5 +39,6 @@ redraw, not a lookalike.
   `object-fit: contain` — height alone renders Arrow of Light two and a half times wider
   than its neighbours.
 - Originals were 1280px on the long side; resized here to 320px (`sips -Z 320`) at JPEG
-  quality 90. Higher quality than the photos in `../photos/` (82) on purpose: these are flat
-  colour with hard edges, where JPEG ringing is far more visible than it is in a photograph.
+  quality 90. Deliberately higher quality than the page photos (see the canonical `sips`
+  command in `../photos/PHOTOS.md` for their setting): these are flat colour with hard
+  edges, where JPEG ringing is far more visible than it is in a photograph.

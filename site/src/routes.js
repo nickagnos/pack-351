@@ -23,7 +23,7 @@ export const SITE_NAME = 'Cub Scout Pack 351';
 // Heads up for anyone linking it: it redirects to my.scouting.org and an unauthenticated
 // visitor lands on a Scouting America login / create-account screen that never says "Pack 351".
 // That's the official flow, but it means the link is for families who have already decided —
-// the interest form on /join is the softer path.
+// the interest form on /info is the softer path.
 export const BEASCOUT_REGISTER_URL =
   'https://beascout.scouting.org/registration?unitId=0b3e8cfb-0aa2-4d75-ad29-6c84c76bc74f';
 

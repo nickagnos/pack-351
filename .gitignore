@@ -10,5 +10,14 @@ site/dist-ssr/
 # macOS
 .DS_Store
 
-# Local scratch
-scroll-world-tweaks-wip/
+# Machine-specific tool config — absolute local paths, not for a public repo
+.mcp.json
+.claude/settings.local.json
+
+# Derived knowledge graph (graphify skill output)
+graphify-out/
+
+# Env files and local overrides — nothing uses them today; insurance for a public repo
+.env*
+*.local
+*.log

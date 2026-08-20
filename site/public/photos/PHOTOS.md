@@ -1,6 +1,7 @@
 # Page photos
 
-The photographs used on About, Events, Join and Resources. As of 2026-08-15 these are
+The photographs used on About, Events, Info and the 404 page (plus two share-card images).
+As of 2026-08-15 these are
 **official Scouting America photography** from the Brand Center, not placeholders — the
 AI-generated stand-ins that used to live here are gone.
 
@@ -11,16 +12,15 @@ changes. Update the `alt` text at the same time — see "Alt text" below, it mat
 | Filename | Used on | What it shows |
 |---|---|---|
 | `photo-den-meeting.jpg` | About (hero) | Scouts and a leader working on a project around a table |
-| `photo-hiking.jpg` | About ("Our story") | A Scout walking a pine-woods trail |
-| `photo-candy-cane.jpg` | About + Events (card) | Scouts carrying bags door to door from a pickup |
+| `photo-hiking.jpg` | About ("Our story") + 404 (hero) | A Scout walking a pine-woods trail |
 | `photo-pack-year.jpg` | Events (hero) | Scouts and leaders setting up a tent together in a meadow |
 | `photo-pinewood-derby.jpg` | Events (card) | A Scout painting a pinewood derby car |
 | `photo-regatta.jpg` | Events (card) | Scouts racing boats down a water trough — a real raingutter regatta |
-| `photo-camping.jpg` | Join (hero) | Scouts around a campsite in a grassy meadow |
-| `photo-handbook.jpg` | Resources (hero) | Scouts and adults working through an activity at a table |
+| `photo-camping.jpg` | `/join` share card only (og:image — /join is a redirect, not a page) | Scouts around a campsite in a grassy meadow |
+| `photo-handbook.jpg` | Info (hero) | Scouts and adults working through an activity at a table |
 
-> The Home page uses none of these. It's the full-screen scrolling cinematic, whose four
-> stills live in `site/public/hero/` — see that folder's README.
+> The Home page uses none of these. Its single full-screen hero still (and the home/404
+> share-card image) live in `site/public/hero/` — see that folder's README.
 
 ## Where these came from
 
@@ -31,7 +31,7 @@ as the rank emblems in `../ranks/`. No login is needed to browse or download.
 |---|---|---|---|---|
 | `photo-den-meeting.jpg` | Day Camp / Den or Pack Meeting | `AL6I6054_photo_CSBC.jpg` | `M78MdrM1NRP6` | 1280x853 |
 | `photo-hiking.jpg` | Hiking | `_DSC7558 treated_photo_CSBC.jpg` | `539yW2XiFJ3T` | 1000x665 |
-| `photo-candy-cane.jpg` | Scouting For Food | `20231227-13-55-12-10-photo-CSBC.jpg` | `wxmzJExHlOn83YPQ` | 1000x667 |
+| *(deleted)* `photo-candy-cane.jpg` | Scouting For Food | `20231227-13-55-12-10-photo-CSBC.jpg` | `wxmzJExHlOn83YPQ` | 1000x667 |
 | `photo-pack-year.jpg` | Camping | `AT4A8317-photo-CSBC.JPG` | `MN8YNLRviCc31EpP` | 1400x949 |
 | `photo-pinewood-derby.jpg` | Pinewood Derby | `AT4A1326-photo-CSBC.JPG` | `ch0Ea1gKhFg61snE` | 1000x667 |
 | `photo-regatta.jpg` | Day Camp / Den or Pack Meeting | `20231203-13-05-10-07-photo-CSBC.jpg` | `UMrYXyOz26L032tj` | 1000x666 |
@@ -61,20 +61,22 @@ as the rank emblems in `../ranks/`. No login is needed to browse or download.
 The Brand Center has no photograph of either of these, so the nearest honest analogue is in
 place and the alt text describes what's actually shown, not the event named on the card:
 
-- **`photo-candy-cane.jpg`** — **retired 2026-08-20, no longer referenced by any page.**
-  No candy-cane-fundraiser imagery exists in the Brand Center; this was a Scouting For Food
-  drive standing in for it, on the grounds that door-to-door was at least the same *shape* of
-  activity. It has been replaced everywhere by `public/candy-cane-scene.svg`, original artwork
-  that shows the actual thing — five-foot canes planted on a snowy lawn — which no photograph
-  in the library can. The file is left in place because it's a decent generic service-project
-  shot if one is ever wanted; delete it if it's still unused a season from now.
+- **`photo-candy-cane.jpg`** — **retired 2026-08-20 and deleted the same day** (it was
+  shipping to production unreferenced). No candy-cane-fundraiser imagery exists in the Brand
+  Center; this was a Scouting For Food drive standing in for it, on the grounds that
+  door-to-door was at least the same *shape* of activity. It was replaced everywhere by
+  `public/candy-cane-scene.svg`, original artwork that shows the actual thing — five-foot
+  canes planted on a snowy lawn — which no photograph in the library can. If a generic
+  service-project shot is ever wanted, its `web_id` in the table above re-downloads it (or
+  pull it from git history).
 - **`photo-pack-year.jpg`** — replaces the old `photo-popcorn.jpg`. There is **no popcorn
   photography in the Brand Center at all** (searched: popcorn, fundraising, sales, Trail's
   End, camp card — zero image results; popcorn is Trail's End branding, not Scouting
   America's). The Events hero is now a general campout scene, which suits the page title
   "A year with Pack 351" better than a fundraiser did. It changed frames again on 2026-08-19:
-  it used to be `AT4A6850-cropped`, and the home hero's scene 1 is now the *uncropped* original
-  of that same photograph — the same people on the same afternoon would have been on two pages.
+  it used to be `AT4A6850-cropped`, and `hero/trail.jpg` — now the home and 404 share-card
+  image — is the *uncropped* original of that same photograph; the same people on the same
+  afternoon would have been on two pages.
   Whenever you swap one of these, check the other slots for the same shoot; the Brand Center
   publishes several crops of one frame under different names.
 

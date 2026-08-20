@@ -4,6 +4,8 @@ node_modules/
 # Build output — GitHub Actions builds this from source on every push to main.
 # Committing it only guarantees a stale copy in the repo.
 site/dist/
+# Intermediate SSR bundle: prerender.js imports it, then it's dead. Never shipped.
+site/dist-ssr/
 
 # macOS
 .DS_Store

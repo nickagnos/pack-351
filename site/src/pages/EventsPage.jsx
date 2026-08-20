@@ -4,7 +4,7 @@ import PhotoSlot from '../components/PhotoSlot';
 import SectionHeader from '../components/SectionHeader';
 import EventRow from '../components/EventRow';
 import PageHero from '../components/PageHero';
-import { asset } from '../asset';
+import { asset, pageHref } from '../asset';
 
 // No fixed dates. This describes a typical Pack year rather than a live calendar, so the
 // left column carries a season or a frequency and the exact dates go out by email and in
@@ -104,7 +104,7 @@ const FEATURED = [
   },
 ];
 
-export default function EventsPage({ go }) {
+export default function EventsPage() {
   return (
     <div>
       {/* "Events & Calendar" / "What's coming up" both promised a dated schedule this page
@@ -120,63 +120,65 @@ export default function EventsPage({ go }) {
       {/* Signature events */}
       <div className="section">
         <div className="container">
-          <SectionHeader eyebrow="Signature events" title="The big ones" />
-          <div className="events-featured-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16, marginBottom: 64 }}>
-            {FEATURED.map(e => (
-              <div key={e.title} className="card" style={{ overflow: 'hidden' }}>
-                <PhotoSlot src={asset(e.src)} alt={e.alt} label={e.label} bg={e.bg} style={{ height: 200 }} />
-                <div style={{ padding: 20 }}>
-                  <span className="eyebrow" style={{ marginBottom: 8 }}>{e.when}</span>
-                  <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 26, color: 'var(--navy)', marginBottom: 10 }}>{e.title}</h3>
-                  <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65 }}>{e.desc}</p>
-                  {/* linkTo is an in-app route, linkHref an outside link. Internal navigation is
-                      always a go() button here, never an <a href="#/...">. */}
-                  {e.linkTo && (
-                    <button
-                      onClick={() => go(e.linkTo)}
-                      style={{
-                        display: 'inline-block', marginTop: 12, fontSize: 14, fontWeight: 700,
-                        color: 'var(--navy)', background: 'none', border: 'none', padding: 0,
-                        cursor: 'pointer', textDecoration: 'underline',
-                      }}
-                    >{e.linkText}</button>
-                  )}
-                  {e.linkHref && (
-                    <a
-                      href={e.linkHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ display: 'inline-block', marginTop: 12, fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}
-                    >{e.linkText}</a>
-                  )}
+          <div id="signature">
+            <SectionHeader eyebrow="Signature events" title="The big ones" />
+            <div className="events-featured-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16, marginBottom: 64 }}>
+              {FEATURED.map(e => (
+                <div key={e.title} className="card" style={{ overflow: 'hidden' }}>
+                  <PhotoSlot src={asset(e.src)} alt={e.alt} label={e.label} bg={e.bg} style={{ height: 200 }} />
+                  <div style={{ padding: 20 }}>
+                    <span className="eyebrow" style={{ marginBottom: 8 }}>{e.when}</span>
+                    <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 26, color: 'var(--navy)', marginBottom: 10 }}>{e.title}</h3>
+                    <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65 }}>{e.desc}</p>
+                    {/* linkTo is a page of this site, linkHref an outside link. */}
+                    {e.linkTo && (
+                      <a
+                        href={pageHref(e.linkTo)}
+                        style={{
+                          display: 'inline-block', marginTop: 12, fontSize: 14, fontWeight: 700,
+                          color: 'var(--navy)', textDecoration: 'underline',
+                        }}
+                      >{e.linkText}</a>
+                    )}
+                    {e.linkHref && (
+                      <a
+                        href={e.linkHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ display: 'inline-block', marginTop: 12, fontSize: 14, fontWeight: 700, color: 'var(--navy)' }}
+                      >{e.linkText}</a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           {/* Full list */}
-          <SectionHeader eyebrow="Through the year" title="What a Pack year looks like" />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {EVENTS.map((e, i) => (
-              <EventRow key={i} when={e.when} title={e.title} time={e.time} location={e.loc} tag={e.tag} tagBg={e.tagBg} />
-            ))}
+          <div id="calendar">
+            <SectionHeader eyebrow="Through the year" title="What a Pack year looks like" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {EVENTS.map((e, i) => (
+                <EventRow key={i} when={e.when} title={e.title} time={e.time} location={e.loc} tag={e.tag} tagBg={e.tagBg} />
+              ))}
+            </div>
+            {/* Dates came off this page, so it has to say where to actually get them. */}
+            <p style={{ fontSize: 14, color: 'var(--muted)', textAlign: 'center', marginTop: 24 }}>
+              Exact dates are set each year and go out by email, on Band, and in our{' '}
+              <a href="https://www.facebook.com/groups/1094659333885105/" target="_blank" rel="noopener noreferrer"
+                 style={{ color: 'var(--navy)', fontWeight: 700, textDecoration: 'underline' }}>
+                private Facebook group
+              </a>. Your den leader also sends reminders.{' '}
+              <a href="mailto:txcspack351@gmail.com" style={{ color: 'var(--navy)', fontWeight: 700, textDecoration: 'underline' }}>
+                Email us
+              </a>{' '}
+              and we'll keep you in the loop.
+            </p>
           </div>
-          {/* Dates came off this page, so it has to say where to actually get them. */}
-          <p style={{ fontSize: 14, color: 'var(--muted)', textAlign: 'center', marginTop: 24 }}>
-            Exact dates are set each year and go out by email, on Band, and in our{' '}
-            <a href="https://www.facebook.com/groups/1094659333885105/" target="_blank" rel="noopener noreferrer"
-               style={{ color: 'var(--navy)', fontWeight: 700, textDecoration: 'underline' }}>
-              private Facebook group
-            </a>. Your den leader also sends reminders.{' '}
-            <a href="mailto:txcspack351@gmail.com" style={{ color: 'var(--navy)', fontWeight: 700, textDecoration: 'underline' }}>
-              Email us
-            </a>{' '}
-            and we'll keep you in the loop.
-          </p>
         </div>
       </div>
 
-      <SiteFooter go={go} />
+      <SiteFooter />
     </div>
   );
 }

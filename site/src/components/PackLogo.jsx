@@ -14,7 +14,7 @@ import { asset } from '../asset';
 //
 // onPhoto: the logo is sitting on the home cinematic rather than a solid bar. --muted only
 // clears 4.5:1 on white; over a photo the tagline measured 1.9:1, so it takes navy instead.
-export default function PackLogo({ dark = false, onPhoto = false, onClick }) {
+export default function PackLogo({ dark = false, onPhoto = false, href }) {
   const logo = (
     <img
       src={asset('/pack-logo.png')}
@@ -26,9 +26,8 @@ export default function PackLogo({ dark = false, onPhoto = false, onClick }) {
   );
 
   return (
-    <button onClick={onClick} style={{
-      display: 'flex', alignItems: 'center', gap: 10,
-      background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+    <a href={href} aria-label="Pack 351 home" style={{
+      display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
     }}>
       {dark
         ? <div style={{ background: '#fff', borderRadius: 8, padding: '6px 9px', flexShrink: 0 }}>{logo}</div>
@@ -39,6 +38,6 @@ export default function PackLogo({ dark = false, onPhoto = false, onClick }) {
           Cub Scouts · Lindale, TX
         </div>
       </div>
-    </button>
+    </a>
   );
 }

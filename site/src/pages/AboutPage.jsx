@@ -4,7 +4,7 @@ import PhotoSlot from '../components/PhotoSlot';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import QuickFacts from '../components/QuickFacts';
-import { asset } from '../asset';
+import { asset, pageHref } from '../asset';
 
 // Official rank emblems from the Scouting America Brand Center (scouting.webdamdb.com).
 // They ship as JPEGs on a white field, which is why they sit on the white `.card` with no
@@ -19,7 +19,7 @@ const dens = [
   { name: 'Arrow of Light', grade: '5th Grade',    img: '/ranks/arrow-of-light.jpg' },
 ];
 
-export default function AboutPage({ go }) {
+export default function AboutPage() {
   return (
     <div>
       <PageHero
@@ -28,12 +28,12 @@ export default function AboutPage({ go }) {
         sub="Pack 351 is chartered by Central Baptist Church in Lindale, TX. We're parents, kids, and leaders who believe the best childhood memories are made outside, with a little mud on your boots."
         image={asset("/photos/photo-den-meeting.jpg")}
         imageAlt="Cub Scouts and a leader working on a project together around a table at a den meeting"
-        actions={<button className="btn btn-primary" onClick={() => go('join')}>Join Pack 351 →</button>}
+        actions={<a className="btn btn-primary" href={pageHref('join')}>Join Pack 351 →</a>}
       />
-      <QuickFacts />
+      <QuickFacts id="facts" />
 
       {/* Pack story */}
-      <div className="section">
+      <div className="section" id="story">
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
             <div>
@@ -51,9 +51,9 @@ export default function AboutPage({ go }) {
                 yards across the Hideaway community. It's become one of our most beloved traditions,
                 and a great fundraiser for the Pack.
               </p>
-              <button className="btn btn-ghost btn-sm" onClick={() => go('candy-canes')}>
+              <a className="btn btn-ghost btn-sm" href={pageHref('candy-canes')}>
                 Order candy canes →
-              </button>
+              </a>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <PhotoSlot
@@ -78,7 +78,7 @@ export default function AboutPage({ go }) {
       {/* Dens */}
       {/* No borderBottom: the charter strip below now follows directly and brings its own
           borderTop, so keeping both would draw a doubled 2px line. */}
-      <div className="section-sm" style={{ background: 'var(--cream)', borderTop: '1px solid var(--border)' }}>
+      <div className="section-sm" id="dens" style={{ background: 'var(--cream)', borderTop: '1px solid var(--border)' }}>
         <div className="container">
           <SectionHeader eyebrow="How we're organized" title="Our dens" sub="Scouts are grouped by grade. Each den has 6–10 kids and its own dedicated leader." center />
           <div className="den-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6,1fr)', gap: 12 }}>
@@ -114,18 +114,18 @@ export default function AboutPage({ go }) {
       </div>
 
       {/* Charter org strip */}
-      <div style={{ background: 'var(--navy-light)', borderTop: '1px solid var(--border)', padding: '36px 0' }}>
+      <div id="charter" style={{ background: 'var(--navy-light)', borderTop: '1px solid var(--border)', padding: '36px 0' }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
           <div>
             <span className="eyebrow" style={{ marginBottom: 8 }}>Our chartering organization</span>
             <h3 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 28, color: 'var(--navy)' }}>Central Baptist Church</h3>
             <p style={{ color: 'var(--muted)', marginTop: 6 }}>Lindale, TX · Our home base</p>
           </div>
-          <button className="btn btn-primary" onClick={() => go('join')}>Join Pack 351 →</button>
+          <a className="btn btn-primary" href={pageHref('join')}>Join Pack 351 →</a>
         </div>
       </div>
 
-      <SiteFooter go={go} />
+      <SiteFooter />
     </div>
   );
 }

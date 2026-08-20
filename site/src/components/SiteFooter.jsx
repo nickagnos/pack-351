@@ -1,7 +1,9 @@
 import React from 'react';
 import PackLogo from './PackLogo';
+import { pageHref } from '../asset';
+import { FOOTER_LINKS } from '../routes.js';
 
-export default function SiteFooter({ go }) {
+export default function SiteFooter() {
   return (
     <footer style={{ background: 'var(--navy-dark)', color: '#fff', padding: '60px 0 32px' }}>
       <div className="container">
@@ -9,7 +11,7 @@ export default function SiteFooter({ go }) {
           display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 40, marginBottom: 48,
         }}>
           <div>
-            <PackLogo dark onClick={() => go('home')} />
+            <PackLogo dark href={pageHref('home')} />
             <p style={{ fontSize: 14, color: 'rgba(255,255,255,.6)', lineHeight: 1.7, marginTop: 14, maxWidth: 260 }}>
               A family-run Cub Scout pack building friendships, skills, and memories for K–5th graders in Lindale.
             </p>
@@ -18,12 +20,12 @@ export default function SiteFooter({ go }) {
           <div>
             <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 17, color: 'var(--gold)', marginBottom: 14 }}>Quick Links</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-              {[['About', 'about'], ['Events', 'events'], ['Candy Canes', 'candy-canes'], ['Resources', 'resources'], ['Join Us', 'join']].map(([l, id]) => (
-                <button key={id} onClick={() => go(id)} style={{
+              {/* Same list routes.js gives the nav, so the two bars can no longer drift. */}
+              {FOOTER_LINKS.map(({ slug, footerLabel }) => (
+                <a key={slug} href={pageHref(slug)} style={{
                   fontFamily: 'Nunito', fontSize: 14, color: 'rgba(255,255,255,.7)',
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  textAlign: 'left', padding: 0, transition: 'color .12s',
-                }}>{l}</button>
+                  textDecoration: 'none', textAlign: 'left', transition: 'color .12s',
+                }}>{footerLabel}</a>
               ))}
             </div>
           </div>
@@ -59,9 +61,9 @@ export default function SiteFooter({ go }) {
                 </a>
               </div>
             </div>
-            <button className="btn btn-primary btn-sm" onClick={() => go('join')} style={{ marginTop: 16 }}>
+            <a className="btn btn-primary btn-sm" href={pageHref('join')} style={{ marginTop: 16 }}>
               Join Pack 351 →
-            </button>
+            </a>
           </div>
         </div>
 

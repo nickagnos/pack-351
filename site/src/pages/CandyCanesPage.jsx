@@ -27,7 +27,7 @@ const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfEZ7BEpcEvaSmMZ-zHFp
 // under it. Adjust this number, not the layout around it.
 const EMBED_HEIGHT = ORDERING_OPEN ? 1400 : 300;
 
-export default function CandyCanesPage({ go }) {
+export default function CandyCanesPage() {
   return (
     <div>
       <PageHero
@@ -44,7 +44,7 @@ export default function CandyCanesPage({ go }) {
           {/* Ordering status. This is the part that has to carry the message for most of the
               year, since the embedded form below just says "no longer accepting responses"
               whenever the Pack has it closed. */}
-          <div className="card" style={{
+          <div className="card" id="status" style={{
             padding: 22,
             borderLeft: `5px solid ${ORDERING_OPEN ? 'var(--gold)' : 'var(--navy)'}`,
             marginBottom: 32,
@@ -67,18 +67,22 @@ export default function CandyCanesPage({ go }) {
             )}
           </div>
 
-          <SectionHeader
-            eyebrow="Order form"
-            title={ORDERING_OPEN ? "Order your candy canes" : "The order form"}
-          />
-          <FormEmbed
-            url={FORM_URL}
-            title="Candy Cane Fundraiser order form"
-            height={EMBED_HEIGHT}
-          />
+          {/* The heading and the embed are wrapped so #form has something to land on -
+              go.pack351tx.org/cc points straight here. */}
+          <div id="form">
+            <SectionHeader
+              eyebrow="Order form"
+              title={ORDERING_OPEN ? "Order your candy canes" : "The order form"}
+            />
+            <FormEmbed
+              url={FORM_URL}
+              title="Candy Cane Fundraiser order form"
+              height={EMBED_HEIGHT}
+            />
+          </div>
 
           {/* How it works */}
-          <div style={{ marginTop: 64 }}>
+          <div id="how-it-works" style={{ marginTop: 64 }}>
             <SectionHeader eyebrow="How it works" title="A Lindale tradition" />
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 48, alignItems: 'start' }}
                  className="join-grid">
@@ -109,7 +113,7 @@ export default function CandyCanesPage({ go }) {
         </div>
       </div>
 
-      <SiteFooter go={go} />
+      <SiteFooter />
     </div>
   );
 }

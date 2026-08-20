@@ -1,14 +1,18 @@
 import React from 'react';
 import PackLogo from './PackLogo';
+import { pageHref } from '../asset';
+import { NAV_LINKS } from '../routes.js';
 
-export default function SiteNav({ current, go }) {
+export default function SiteNav({ current }) {
   const [open, setOpen] = React.useState(false);
   // "Hideaway Candy Canes" renders at 185px, against 74/80/104 for the other three. That puts
   // the whole desktop row at 755px, which clears the 772px available at the old 820px
   // breakpoint by just 18px - fine until Barlow Condensed fails to load and a wider fallback
   // renders. styles.css switches to the hamburger at 900px instead of 820px to cover that.
-  const links = [['about', 'About'], ['events', 'Events'], ['candy-canes', 'Hideaway Candy Canes'], ['resources', 'Resources']];
-  const nav = (p) => { go(p); setOpen(false); };
+  //
+  // The link list comes from routes.js rather than being spelled out here: the nav and the
+  // footer used to keep separate hardcoded arrays, with the tuples in opposite orders.
+  const links = NAV_LINKS;
   // On the home cinematic the nav floats over the scene (transparent overlay); everywhere
   // else it's the solid sticky bar.
   const isHome = current === 'home' && !open;
@@ -27,30 +31,31 @@ export default function SiteNav({ current, go }) {
       <div className="container" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 68,
       }}>
-        <PackLogo onClick={() => nav('home')} onPhoto={isHome} />
+        <PackLogo href={pageHref('home')} onPhoto={isHome} />
 
         <div className="nav-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          {links.map(([id, label]) => (
-            <button key={id} onClick={() => nav(id)} style={{
+          {links.map(({ slug, navLabel }) => (
+            <a key={slug} href={pageHref(slug)} style={{
               fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 18,
               // --muted only clears 4.5:1 on a solid white bar; over the scenes it needs navy
-              color: (current === id || isHome) ? 'var(--navy)' : 'var(--muted)',
-              background: 'none', border: 'none', cursor: 'pointer',
+              color: (current === slug || isHome) ? 'var(--navy)' : 'var(--muted)',
+              textDecoration: 'none',
               padding: '8px 18px', borderRadius: 6,
-              borderBottom: current === id ? '2px solid var(--gold)' : '2px solid transparent',
+              borderBottom: current === slug ? '2px solid var(--gold)' : '2px solid transparent',
               transition: 'color .12s',
-            }}>{label}</button>
+            }}>{navLabel}</a>
           ))}
         </div>
 
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <button className="btn btn-primary nav-desktop-links" onClick={() => nav('join')}>
+          <a className="btn btn-primary nav-desktop-links" href={pageHref('join')}>
             Join Now →
-          </button>
+          </a>
           <button
             className="nav-hamburger-btn"
             onClick={() => setOpen(!open)}
             aria-label="Open menu"
+            aria-expanded={open}
             style={{
               display: 'none', flexDirection: 'column', gap: 4,
               background: 'none', border: 'none', cursor: 'pointer', padding: 6,
@@ -65,15 +70,15 @@ export default function SiteNav({ current, go }) {
 
       {open && (
         <div style={{ borderTop: '1px solid var(--border)', background: '#fff', padding: '8px 16px 16px' }}>
-          {[...links, ['join', 'Join Now']].map(([id, label]) => (
-            <button key={id} onClick={() => nav(id)} style={{
+          {[...links, { slug: 'join', navLabel: 'Join Now' }].map(({ slug, navLabel }) => (
+            <a key={slug} href={pageHref(slug)} style={{
               display: 'block', width: '100%', textAlign: 'left',
               fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22,
-              color: id === 'join' ? '#fff' : 'var(--navy)',
-              background: id === 'join' ? 'var(--gold)' : 'transparent',
-              border: 'none', cursor: 'pointer',
+              color: slug === 'join' ? '#fff' : 'var(--navy)',
+              background: slug === 'join' ? 'var(--gold)' : 'transparent',
+              textDecoration: 'none',
               padding: '10px 14px', borderRadius: 6, marginTop: 4,
-            }}>{label}</button>
+            }}>{navLabel}</a>
           ))}
         </div>
       )}

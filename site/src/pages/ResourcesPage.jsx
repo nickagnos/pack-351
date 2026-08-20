@@ -2,7 +2,7 @@ import React from 'react';
 import SiteFooter from '../components/SiteFooter';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
-import { asset } from '../asset';
+import { asset, pageHref } from '../asset';
 
 // Every link here was checked on 2026-08-02, and each PDF was opened to confirm it is the
 // document it claims to be (the old Part C link had been 404ing for who knows how long).
@@ -137,7 +137,7 @@ const NEW_STEPS = [
   { n: '5', title: 'Complete the medical form', body: "Download and fill out Parts A & B of the Annual Health & Medical Record. Your den leader needs this on file. Grab it from the links at the top of this page." },
 ];
 
-export default function ResourcesPage({ go }) {
+export default function ResourcesPage() {
   const [openFaq, setOpenFaq] = React.useState(null);
 
   return (
@@ -155,7 +155,7 @@ export default function ResourcesPage({ go }) {
           telling you where one topic ends and the next begins. */}
 
       {/* LINKS */}
-      <div className="section">
+      <div className="section" id="links">
         <div className="container">
               <SectionHeader
                 eyebrow="The useful stuff"
@@ -198,7 +198,7 @@ export default function ResourcesPage({ go }) {
       </div>
 
       {/* UNIFORM */}
-      <div className="section" style={{ background: '#fff', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+      <div className="section" id="uniform" style={{ background: '#fff', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
         <div className="container">
               <SectionHeader eyebrow="What to wear" title="The Cub Scout uniform" sub="Scouts are uniformed from the waist up. Here's what you buy, what's optional, what you never need to buy, and a few money-saving tips." />
               <div className="uniform-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
@@ -248,7 +248,7 @@ export default function ResourcesPage({ go }) {
       </div>
 
       {/* NEW FAMILIES */}
-      <div className="section">
+      <div className="section" id="new-families">
         <div className="container">
               <SectionHeader eyebrow="You're new here, welcome" title="Your first 30 days" sub="Five steps to get your scout settled in. Takes about a week." />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -272,7 +272,7 @@ export default function ResourcesPage({ go }) {
       </div>
 
       {/* FAQ */}
-      <div className="section" style={{ background: '#fff', borderTop: '1px solid var(--border)' }}>
+      <div className="section" id="faq" style={{ background: '#fff', borderTop: '1px solid var(--border)' }}>
         <div className="container">
               <SectionHeader eyebrow="Common questions" title="Frequently asked" sub="If your question isn't here, just email our Cubmaster." />
               <div style={{ maxWidth: 800, display: 'flex', flexDirection: 'column' }}>
@@ -309,7 +309,7 @@ export default function ResourcesPage({ go }) {
                 </div>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                   <a href="mailto:txcspack351@gmail.com" className="btn btn-ghost btn-sm">Email Cubmaster</a>
-                  <button className="btn btn-navy btn-sm" onClick={() => go('join')}>Join & we'll reach out</button>
+                  <a className="btn btn-navy btn-sm" href={pageHref('join')}>Join &amp; we'll reach out</a>
                 </div>
               </div>
         </div>
@@ -319,7 +319,7 @@ export default function ResourcesPage({ go }) {
           last word and the only full-colour block. */}
       {/* Gold rule at the foot: this navy band sits directly on the navy-dark footer, and
           without it the two blocks read as one undifferentiated slab of blue. */}
-      <div style={{
+      <div id="band" style={{
         background: 'var(--navy)', padding: 'clamp(44px,6vw,68px) 0',
         borderBottom: '3px solid var(--gold)',
       }}>
@@ -381,7 +381,7 @@ export default function ResourcesPage({ go }) {
         </div>
       </div>
 
-      <SiteFooter go={go} />
+      <SiteFooter />
     </div>
   );
 }

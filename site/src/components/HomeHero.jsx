@@ -1,5 +1,5 @@
 import React from 'react';
-import { asset } from '../asset';
+import { asset, pageHref } from '../asset';
 
 // The home hero: a scroll-scrubbed photographic cinematic. Scroll drives a deterministic
 // "camera": each scene pushes in (Ken Burns) + drifts (parallax) and cross-fades to the
@@ -38,16 +38,21 @@ function metrics(track) {
   return { unit, max: h - unit };
 }
 
-export default function HomeHero({ go }) {
+export default function HomeHero() {
   const stageRef = React.useRef(null);
   const trackRef = React.useRef(null);
   const railRef = React.useRef(null);
   const hintRef = React.useRef(null);
-  const [touch, setTouch] = React.useState(() => window.matchMedia(TOUCH_MQ).matches);
+  // Starts false rather than reading matchMedia during render: this component is rendered
+  // to HTML at build time, where there is no window. The effect below does the initial read
+  // as well as subscribing, so touch devices still get the up-arrow on the first paint after
+  // hydration - without that first read they would keep the wrong arrow forever.
+  const [touch, setTouch] = React.useState(false);
 
   React.useEffect(() => {
     const mq = window.matchMedia(TOUCH_MQ);
     const onChange = () => setTouch(mq.matches);
+    onChange();
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
   }, []);
@@ -115,7 +120,14 @@ export default function HomeHero({ go }) {
 
   return (
     <div className="hh-root">
-      <style>{HERO_CSS}</style>
+      {/* dangerouslySetInnerHTML, not a text child: this page is prerendered, and
+          renderToString escapes text content - it turns every apostrophe in the CSS into
+          &#x27;. The HTML parser doesn't decode entities inside <style> (it's a raw-text
+          element), so what the browser actually got was `content: &#x27;&#x27;` and
+          `font-family: &#x27;Nunito&#x27;` - invalid declarations that dropped the scrim
+          and the display font until React re-rendered, plus a hydration mismatch that threw
+          the whole prerendered page away. The CSS here is a module constant, never input. */}
+      <style dangerouslySetInnerHTML={{ __html: HERO_CSS }} />
       {/* The four scene titles are mood lines, not page headings - as <h1>s they gave the
           home page four competing top-level headings, none of which named the Pack. The
           real heading lives here, off-screen but read by screen readers and search
@@ -131,8 +143,8 @@ export default function HomeHero({ go }) {
               <p className="hh-body">{s.body}</p>
               {s.cta && (
                 <div className="hh-cta">
-                  <button className="hh-btn hh-btn-primary" onClick={() => go('join')}>Join Pack 351 →</button>
-                  <button className="hh-btn hh-btn-ghost" onClick={() => go('events')}>Come to a meeting</button>
+                  <a className="hh-btn hh-btn-primary" href={pageHref('join')}>Join Pack 351 →</a>
+                  <a className="hh-btn hh-btn-ghost" href={pageHref('events')}>Come to a meeting</a>
                 </div>
               )}
             </div>
@@ -155,7 +167,13 @@ export default function HomeHero({ go }) {
 const HERO_CSS = `
 .hh-root { --hh-bg: var(--cream); }
 .hh-stage { position: fixed; inset: 0; overflow: hidden; background: var(--hh-bg); z-index: 1; }
+/* The scenes start hidden and the scroll loop fades the right one in - but this page is
+   prerendered, so between the HTML parsing and the first frame of that loop there would be
+   nothing on screen but cream. The first scene therefore defaults to visible; frame() writes
+   an inline opacity on its very first run, which beats this. It also means the home page
+   still reads properly with JavaScript switched off. */
 .hh-scene { position: absolute; inset: 0; opacity: 0; will-change: opacity; }
+.hh-scene:first-child { opacity: 1; }
 .hh-scene .hh-img { position: absolute; inset: 0; background: var(--hh-bg) center/cover no-repeat;
   transform-origin: 50% 52%; will-change: transform; backface-visibility: hidden; }
 /* Cream scrim behind the copy. The navy text sits directly on the photo, and golden-hour
@@ -190,6 +208,7 @@ const HERO_CSS = `
 .hh-cta { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
 .hh-btn { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: .5px;
   padding: 13px 26px; border-radius: 9px; border: 2px solid transparent; cursor: pointer;
+  text-decoration: none; line-height: 1;
   display: inline-flex; align-items: center; gap: 6px; transition: transform .12s, background .12s; }
 .hh-btn:active { transform: translateY(1px); }
 .hh-btn-primary { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }

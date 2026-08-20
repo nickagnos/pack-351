@@ -3,7 +3,7 @@ import SiteFooter from '../components/SiteFooter';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import FormEmbed from '../components/FormEmbed';
-import { asset } from '../asset';
+import { asset, pageHref } from '../asset';
 
 const CONTACT_EMAIL = 'txcspack351@gmail.com';
 const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Joining Pack 351')}` +
@@ -26,13 +26,7 @@ const INTEREST_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSebpfiiOkjAT
 // nothing explaining why, so add a status banner like the candy canes page has.
 const FORM_HEIGHT = 1490;
 
-// Anchors can't be <a href="#interest-form"> on this site: App.jsx derives the route from
-// window.location.hash, so any bare hash that isn't "#/route" resolves to a page that doesn't
-// exist and renders a blank screen. Scroll the element instead and leave the hash alone.
-const scrollToForm = () =>
-  document.getElementById('interest-form')?.scrollIntoView({ behavior: 'smooth' });
-
-export default function JoinPage({ go }) {
+export default function JoinPage() {
   return (
     <div>
       <PageHero
@@ -44,7 +38,7 @@ export default function JoinPage({ go }) {
       />
 
       {/* Get started + sidebar */}
-      <div className="section">
+      <div className="section" id="ways-to-join">
         <div className="container">
           <div className="join-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: 60, alignItems: 'start' }}>
 
@@ -67,7 +61,7 @@ export default function JoinPage({ go }) {
                     Most Tuesday nights, 6:00–7:00 PM at Central Baptist Church in Lindale. No sign-up
                     needed. Just show up and see if it's a fit.
                   </p>
-                  <button className="btn btn-ghost" onClick={() => go('events')}>See what we do →</button>
+                  <a className="btn btn-ghost" href={pageHref('events')}>See what we do →</a>
                 </div>
 
                 <div className="card" style={{ padding: 22 }}>
@@ -92,13 +86,15 @@ export default function JoinPage({ go }) {
                     follows up with information about events and how to join. It also asks whether
                     you'd like to help out — "maybe" is a perfectly good answer.
                   </p>
-                  <button className="btn btn-ghost" onClick={scrollToForm}>Go to the form ↓</button>
+                  {/* A real fragment link now that the hash is no longer the router, and the
+                      form is in the HTML at parse time, so the browser's own scroll handles it. */}
+                  <a className="btn btn-ghost" href="#interest-form">Go to the form ↓</a>
                 </div>
               </div>
             </div>
 
             {/* Sidebar */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <div id="questions" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
                 { icon: '💸', title: "What does it cost?", body: "Scouting America's national fee is $85/year, plus an East Texas Area Council fee. That covers registration, the awards your scout earns, a Pinewood Derby kit, a Raingutter Regatta boat kit, and insurance for official Scouting events. The Pack charges no dues of its own. Uniform and camping food are the only other costs. Scholarships are available, and no scout is ever turned away for finances." },
                 { icon: '📅', title: "When do we meet?", body: 'Most Tuesday nights, 6:00–7:00 PM at Central Baptist Church in Lindale.' },
@@ -123,9 +119,9 @@ export default function JoinPage({ go }) {
 
       {/* Full width rather than inside the column above: the form is natively 640px and the
           left column is only ~650px at the widest, which leaves it cramped from 900px down.
-          scrollMarginTop clears the 68px sticky nav - without it the "Go to the form" button
-          scrolls this heading underneath the bar. */}
-      <div className="section" id="interest-form" style={{ paddingTop: 0, scrollMarginTop: 88 }}>
+          The sticky nav is cleared by scroll-padding-top on <html> in styles.css, which does
+          the same job for every anchor on the site. */}
+      <div className="section" id="interest-form" style={{ paddingTop: 0 }}>
         <div className="container">
           <SectionHeader
             eyebrow="Interest form"
@@ -140,7 +136,7 @@ export default function JoinPage({ go }) {
         </div>
       </div>
 
-      <SiteFooter go={go} />
+      <SiteFooter />
     </div>
   );
 }

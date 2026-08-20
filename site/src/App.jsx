@@ -6,48 +6,31 @@ import EventsPage from './pages/EventsPage';
 import CandyCanesPage from './pages/CandyCanesPage';
 import JoinPage from './pages/JoinPage';
 import ResourcesPage from './pages/ResourcesPage';
+import NotFoundPage from './pages/NotFoundPage';
 
-const getPage = () => window.location.hash.replace('#/', '') || 'home';
-
-// Hash routing never reloads the document, so the <title> in index.html would otherwise
-// stick on every page — leaving all five identical in tabs, history and bookmarks.
-const TITLES = {
-  home:      'Pack 351 · Cub Scouts · Lindale, TX',
-  about:     'About · Pack 351 · Cub Scouts · Lindale, TX',
-  events:    'Events · Pack 351 · Cub Scouts · Lindale, TX',
-  'candy-canes': 'Hideaway Candy Canes · Pack 351 · Cub Scouts · Lindale, TX',
-  join:      'Join · Pack 351 · Cub Scouts · Lindale, TX',
-  resources: 'Resources · Pack 351 · Cub Scouts · Lindale, TX',
+// There is no router. Each page is a real HTML document prerendered by prerender.js and
+// served at its own path, so navigation is a plain <a href> and a full page load — which
+// is also what frees the URL fragment for section anchors (/resources#uniform).
+//
+// `page` is a slug from routes.js. The build passes it in through entry-server.jsx; the
+// browser derives the same value from location.pathname in main.jsx, so the hydrated tree
+// matches the prerendered markup exactly.
+const PAGES = {
+  home: HomePage,
+  about: AboutPage,
+  events: EventsPage,
+  'candy-canes': CandyCanesPage,
+  join: JoinPage,
+  resources: ResourcesPage,
+  404: NotFoundPage,
 };
 
-export default function App() {
-  const [page, setPage] = React.useState(getPage);
-
-  React.useEffect(() => {
-    document.title = TITLES[page] || TITLES.home;
-  }, [page]);
-
-  const go = React.useCallback((p) => {
-    setPage(p);
-    window.location.hash = '/' + p;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
-
-  React.useEffect(() => {
-    const h = () => setPage(getPage());
-    window.addEventListener('hashchange', h);
-    return () => window.removeEventListener('hashchange', h);
-  }, []);
-
+export default function App({ page }) {
+  const Page = PAGES[page] || NotFoundPage;
   return (
     <>
-      <SiteNav current={page} go={go} />
-      {page === 'home'      && <HomePage      go={go} />}
-      {page === 'about'     && <AboutPage     go={go} />}
-      {page === 'events'    && <EventsPage    go={go} />}
-      {page === 'candy-canes' && <CandyCanesPage go={go} />}
-      {page === 'join'      && <JoinPage      go={go} />}
-      {page === 'resources' && <ResourcesPage go={go} />}
+      <SiteNav current={page} />
+      <Page />
     </>
   );
 }

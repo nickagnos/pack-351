@@ -6,19 +6,46 @@
          indicator. It also means env(safe-area-inset-*) stops resolving to 0, which the home
          hero's hint/dots and .container's side padding rely on to stay out of those areas. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Pack 351 · Cub Scouts · Lindale, TX</title>
-    <meta name="description" content="Cub Scout Pack 351 in Lindale, TX — building friendships, skills, and memories for K–5th graders." />
+
+    <!-- Legacy hash links. Until 2026-08-19 every page of this site was a fragment
+         (pack351tx.org/#/join), and those URLs are out in the wild - shared with families in
+         the Facebook group, bookmarked, and reachable through the 301 from the old
+         nickagnos.github.io/pack-351/ address, which preserves the fragment. After the move
+         to real paths they would silently serve the home page: a wrong page, not an error.
+         So this runs before anything else and rewrites them.
+
+         The ^#/ anchor is what makes real section anchors safe - /join#interest-form and
+         /resources#uniform don't match, only the old #/route shape does. replace() rather
+         than assign() so the dead URL doesn't land in the back button.
+
+         It also runs on hashchange, not just at load: clicking an old #/candy-canes link
+         while already on the site only changes the fragment, which is a same-document
+         navigation - the page never reloads, so a load-time-only check would sit there
+         showing the wrong page. Same for the back button through old hash history. -->
+    <script>
+      (function () {
+        function go() {
+          var m = location.hash.match(/^#\/([a-z-]*)/);
+          if (m) location.replace('/' + (m[1] === 'home' ? '' : m[1]) + location.search);
+        }
+        addEventListener('hashchange', go);
+        go();
+      })();
+    </script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Link previews. The Pack's main channel is a Facebook group, so a shared link
-         renders as a card there; without these it shows as a bare URL. og:url and
-         og:image must be absolute per the Open Graph spec, so they hardcode the
-         production origin — the two places in this repo that don't adapt to a
-         change of domain on their own. Update both if the site ever moves again,
-         then re-scrape the URL in Facebook's Sharing Debugger. -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Cub Scout Pack 351" />
+    <!-- Everything between the head markers is REGENERATED PER PAGE by prerender.js from the
+         manifest in src/routes.js - title, description, canonical and the og: card. What's
+         here is the home page's set, which is what the dev server serves and what the client
+         build emits before prerendering rewrites it. Edit routes.js, not this block.
+
+         og:url and og:image must be absolute per the Open Graph spec, so they carry the
+         production origin; SITE_URL in routes.js is the one place that lives now. -->
+    <!--head-->
+    <title>Pack 351 · Cub Scouts · Lindale, TX</title>
+    <meta name="description" content="Cub Scout Pack 351 in Lindale, TX — building friendships, skills, and memories for K–5th graders." />
+    <link rel="canonical" href="https://pack351tx.org/" />
     <meta property="og:title" content="Pack 351 · Cub Scouts · Lindale, TX" />
     <meta property="og:description" content="Cub Scouts for K–5th graders in Lindale, TX. Campouts, the Pinewood Derby, the Raingutter Regatta — and a welcome for every family. Drop in to a Tuesday meeting." />
     <meta property="og:url" content="https://pack351tx.org/" />
@@ -26,6 +53,13 @@
     <meta property="og:image:width" content="1800" />
     <meta property="og:image:height" content="1200" />
     <meta property="og:image:alt" content="Cub Scouts and adult leaders carrying camping gear across a sunny meadow" />
+    <!--/head-->
+
+    <!-- The parts of the link-preview card that are the same on every page. The Pack's main
+         channel is a Facebook group, so a shared link renders as a card there; without these
+         it shows as a bare URL. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Cub Scout Pack 351" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
 

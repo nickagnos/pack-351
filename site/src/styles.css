@@ -16,7 +16,11 @@
   --border:     #e2ddd4;
   --rad:        8px;
 }
-html { scroll-behavior: smooth; }
+/* scroll-padding-top keeps every #anchor landing clear of the 68px sticky nav (68 + 20px of
+   breathing room). It's on <html> rather than repeated as scroll-margin on each of the
+   fifteen anchored sections, and it applies to the browser's own jump on a cold load of a
+   deep link (/resources#uniform) as well as to in-page clicks. */
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
   font-family: 'Nunito', sans-serif;
   background: var(--cream);

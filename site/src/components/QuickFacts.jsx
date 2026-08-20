@@ -12,9 +12,9 @@ const FACTS = [
   { icon: '💰', head: '$85 / year + council fee', sub: 'Scholarships available' },
 ];
 
-export default function QuickFacts() {
+export default function QuickFacts({ id }) {
   return (
-    <div className="quick-facts-band">
+    <div className="quick-facts-band" id={id}>
       <div className="container">
         <div className="quick-facts">
           {FACTS.map(({ icon, head, sub }) => (

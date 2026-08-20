@@ -3,6 +3,7 @@ import SiteFooter from '../components/SiteFooter';
 import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import { asset, pageHref } from '../asset';
+import { BEASCOUT_REGISTER_URL } from '../routes.js';
 
 // Every link here was checked on 2026-08-02, and each PDF was opened to confirm it is the
 // document it claims to be (the old Part C link had been 404ing for who knows how long).
@@ -14,6 +15,12 @@ import { asset, pageHref } from '../asset';
 // permission for the Pack to post photos here. Anyone adding a photo-release link later
 // should write a Pack form instead. AHMR Part A already covers council and BSA use.
 const LINKS = [
+  {
+    name: 'Register with Pack 351',
+    note: "Scouting America's official registration for our pack. You'll need a my.Scouting account — it asks you to sign in or create one first",
+    kind: 'web',
+    href: BEASCOUT_REGISTER_URL,
+  },
   {
     name: 'Annual Health & Medical Record',
     note: 'Parts A & B for every Scout, yearly. Part C needs a doctor and is only for resident camp. Background and FAQ at scouting.org/health-and-safety/ahmr',
@@ -129,12 +136,27 @@ const FAQS = [
     a: "Most families spend 1–2 hours per week on meetings. Big events like campouts and the derby require more, but they're entirely optional. We work hard to make every hour worth it." },
 ];
 
+// Ordered by what actually blocks a scout, not by how easy each one is. The medical form comes
+// before the Scouting app because a den leader needs Parts A & B on file before your scout goes
+// anywhere; the app is a convenience. `n` is the number in the circle and the React key, so it
+// has to be edited alongside any reordering - the array position alone doesn't drive it.
 const NEW_STEPS = [
   { n: '1', title: 'Come to your first meeting', body: "Show up any Tuesday at 6:00 PM at Central Baptist Church. No paperwork, no uniform. Just you and your scout. We'll take it from there. The Welcome Packet linked above is a good read beforehand if you like knowing what you're walking into." },
-  { n: '2', title: 'Register online',            body: "After your visit, register through BeAScout.org or our Join page. You'll pay the national and council fees through the BSA portal. While you're at it, fill in the Family Talent Survey linked above so we know what you'd enjoy helping with." },
+  { n: '2', title: 'Register online', body: (
+    <>
+      After your visit,{' '}
+      <a href={BEASCOUT_REGISTER_URL} target="_blank" rel="noopener noreferrer"
+         style={{ color: 'var(--navy)', fontWeight: 700, textDecoration: 'underline' }}>
+        register your scout with Pack 351
+      </a>{' '}
+      — that link goes straight to our pack on Scouting America's site. You'll pay the national
+      and council fees through the BSA portal. While you're at it, fill in the Family Talent
+      Survey linked above so we know what you'd enjoy helping with.
+    </>
+  ) },
   { n: '3', title: "Get your scout's shirt",    body: "Order the hat, blue Cub Scout shirt, and belt from ScoutShop.org, or pick them up at the East Texas Area Council Scout Shop in Tyler. The shirt is the only thing you truly need on day one. We'll help you with patches at your next meeting." },
-  { n: '4', title: 'Download the Scouting app', body: 'The free Scouting America app has your scout\'s handbook, advancement tracker, and event notifications. Available on iOS and Android.' },
-  { n: '5', title: 'Complete the medical form', body: "Download and fill out Parts A & B of the Annual Health & Medical Record. Your den leader needs this on file. Grab it from the links at the top of this page." },
+  { n: '4', title: 'Complete the medical form', body: "Download and fill out Parts A & B of the Annual Health & Medical Record. Your den leader needs this on file. Grab it from the links at the top of this page." },
+  { n: '5', title: 'Download the Scouting app', body: 'The free Scouting America app has your scout\'s handbook, advancement tracker, and event notifications. Available on iOS and Android.' },
 ];
 
 export default function ResourcesPage() {
@@ -271,57 +293,17 @@ export default function ResourcesPage() {
         </div>
       </div>
 
-      {/* FAQ */}
-      <div className="section" id="faq" style={{ background: '#fff', borderTop: '1px solid var(--border)' }}>
-        <div className="container">
-              <SectionHeader eyebrow="Common questions" title="Frequently asked" sub="If your question isn't here, just email our Cubmaster." />
-              <div style={{ maxWidth: 800, display: 'flex', flexDirection: 'column' }}>
-                {FAQS.map((f, i) => (
-                  <div key={i} style={{ borderBottom: '1px solid var(--border)' }}>
-                    <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{
-                      width: '100%', textAlign: 'left', padding: '20px 0',
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16,
-                      background: 'none', border: 'none', cursor: 'pointer',
-                    }}>
-                      <span style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 20, color: 'var(--text)' }}>{f.q}</span>
-                      <span style={{
-                        fontSize: 24, color: 'var(--gold)', flexShrink: 0,
-                        transition: 'transform .2s',
-                        transform: openFaq === i ? 'rotate(45deg)' : 'none',
-                        display: 'inline-block',
-                      }}>+</span>
-                    </button>
-                    {openFaq === i && (
-                      <div style={{ paddingBottom: 20 }}>
-                        <p style={{ color: 'var(--muted)', lineHeight: 1.75, fontSize: 15, margin: 0 }}>{f.a}</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div style={{
-                marginTop: 40, background: 'var(--navy-light)', borderRadius: 10,
-                padding: '24px 32px', display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap',
-              }}>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22, color: 'var(--navy)' }}>Still have a question?</div>
-                  <div style={{ fontSize: 14, color: 'var(--muted)', marginTop: 4 }}>Our Cubmaster usually replies within a day.</div>
-                </div>
-                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                  <a href="mailto:txcspack351@gmail.com" className="btn btn-ghost btn-sm">Email Cubmaster</a>
-                  <a className="btn btn-navy btn-sm" href={pageHref('join')}>Join &amp; we'll reach out</a>
-                </div>
-              </div>
-        </div>
-      </div>
+      {/* BAND — moved above the FAQ. It follows "Your first 30 days" because it's the last
+          thing a newly-settled family needs: the checklist gets them registered and kitted
+          out, this is how the Pack then actually talks to them. Below thirteen FAQ entries it
+          was the last thing anyone found. The FAQ closes the page now.
 
-      {/* Band closes the page: it's the one thing every family has to do, so it gets the
-          last word and the only full-colour block. */}
-      {/* Gold rule at the foot: this navy band sits directly on the navy-dark footer, and
-          without it the two blocks read as one undifferentiated slab of blue. */}
+          No bottom rule: it used to carry a 3px gold one purely to separate this navy block
+          from the navy-dark footer directly beneath it, which would otherwise have read as one
+          slab of blue. Against the white FAQ that problem doesn't exist, and the rule would
+          have stacked on top of the FAQ's own borderTop. */}
       <div id="band" style={{
         background: 'var(--navy)', padding: 'clamp(44px,6vw,68px) 0',
-        borderBottom: '3px solid var(--gold)',
       }}>
         <div className="container">
           <div className="band-grid" style={{
@@ -378,6 +360,50 @@ export default function ResourcesPage() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <div className="section" id="faq" style={{ background: '#fff', borderTop: '1px solid var(--border)' }}>
+        <div className="container">
+              <SectionHeader eyebrow="Common questions" title="Frequently asked" sub="If your question isn't here, just email our Cubmaster." />
+              <div style={{ maxWidth: 800, display: 'flex', flexDirection: 'column' }}>
+                {FAQS.map((f, i) => (
+                  <div key={i} style={{ borderBottom: '1px solid var(--border)' }}>
+                    <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{
+                      width: '100%', textAlign: 'left', padding: '20px 0',
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16,
+                      background: 'none', border: 'none', cursor: 'pointer',
+                    }}>
+                      <span style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 20, color: 'var(--text)' }}>{f.q}</span>
+                      <span style={{
+                        fontSize: 24, color: 'var(--gold)', flexShrink: 0,
+                        transition: 'transform .2s',
+                        transform: openFaq === i ? 'rotate(45deg)' : 'none',
+                        display: 'inline-block',
+                      }}>+</span>
+                    </button>
+                    {openFaq === i && (
+                      <div style={{ paddingBottom: 20 }}>
+                        <p style={{ color: 'var(--muted)', lineHeight: 1.75, fontSize: 15, margin: 0 }}>{f.a}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div style={{
+                marginTop: 40, background: 'var(--navy-light)', borderRadius: 10,
+                padding: '24px 32px', display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap',
+              }}>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22, color: 'var(--navy)' }}>Still have a question?</div>
+                  <div style={{ fontSize: 14, color: 'var(--muted)', marginTop: 4 }}>Our Cubmaster usually replies within a day.</div>
+                </div>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                  <a href="mailto:txcspack351@gmail.com" className="btn btn-ghost btn-sm">Email Cubmaster</a>
+                  <a className="btn btn-navy btn-sm" href={pageHref('join')}>Join &amp; we'll reach out</a>
+                </div>
+              </div>
         </div>
       </div>
 

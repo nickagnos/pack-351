@@ -4,7 +4,7 @@ import SectionHeader from '../components/SectionHeader';
 import PageHero from '../components/PageHero';
 import FormEmbed from '../components/FormEmbed';
 import { asset, pageHref } from '../asset';
-import { JOIN_FORM_ID } from '../routes.js';
+import { JOIN_FORM_ID, BEASCOUT_REGISTER_URL } from '../routes.js';
 
 const CONTACT_EMAIL = 'txcspack351@gmail.com';
 const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Joining Pack 351')}` +
@@ -33,7 +33,7 @@ export default function JoinPage() {
       <PageHero
         eyebrow="Join Pack 351"
         title="Let's get your scout started."
-        sub="No application, no payment up front. Drop in to any Tuesday meeting, send us a quick email, or leave your details on our interest form — a leader will walk your family through the next steps."
+        sub="Drop in to any Tuesday meeting, send us a quick email, or leave your details on our interest form — a leader will walk your family through the next steps. When you're ready, register with us online. Nothing to pay to come and look."
         image={asset('/photos/photo-camping.jpg')}
         imageAlt="Cub Scouts sitting around a campsite in a grassy meadow"
       />
@@ -43,14 +43,18 @@ export default function JoinPage() {
         <div className="container">
           <div className="join-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: 60, alignItems: 'start' }}>
 
-            {/* Three ways to join */}
+            {/* Ways to join. The first three are ways to reach us and can be taken in any
+                order; the fourth is the official registration, which is where families end up
+                once they've decided - hence the "when you're ready" framing rather than
+                "pick whichever is easiest". */}
             <div>
               <h2 style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 32, color: 'var(--navy)', marginBottom: 16 }}>
-                Three easy ways to join
+                Four easy ways to join
               </h2>
               <p style={{ color: 'var(--muted)', lineHeight: 1.75, marginBottom: 28 }}>
-                Pick whichever is easiest. However you reach us, we'll help you with everything:
-                your scout's den, gear, cost, and when to show up.
+                Start with whichever of the first three is easiest — however you reach us, we'll
+                help you with everything: your scout's den, gear, cost, and when to show up. The
+                last one is the official registration, for when you're ready to make it formal.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -90,6 +94,26 @@ export default function JoinPage() {
                   {/* A real fragment link now that the hash is no longer the router, and the
                       form is in the HTML at parse time, so the browser's own scroll handles it. */}
                   <a className="btn btn-ghost" href={`#${JOIN_FORM_ID}`}>Go to the form ↓</a>
+                </div>
+
+                {/* The one card that actually enrols a scout. It leaves the site for Scouting
+                    America, and the note is deliberate: the link bounces to a my.Scouting sign-in
+                    that never mentions Pack 351, so being told to expect that beats meeting it
+                    cold. The unit is ours - see BEASCOUT_REGISTER_URL in routes.js. */}
+                <div className="card" style={{ padding: 22 }}>
+                  <div style={{ fontFamily: 'Barlow Condensed', fontWeight: 700, fontSize: 22, color: 'var(--navy)', marginBottom: 6 }}>
+                    4 · Register officially
+                  </div>
+                  <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 14 }}>
+                    Ready to make it official? This goes straight to Pack 351 on Scouting America's
+                    site, where you'll register your scout and pay the national and council fees.
+                    You'll be asked to sign in or create a my.Scouting account first. No need to do
+                    this before your first visit.
+                  </p>
+                  <a className="btn btn-primary" href={BEASCOUT_REGISTER_URL}
+                     target="_blank" rel="noopener noreferrer">
+                    Register with Pack 351 →
+                  </a>
                 </div>
               </div>
             </div>

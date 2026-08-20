@@ -1,5 +1,6 @@
 import React from 'react';
-import { asset, pageHref, JOIN_CTA_HREF } from '../asset';
+import { asset, pageHref } from '../asset';
+import { BEASCOUT_REGISTER_URL } from '../routes.js';
 
 // The home hero: a scroll-scrubbed photographic cinematic. Scroll drives a deterministic
 // "camera": each scene pushes in (Ken Burns) + drifts (parallax) and cross-fades to the
@@ -141,9 +142,16 @@ export default function HomeHero() {
               <div className="hh-eyebrow">{s.eyebrow}</div>
               <h2 className="hh-title">{s.title}</h2>
               <p className="hh-body">{s.body}</p>
+              {/* Three actions, in decreasing order of commitment. The gold one is Scouting
+                  America's official registration for this pack - it leaves the site, so it
+                  takes target/rel like every other external link here. The interest form and
+                  the meeting link stay behind it, because the body copy above promises a
+                  no-pressure visit and should have something to click. */}
               {s.cta && (
                 <div className="hh-cta">
-                  <a className="hh-btn hh-btn-primary" href={JOIN_CTA_HREF}>Join Pack 351 →</a>
+                  <a className="hh-btn hh-btn-primary" href={BEASCOUT_REGISTER_URL}
+                     target="_blank" rel="noopener noreferrer">Join the Cub Scouts</a>
+                  <a className="hh-btn hh-btn-ghost" href={pageHref('join')}>Join Pack 351 →</a>
                   <a className="hh-btn hh-btn-ghost" href={pageHref('events')}>Come to a meeting</a>
                 </div>
               )}

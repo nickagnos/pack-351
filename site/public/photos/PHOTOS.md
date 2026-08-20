@@ -47,6 +47,16 @@ as the rank emblems in `../ranks/`. No login is needed to browse or download.
   `object-fit: cover` — the framing is cropped at display time by CSS, not baked into the
   file. **Keep it that way.** Run `sips -Z <px> in.jpg -s format jpeg -s formatOptions 78
   --out out.jpg` and nothing else.
+- ⚠️ **Resizing changes the pixel dimensions, and four of these files have theirs hardcoded
+  in `site/src/routes.js`** as `imageWidth`/`imageHeight`: `photo-den-meeting.jpg` (About),
+  `photo-pack-year.jpg` (Events), `photo-handbook.jpg` (Info), and `photo-camping.jpg` (the
+  `/join` share card). Those two numbers are what `prerender.js` writes into
+  `og:image:width` / `og:image:height`, which Facebook uses to lay the card out *before* it
+  downloads the image — so a stale number renders the preview at the wrong shape. **Nothing
+  checks this**: the build reads the declared numbers and never opens the file. If you
+  replace or re-downscale one of those four, run `sips -g pixelWidth -g pixelHeight <file>`
+  and update `routes.js` to match. (`hero/trail.jpg` carries the same coupling — see that
+  folder's README; `candy-cane-scene.png`'s is documented in `CLAUDE.md`.)
 - **Alt text must not claim these are our Scouts.** They're children from other units. Every
   `alt` and `label` here describes only what is literally in the frame — no "Pack 351
   Scouts", no place names. The old copy asserted things like *"Pack 351 Scouts selling
